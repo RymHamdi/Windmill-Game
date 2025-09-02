@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: e78437c67af702348a862087119e01bd
+guid: 6cfa06316c1e8434d8b8209de34c8dda
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5314288398424425573
-    second: openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0
+      213: 24220203175759863
+    second: openart-image_sbUq8_78_1756732307933_raw-removebg-preview-removebg-preview
+      (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +101,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0
+      name: openart-image_sbUq8_78_1756732307933_raw-removebg-preview-removebg-preview
+        (1)_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 30
-        width: 352
-        height: 552
+        x: 58
+        y: 36
+        width: 398
+        height: 426
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9bbee1abdadf36b0800000000000000
-      internalID: -5314288398424425573
+      spriteID: 7ffcdae752c065000800000000000000
+      internalID: 24220203175759863
       vertices: []
       indices: 
       edges: []
@@ -135,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0: -5314288398424425573
+      openart-image_sbUq8_78_1756732307933_raw-removebg-preview-removebg-preview (1)_0: 24220203175759863
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

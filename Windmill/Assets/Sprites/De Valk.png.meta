@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e78437c67af702348a862087119e01bd
+guid: d96b7c5a0388d1443b5c3dc37ad59118
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5314288398424425573
-    second: openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0
+      213: -2335747818437752850
+    second: De Valk_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0
+      name: De Valk_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 30
-        width: 352
-        height: 552
+        x: 38
+        y: 0
+        width: 405
+        height: 449
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9bbee1abdadf36b0800000000000000
-      internalID: -5314288398424425573
+      spriteID: ee7cf150cb1c59fd0800000000000000
+      internalID: -2335747818437752850
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      openart-image_-7iCudsl_1756813806230_raw-removebg-preview_0: -5314288398424425573
+      De Valk_0: -2335747818437752850
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

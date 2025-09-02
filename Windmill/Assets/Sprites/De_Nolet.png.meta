@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 05444b551a0c06c48b0accf9a741f603
+guid: 1d4d3274d88c28c458fb3a831cbd691e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8820985545286368205
-    second: De_Hoop 1_0
+      213: 7418706503542194279
+    second: De_Nolet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: De_Hoop 1_0
+      name: De_Nolet_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 147
-        width: 758
-        height: 875
+        x: 203
+        y: 111
+        width: 646
+        height: 852
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 334c954d160959580800000000000000
-      internalID: -8820985545286368205
+      spriteID: 760438c424a84f660800000000000000
+      internalID: 7418706503542194279
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      De_Hoop 1_0: -8820985545286368205
+      De_Nolet_0: 7418706503542194279
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
