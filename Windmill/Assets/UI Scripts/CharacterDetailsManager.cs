@@ -14,5 +14,6 @@ public class CharacterDetailsManager : MonoBehaviour
         // Show the clicked one
         detailPanels[index].SetActive(true);
         currentIndex = index;
+        LobbyManager.Instance.localPlayerindex = index;
     }
 }

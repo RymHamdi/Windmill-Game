@@ -42,7 +42,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("Join Random Failed. No rooms available, creating room");
-        PhotonNetwork.CreateRoom(roomName, new Photon.Realtime.RoomOptions { MaxPlayers = 8 });
+        PhotonNetwork.CreateRoom(roomName, new Photon.Realtime.RoomOptions { MaxPlayers = 8, PublishUserId = true });
     }
 
     public override void OnJoinedRoom()

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232568f85ac6d2946a82f1d5a2e04234, type: 3}
+  m_Name: WindmillCharacter 3
+  m_EditorClassIdentifier: 
+  id: 3
+  icon: {fileID: 6131082289131974691, guid: 0d6afc5400e252d42bb46aef55ff7ae7, type: 3}
+  wiekslag: 0
+  hoogte: 0
+  design: 0
+  characterName: 
+  description: 
