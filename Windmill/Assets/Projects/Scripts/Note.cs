@@ -9,6 +9,9 @@ public class Note : MonoBehaviour
 
     private float travelDuration;
 
+    [Header("VFX")]
+    public GameObject waterSplashPrefab;
+
     public void Initialize(Vector3 start, Vector3 end, float duration)
     {
         startPosition = start;
@@ -29,6 +32,7 @@ public class Note : MonoBehaviour
         // Note reached the end position without being hit
         Debug.Log("Missed Note");
         Destroy(gameObject);
+        PlaySplash();
     }
 
     public void Hit()
@@ -36,5 +40,23 @@ public class Note : MonoBehaviour
         // Note was hit successfully
         Debug.Log("Hit Note");
         Destroy(gameObject);
+        PlaySplash();
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.AddScore(10);
+    }
+
+    private void PlaySplash()
+    {
+        if (waterSplashPrefab != null)
+        {
+            GameObject splash = Instantiate(
+                waterSplashPrefab,
+                transform.position, // spawn at current position
+                Quaternion.identity // no rotation, or use prefab’s rotation
+            );
+
+            // Optionally destroy splash after some time
+            Destroy(splash, 2f);
+        }
     }
 }
