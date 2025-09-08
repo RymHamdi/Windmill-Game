@@ -34,7 +34,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        playersCountText.text = "Players in room: " + PhotonNetwork.CurrentRoom.PlayerCount;
+        if (playersCountText != null)
+        {
+            playersCountText.text =  PhotonNetwork.CurrentRoom.PlayerCount + "/5";
+        }
+
         startButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 

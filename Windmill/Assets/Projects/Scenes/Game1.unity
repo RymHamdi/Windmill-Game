@@ -814,7 +814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &121736912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ MonoBehaviour:
   introPanel: {fileID: 121736911}
   gamePanel: {fileID: 495208010}
   skipButton: {fileID: 309031914}
-  introDuration: 3
+  introDuration: 15
 --- !u!114 &121736917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2937,7 +2937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &495208011
 Transform:
   m_ObjectHideFlags: 0
@@ -2959,6 +2959,7 @@ Transform:
   - {fileID: 1124234}
   - {fileID: 1839800120}
   - {fileID: 344039819}
+  - {fileID: 2139361444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504689548
@@ -4120,7 +4121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &804016779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5435,7 +5436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1031471253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6537,7 +6538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 159.15}
+  m_AnchoredPosition: {x: 0, y: 159.15002}
   m_SizeDelta: {x: 1080.9651, y: 278.255}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1172583408
@@ -9366,15 +9367,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 342679325773886913, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.9622642
+      value: 0.9433962
       objectReference: {fileID: 0}
     - target: {fileID: 342679325773886913, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.875708
+      value: 0.67716974
       objectReference: {fileID: 0}
     - target: {fileID: 342679325773886913, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.48567107
+      value: 0.37824848
       objectReference: {fileID: 0}
     - target: {fileID: 1628820213600129016, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: m_LocalScale.x
@@ -9418,7 +9419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4471720668512486659, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.1804702
+      value: -12.09
       objectReference: {fileID: 0}
     - target: {fileID: 4471720668512486659, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9454,15 +9455,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6894592174296404785, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.9622642
+      value: 0.9433962
       objectReference: {fileID: 0}
     - target: {fileID: 6894592174296404785, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.875708
+      value: 0.67716974
       objectReference: {fileID: 0}
     - target: {fileID: 6894592174296404785, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.48567107
+      value: 0.37824848
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: VelocityModule.y.scalar
@@ -9470,35 +9471,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 414
+      value: 231.72737
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.9622642
+      value: 0.9433962
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.875708
+      value: 0.67716974
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.48567107
+      value: 0.37824848
       objectReference: {fileID: 0}
     - target: {fileID: 8954973185838544109, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: intensity
-      value: 2.07
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 8954973185838544109, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: particleColor.b
-      value: 0.9622642
+      value: 0.9433962
       objectReference: {fileID: 0}
     - target: {fileID: 8954973185838544109, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: particleColor.g
-      value: 0.875708
+      value: 0.67716974
       objectReference: {fileID: 0}
     - target: {fileID: 8954973185838544109, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: particleColor.r
-      value: 0.48567107
+      value: 0.37824848
       objectReference: {fileID: 0}
     - target: {fileID: 8954973185838544109, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: windDirection.y
@@ -10112,7 +10113,7 @@ RectTransform:
   - {fileID: 1889476354}
   - {fileID: 868792355}
   - {fileID: 1172583407}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 495208011}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10251,5 +10252,4 @@ SceneRoots:
   - {fileID: 2043865026}
   - {fileID: 1305311990}
   - {fileID: 483202740}
-  - {fileID: 2139361444}
   - {fileID: 495208011}

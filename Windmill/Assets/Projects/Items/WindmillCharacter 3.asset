@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WindmillCharacter 3
   m_EditorClassIdentifier: 
   id: 3
-  icon: {fileID: 6131082289131974691, guid: 0d6afc5400e252d42bb46aef55ff7ae7, type: 3}
+  icon: {fileID: -606033477821260893, guid: 256038aedadf8f24fb01377ca8a15056, type: 3}
   wiekslag: 0
   hoogte: 0
   design: 0
