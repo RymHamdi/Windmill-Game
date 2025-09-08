@@ -39,8 +39,9 @@ public class Note : MonoBehaviour
     {
         // Note was hit successfully
         Debug.Log("Hit Note");
-        Destroy(gameObject);
-        PlaySplash();
+                PlaySplash();
+        Destroy(gameObject, 0.1f);
+
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.AddScore(10);
     }
@@ -52,7 +53,7 @@ public class Note : MonoBehaviour
             GameObject splash = Instantiate(
                 waterSplashPrefab,
                 transform.position, // spawn at current position
-                Quaternion.identity // no rotation, or use prefab’s rotation
+                Quaternion.identity // no rotation, or use prefabï¿½s rotation
             );
 
             // Optionally destroy splash after some time
