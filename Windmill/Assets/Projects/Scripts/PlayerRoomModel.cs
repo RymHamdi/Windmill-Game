@@ -56,7 +56,7 @@ public class PlayerRoomModel : MonoBehaviour
             Debug.Log($"Loaded Character: {currentCharacter.characterName}");
             characterImage.sprite = currentCharacter.icon;
             playerNameText.text = currentCharacter.characterName;
-            strenthText.text = "Strength: " + currentCharacter.hoogte.ToString();
+            strenthText.text = currentCharacter.hoogte.ToString();
             localPlayerIndicator.gameObject.SetActive(isLocalPlayer);
             // Add a smooth floating animation using DOTween
             // Moves the GameObject's RectTransform up and down in a loop
