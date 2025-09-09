@@ -35,14 +35,15 @@ public class CharacterDetailsManager : MonoBehaviour
         // Hide currently shown panel
         if (currentIndex >= 0)
             detailPanels[currentIndex].SetActive(false);
-
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickSound);
         // Show the clicked one
         detailPanels[index].SetActive(true);
         currentIndex = index;
-        LobbyManager.Instance.localPlayerindex = index;
-
         ResetAllButtons();
         buttons[index].image.sprite = selectedSprite;
+        LobbyManager.Instance.localPlayerindex = index;
+
+       
     }
 
     public void NextPanel()

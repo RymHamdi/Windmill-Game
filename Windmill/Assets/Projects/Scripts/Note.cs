@@ -32,7 +32,6 @@ public class Note : MonoBehaviour
         // Note reached the end position without being hit
         Debug.Log("Missed Note");
         Destroy(gameObject);
-        PlaySplash();
     }
 
     public void Hit()
@@ -40,6 +39,7 @@ public class Note : MonoBehaviour
         // Note was hit successfully
         Debug.Log("Hit Note");
         Destroy(gameObject);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
         PlaySplash();
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.AddScore(10);
