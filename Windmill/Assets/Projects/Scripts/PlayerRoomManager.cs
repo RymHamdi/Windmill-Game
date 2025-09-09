@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerRoomManager : MonoBehaviour
 {
-    public PlayerRoomModel playerPrefab;
-    public Transform contentParent;
-
     public List<PlayerRoomModel> playersInRoom = new List<PlayerRoomModel>();
 
     void OnEnable()
@@ -15,11 +12,17 @@ public class PlayerRoomManager : MonoBehaviour
         LobbyManager.Instance.CheckPlayersInRoom();
     }
 
-    private void CreateNewPlayer(string photonId, int characterId)
+    private void CreateNewPlayer(string photonId, int characterId, bool isLocalPlayer)
     {
-        PlayerRoomModel newPlayer = Instantiate(playerPrefab, contentParent);
-        newPlayer.Init(characterId, photonId);
-        playersInRoom.Add(newPlayer);
+        Debug.Log($"Creating/Updating PlayerRoomModel for Photon ID: {photonId}, Character ID: {characterId}, IsLocal: {isLocalPlayer}");
+        // Try to find an inactive player model that is not assigned
+        PlayerRoomModel availablePlayer = playersInRoom.Find(p => !p.gameObject.activeSelf && !p.hasAPlayer);
+
+        if (availablePlayer != null)
+        {
+            availablePlayer.gameObject.SetActive(true);
+            availablePlayer.Init(characterId, photonId, isLocalPlayer);
+        }
     }
 
     void OnDisable()

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WindmillCharacter 2
   m_EditorClassIdentifier: 
   id: 2
-  icon: {fileID: 8045308609858444345, guid: 1ff4fa70c694bea48bcaf10d30c5f2a2, type: 3}
+  icon: {fileID: -962488092458481032, guid: 3b064f3fc0f063a4faab88596371045b, type: 3}
   wiekslag: 0
-  hoogte: 0
+  hoogte: 85
   design: 0
-  characterName: 
+  characterName: De Kat
   description: 

@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 
@@ -10,13 +12,22 @@ public class PlayerRoomModel : MonoBehaviour
 
     public Image characterImage;
 
+    public bool hasAPlayer = false;
+    public bool isLocalPlayer = false;
+
+    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI strenthText;
+    public Image localPlayerIndicator;
+
 
     private WindmillCharacter currentCharacter;
 
-    public void Init(int id, string photonId)
+    public void Init(int id, string photonId, bool isLocal)
     {
         characterId = id;
         playerPhotonId = photonId;
+        isLocalPlayer = isLocal;
+        hasAPlayer = true;
         LoadCharacter();
         LobbyManager.Instance.OnPlayerLeft += RemovePlayer;
     }
@@ -25,9 +36,15 @@ public class PlayerRoomModel : MonoBehaviour
     {
         if (playerPhotonId == photonId)
         {
-            Destroy(gameObject);
+            hasAPlayer = false;
+            isLocalPlayer = false;
+            characterImage.sprite = null;
+            playerNameText.text = "";
+            strenthText.text = "";
+            gameObject.SetActive(false);
+            
 
-            Debug.Log($"Player with Photon ID {photonId} has left the room. Removing their PlayerRoomModel.");
+            Debug.Log($"Player with Photon ID {photonId} has left the room. Disabling their PlayerRoomModel.");
         }
     }
 
@@ -38,6 +55,18 @@ public class PlayerRoomModel : MonoBehaviour
         {
             Debug.Log($"Loaded Character: {currentCharacter.characterName}");
             characterImage.sprite = currentCharacter.icon;
+            playerNameText.text = currentCharacter.characterName;
+            strenthText.text = "Strength: " + currentCharacter.hoogte.ToString();
+            localPlayerIndicator.gameObject.SetActive(isLocalPlayer);
+            // Add a smooth floating animation using DOTween
+            // Moves the GameObject's RectTransform up and down in a loop
+            RectTransform rectTransform = GetComponent<RectTransform>();
+            if (rectTransform != null)
+            {
+                rectTransform.DOAnchorPosY(rectTransform.anchoredPosition.y + 10f, 1.2f)
+                    .SetLoops(-1, LoopType.Yoyo)
+                    .SetEase(Ease.InOutSine);
+            }
             // Here you can add code to update the player room model with character details
         }
         else

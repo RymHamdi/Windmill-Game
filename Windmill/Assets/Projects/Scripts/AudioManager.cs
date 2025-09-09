@@ -45,7 +45,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayRain()
     {
-        if (rainVideo.activeInHierarchy)
+        if (rainVideo!= null && rainVideo.activeInHierarchy)
         {
             // If rain video is ON, play looping rain sound
             if (!sfxSource.isPlaying || sfxSource.clip != rainSound)
