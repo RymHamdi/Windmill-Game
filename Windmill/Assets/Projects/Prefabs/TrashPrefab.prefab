@@ -125,6 +125,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
   waterSplashPrefab: {fileID: 8585649807550039280, guid: 224c4574d4d272a4b92df19ede61b338, type: 3}
+  isTrash: 1
 --- !u!1 &7312882184998583786
 GameObject:
   m_ObjectHideFlags: 0

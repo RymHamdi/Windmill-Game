@@ -6,17 +6,25 @@ public class Note : MonoBehaviour
 {
     public Vector3 startPosition;
     public Vector3 endPosition;
+    public Vector3 hitZonePosition;
 
     private float travelDuration;
 
     [Header("VFX")]
     public GameObject waterSplashPrefab;
 
-    public void Initialize(Vector3 start, Vector3 end, float duration)
+    public bool isTrash;
+
+    public void Initialize(Vector3 start, Vector3 end, Vector3 hitzone, float duration)
     {
         startPosition = start;
         endPosition = end;
+        hitZonePosition = hitzone;
         travelDuration = duration;
+
+        Vector3 localScal = transform.localScale;
+        localScal *= Random.Range(0.8f, 1.2f);
+        transform.localScale = localScal;
 
         transform.position = startPosition;
         StartMovement();
@@ -38,11 +46,17 @@ public class Note : MonoBehaviour
     {
         // Note was hit successfully
         Debug.Log("Hit Note");
+
+        if (!isTrash)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
+            PlaySplash();
+            if (ScoreManager.Instance != null)
+                ScoreManager.Instance.AddScore(10);
+        }
+
         Destroy(gameObject);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
-        PlaySplash();
-        if (ScoreManager.Instance != null)
-            ScoreManager.Instance.AddScore(10);
+
     }
 
     private void PlaySplash()
@@ -51,8 +65,8 @@ public class Note : MonoBehaviour
         {
             GameObject splash = Instantiate(
                 waterSplashPrefab,
-                transform.position, // spawn at current position
-                Quaternion.identity // no rotation, or use prefab’s rotation
+                hitZonePosition, // spawn at current position
+                Quaternion.identity // no rotation, or use prefabï¿½s rotation
             );
 
             // Optionally destroy splash after some time

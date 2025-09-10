@@ -14,7 +14,7 @@ public class HitZone : MonoBehaviour
 
     void CheckHit()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, 0.5f);
+        Collider[] hits = Physics.OverlapSphere(transform.position, 1);
         foreach (var hit in hits)
         {
             Note note = hit.GetComponent<Note>();

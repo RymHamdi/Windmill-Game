@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening; // for smooth fading
 using TMPro;
+using Photon.Pun;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviourPun
 {
     [Header("UI")]
     public TMP_Text timerText;
@@ -15,6 +16,9 @@ public class Timer : MonoBehaviour
     private float currentTime;
     private bool isRunning = false;
     private bool alertActive = false;
+
+    public GameObject ObjectToHide;
+    public GameObject ObjectToShow;
 
     void Start()
     {
@@ -56,10 +60,23 @@ public class Timer : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+
     private void TimerEnded()
     {
         Debug.Log("Timer Ended!");
         StopAlert();
+        if (PhotonNetwork.IsMasterClient)
+            photonView.RPC("ShowHidePanel", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void ShowHidePanel()
+    {
+        if (ObjectToHide != null)
+            ObjectToHide.SetActive(false);
+
+        if (ObjectToShow != null)
+            ObjectToShow.SetActive(true);
     }
 
     private void StartAlert()

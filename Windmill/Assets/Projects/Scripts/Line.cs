@@ -4,5 +4,7 @@ public class Line : MonoBehaviour
 {
     public Transform startPoint;
     public Transform endPoint;
+
+    public Transform hitZonePoint;
     
 }
