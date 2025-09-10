@@ -1,4 +1,6 @@
 using UnityEngine;
+using Photon;
+using Photon.Pun;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip rainSound;
     public GameObject rainVideo;
 
+    // Add a flag to indicate if this instance is the master
+    private bool isMaster = false;
+
     void Awake()
     {
         // Singleton pattern
@@ -22,6 +27,7 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // persists between scenes
+            isMaster = PhotonNetwork.IsMasterClient;
         }
         else
         {
@@ -32,11 +38,15 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlayMusic(themeSong);
+        if (isMaster)
+        {
+            PlayMusic(themeSong);
+        }
     }
 
     public void PlayMusic(AudioClip clip)
     {
+        if (!isMaster) return;
         if (clip == null) return;
         musicSource.clip = clip;
         musicSource.loop = true;
@@ -45,7 +55,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayRain()
     {
-        if (rainVideo!= null && rainVideo.activeInHierarchy)
+        if (rainVideo != null && rainVideo.activeInHierarchy)
         {
             // If rain video is ON, play looping rain sound
             if (!sfxSource.isPlaying || sfxSource.clip != rainSound)

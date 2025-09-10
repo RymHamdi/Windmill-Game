@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI; // Needed for Text
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
+using DG.Tweening;
 
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
@@ -13,6 +14,16 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     private int score = 0;
     private const string ScoreKey = "Score";
+
+    [Header("Bingo Effect")]
+    public GameObject BingoEffect;
+    public float BingoEffectDuration = 1.0f;
+    public float timeIntervalToGetBingo = 1.5f;
+    public int notesToGetBingo = 3;
+
+    private int notesHitInInterval = 0;
+    private float lastNoteHitTime = -Mathf.Infinity;
+
 
     void Awake()
     {
@@ -25,6 +36,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        lastNoteHitTime = Time.time;
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(ScoreKey))
             score = (int)PhotonNetwork.LocalPlayer.CustomProperties[ScoreKey];
         else
@@ -40,11 +52,68 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public void AddScore(int amount)
     {
+        float currentTime = Time.time;
+
+        // Check interval
+        if (currentTime - lastNoteHitTime <= timeIntervalToGetBingo)
+        {
+            notesHitInInterval++;
+        }
+        else
+        {
+            // Reset streak
+            notesHitInInterval = 1;
+        }
+
+        // Update last hit time every note
+        lastNoteHitTime = currentTime;
+
+        // Check Bingo
+        if (notesHitInInterval >= notesToGetBingo)
+        {
+            TriggerBingo();
+            notesHitInInterval = 0; // reset after bingo
+        }
+
+        // Update score
         score += amount;
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
         props[ScoreKey] = score;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         UpdateScoreUI();
+    }
+
+    private void TriggerBingo()
+    {
+        if (BingoEffect != null)
+        {
+            // Reset if already active
+            CancelInvoke(nameof(DisableBingoEffect));
+            BingoEffect.SetActive(false);
+            BingoEffect.SetActive(true);
+            StartCoroutine(PlayScoreTexteffect());
+            Invoke(nameof(DisableBingoEffect), BingoEffectDuration);
+        }
+    }
+
+    public IEnumerator PlayScoreTexteffect()
+    {
+        Camera.main.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true);
+        for (int i = 0; i < 3; i++)
+        {
+            scoreText.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutBack);
+            yield return new WaitForSeconds(0.1f);
+            score += 1;
+            UpdateScoreUI();
+            scoreText.transform.DOScale(1.0f, 0.1f).SetEase(Ease.InBack);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private void DisableBingoEffect()
+    {
+        if (BingoEffect != null)
+            BingoEffect.SetActive(false);
     }
 
     private void UpdateScoreUI()
