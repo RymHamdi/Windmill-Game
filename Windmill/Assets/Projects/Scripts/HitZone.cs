@@ -23,6 +23,7 @@ public class HitZone : MonoBehaviour
             {
                 CheckHit();
             }
+            
         }
     }
 
@@ -34,6 +35,10 @@ public class HitZone : MonoBehaviour
             if (hitInfo.collider == GetComponent<Collider>())
             {
                 CheckHit();
+            }
+            else
+            {
+                Debug.Log(hitInfo.collider.gameObject.transform.parent.name);
             }
         }
     }

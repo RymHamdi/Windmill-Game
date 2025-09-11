@@ -4,6 +4,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using DG.Tweening;
+using UnityEngine.Video;
+using System;
 
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
@@ -23,6 +25,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     private int notesHitInInterval = 0;
     private float lastNoteHitTime = -Mathf.Infinity;
+
+    public VideoPlayer gameVideo;
 
 
     void Awake()
@@ -75,12 +79,26 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             notesHitInInterval = 0; // reset after bingo
         }
 
+        // --- Store old score before update
+        int oldScore = score;
+
         // Update score
         score += amount;
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
         props[ScoreKey] = score;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         UpdateScoreUI();
+
+        // --- Debug check for 100 milestones
+        if ((score / 150) > (oldScore / 150))
+        {
+            UpdateVideoSpeed();
+        }
+    }
+
+    private void UpdateVideoSpeed()
+    {
+        gameVideo.playbackSpeed -= 0.05f;
     }
 
     private void TriggerBingo()

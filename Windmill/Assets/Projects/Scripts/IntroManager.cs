@@ -1,6 +1,8 @@
 using Photon.Pun;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+using System;
 
 public class IntroManager : MonoBehaviourPun
 {
@@ -20,6 +22,10 @@ public class IntroManager : MonoBehaviourPun
     private float timer;
     private bool isRunning = true;
 
+    public List<IntroDivider> introDividers;
+    public float timeBeforeRunDivider = 3;
+    private int currentDividerIndex = 0;
+
     void Start()
     {
         timer = introDuration;
@@ -34,12 +40,40 @@ public class IntroManager : MonoBehaviourPun
 
         timer -= Time.deltaTime;
         timerText.text = Mathf.Ceil(timer).ToString();
+        timeBeforeRunDivider -= Time.deltaTime;
+        if (timeBeforeRunDivider <= 0)
+        {
+            RunDivider();
+            timeBeforeRunDivider = Mathf.Infinity;
+        }
 
         if (timer <= 0f && PhotonNetwork.IsMasterClient)
         {
-            SkipIntro(); // auto skip when timer ends
+            //SkipIntro(); // auto skip when timer ends
         }
         skipButton.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
+    private void RunDivider()
+    {
+        if (currentDividerIndex < introDividers.Count)
+        {
+            introDividers[currentDividerIndex].gameObject.SetActive(true);
+            introDividers[currentDividerIndex].Init(OnDividerComplete);
+            currentDividerIndex++;
+        }
+    }
+
+    private void OnDividerComplete()
+    {
+        if (currentDividerIndex < introDividers.Count)
+        {
+            RunDivider();
+        }
+        else
+        {
+            Invoke("OnSkipButton", 0.5f);
+        }
     }
 
     public void OnSkipButton()

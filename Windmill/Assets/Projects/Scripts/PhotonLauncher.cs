@@ -62,9 +62,4 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRandomRoom();
     }
 
-    void Start()
-    {
-        Connect();
-    }
-
 }

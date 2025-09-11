@@ -47,7 +47,6 @@ public class MultiTouchActions : MonoBehaviour
                 if (touch.press.isPressed)
                 {
                     Vector2 pos = touch.position.ReadValue();
-                    Debug.Log($"Touch {touch.touchId.ReadValue()} at {pos}");
                     OnMultiTouchPress?.Invoke(pos, touch.touchId.ReadValue());
                 }
             }
@@ -56,7 +55,6 @@ public class MultiTouchActions : MonoBehaviour
         if (input.Gameplay.TouchPress.ReadValue<float>() > 0)
         {
             Vector2 pos = input.Gameplay.TouchPosition.ReadValue<Vector2>();
-            Debug.Log($"Pressed at {pos}");
             OnTouchPress?.Invoke(pos);
 
         }
