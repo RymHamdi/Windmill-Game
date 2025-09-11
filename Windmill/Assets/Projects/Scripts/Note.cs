@@ -15,6 +15,8 @@ public class Note : MonoBehaviour
 
     public bool isTrash;
 
+    public GameObject[] trashSprites;
+
     public void Initialize(Vector3 start, Vector3 end, Vector3 hitzone, float duration)
     {
         startPosition = start;
@@ -28,6 +30,12 @@ public class Note : MonoBehaviour
 
         transform.position = startPosition;
         StartMovement();
+
+        if (isTrash)
+        {
+            int index = Random.Range(0, trashSprites.Length);
+            trashSprites[index].SetActive(true);
+        }
     }
 
     void StartMovement()

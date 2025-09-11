@@ -33,7 +33,7 @@ public class NoteSpawner : MonoBehaviour
         Vector3 endPos = lanes[laneIndex].endPoint.position;
         Vector3 h = lanes[laneIndex].hitZonePoint.position;
         float travelTime = Random.Range(1.5f, 2.0f);
-        GameObject prefabToSpawn = (Random.value < 0.9f) ? notePrefab : trashPrefab;
+        GameObject prefabToSpawn = (Random.value < 0.8f) ? notePrefab : trashPrefab;
         GameObject note = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
         
         note.GetComponent<Note>().Initialize(spawnPos, endPos, h, travelTime);
