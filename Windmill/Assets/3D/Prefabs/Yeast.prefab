@@ -99,13 +99,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitHalfPrefabL: {fileID: 1158765001484487261, guid: c22f701d8151bc34990d565be550f96f, type: 3}
   fruitHalfPrefabR: {fileID: 313045553950234485, guid: c63ff16396a3f554a94424becb128be1, type: 3}
-  juiceParticles: {fileID: 0}
+  sliceVFXPrefab: {fileID: 0}
   sliceSound: {fileID: 0}
   explosionForce: 0.5
   explosionTorque: 0.5
   type: 0
   bingoSpritePrefab: {fileID: 6511528371435352685, guid: 50ba03dc8af299e43985a282e8e6495e, type: 3}
   badSpritePrefab: {fileID: 6511528371435352685, guid: 6c9af83b535c09e4782d1f838d28abe9, type: 3}
+  id: 5
 --- !u!1001 &4646341873524331832
 PrefabInstance:
   m_ObjectHideFlags: 0

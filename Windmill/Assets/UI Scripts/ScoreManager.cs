@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public TMP_Text scoreText;
 
     private int score = 0;
-    private const string ScoreKey = "Score";
+    public string ScoreKey = "Score";
 
     [Header("Bingo Effect")]
     public GameObject BingoEffect;
@@ -90,10 +90,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         UpdateScoreUI();
 
         // --- Debug check for 100 milestones
-        if ((score / 150) > (oldScore / 150))
+        if (gameVideo != null)
+        {
+             if ((score / 150) > (oldScore / 150))
         {
             UpdateVideoSpeed();
         }
+        }
+       
     }
 
     private void UpdateVideoSpeed()
@@ -116,7 +120,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public IEnumerator PlayScoreTexteffect()
     {
-        Camera.main.transform.DOShakePosition(0.5f, 0.2f, 10, 90, false, true);
+        ShakeCamera(0.55f);
         for (int i = 0; i < 3; i++)
         {
             scoreText.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutBack);
@@ -126,6 +130,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             scoreText.transform.DOScale(1.0f, 0.1f).SetEase(Ease.InBack);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void ShakeCamera(float duration)
+    {
+        Camera.main.transform.DOShakePosition(duration, 0.2f, 10, 90, false, true);
     }
 
     private void DisableBingoEffect()

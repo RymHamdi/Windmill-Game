@@ -28,6 +28,8 @@ public class Fruit : MonoBehaviour
 
     private bool isSliced = false;
 
+    public int id = 0; // Unique ID for collectable fruits
+
     void OnTriggerEnter(Collider other)
     {
         if (isSliced) return;
@@ -41,7 +43,7 @@ public class Fruit : MonoBehaviour
     void Slice()
     {
         isSliced = true;
-
+        bool isGoodSliced = CollectableUIManager.Instance.CollectItem(id);
         // Spawn halves
         GameObject halfL = Instantiate(fruitHalfPrefabL, transform.position, transform.rotation);
         GameObject halfR = Instantiate(fruitHalfPrefabR, transform.position, transform.rotation);
@@ -77,7 +79,7 @@ if (canvas != null)
 {
     GameObject fxPrefab = null;
 
-    if (type == FruitType.Good && bingoSpritePrefab != null)
+    if (type == FruitType.Good && bingoSpritePrefab != null && isGoodSliced)
     {
         fxPrefab = bingoSpritePrefab; // prefab with SliceFX sliceType = Good
     }
