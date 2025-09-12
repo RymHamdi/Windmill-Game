@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 66a9e1a008cc57240b693913f8bfa5e0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8954586851001084689
+    second: Bingo_0
+  - first:
+      213: 5198185762020218443
+    second: Bingo_1
+  - first:
+      213: -7398647046087602679
+    second: Bingo_2
+  - first:
+      213: 4706987707149629737
+    second: Bingo_3
+  - first:
+      213: -8711649127775992160
+    second: Bingo_4
+  - first:
+      213: 1761577312072216709
+    second: Bingo_5
+  - first:
+      213: -156214381746789112
+    second: Bingo_6
+  - first:
+      213: 1011270577994242821
+    second: Bingo_7
+  - first:
+      213: 207823848523577326
+    second: Bingo_8
+  - first:
+      213: 7878546247508821024
+    second: Bingo_9
+  - first:
+      213: -7401114120475026153
+    second: Bingo_10
+  - first:
+      213: 8659661376003418135
+    second: Bingo_11
+  - first:
+      213: 5091209669845641995
+    second: Bingo_12
+  - first:
+      213: -6161391864784458777
+    second: Bingo_13
+  - first:
+      213: -3172831212644605160
+    second: Bingo_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bingo_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 123
+        width: 1199
+        height: 903
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe452b3d3baeab380800000000000000
+      internalID: -8954586851001084689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 42907d68242fe2e4fa6adfb746f846c5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bingo_0: -8954586851001084689
+      Bingo_1: 5198185762020218443
+      Bingo_10: -7401114120475026153
+      Bingo_11: 8659661376003418135
+      Bingo_12: 5091209669845641995
+      Bingo_13: -6161391864784458777
+      Bingo_14: -3172831212644605160
+      Bingo_2: -7398647046087602679
+      Bingo_3: 4706987707149629737
+      Bingo_4: -8711649127775992160
+      Bingo_5: 1761577312072216709
+      Bingo_6: -156214381746789112
+      Bingo_7: 1011270577994242821
+      Bingo_8: 207823848523577326
+      Bingo_9: 7878546247508821024
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
