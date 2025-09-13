@@ -92,12 +92,21 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         // --- Debug check for 100 milestones
         if (gameVideo != null)
         {
-             if ((score / 150) > (oldScore / 150))
-        {
-            UpdateVideoSpeed();
+            if ((score / 150) > (oldScore / 150))
+            {
+                UpdateVideoSpeed();
+            }
         }
-        }
-       
+
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
+        props[ScoreKey] = score;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        UpdateScoreUI();
     }
 
     private void UpdateVideoSpeed()

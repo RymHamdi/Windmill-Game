@@ -8,6 +8,8 @@ public class Leaderboard : MonoBehaviour
 
     private static readonly WaitForSeconds leaderboardDelay = new WaitForSeconds(1f);
 
+    public string ScoreKey = "Score";
+
     void Start()
     {
         var players = new List<PlayerLearderBoardStruct>();
@@ -15,7 +17,7 @@ public class Leaderboard : MonoBehaviour
         foreach (var photonPlayer in Photon.Pun.PhotonNetwork.PlayerList)
         {
             int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
-            int score = photonPlayer.CustomProperties.TryGetValue("Score", out object scoreObj) ? (int)scoreObj : 0;
+            int score = photonPlayer.CustomProperties.TryGetValue(ScoreKey, out object scoreObj) ? (int)scoreObj : 0;
 
             players.Add(new PlayerLearderBoardStruct
             {

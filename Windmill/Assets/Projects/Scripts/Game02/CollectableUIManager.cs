@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
+
 
 public class CollectableUIManager : MonoBehaviour
 {
     public static CollectableUIManager Instance;
     public Func<int, bool> OnCollectItem;
+
+    public Action OnAllItemsCollected;
     public Action OnResetItems;
 
     public int totalItems = 5;
@@ -14,6 +19,8 @@ public class CollectableUIManager : MonoBehaviour
     private bool isFinished = false;
 
     public List<CollectableUIItem> items;
+
+    public VideoPlayer videoPlayer;
 
     void Awake()
     {
@@ -43,6 +50,7 @@ public class CollectableUIManager : MonoBehaviour
                 Globaleffect.Instance.PlayEffect(EffestType.Bad);
             }
             collectedItems = 0;
+            ScoreManager.Instance.ResetScore();
             OnResetItems?.Invoke();
             return false;
         }
@@ -56,6 +64,7 @@ public class CollectableUIManager : MonoBehaviour
             }
             OnResetItems?.Invoke();
             collectedItems = 0;
+            ScoreManager.Instance.ResetScore();
             return false;
         }
         if (OnCollectItem != null)
@@ -72,6 +81,7 @@ public class CollectableUIManager : MonoBehaviour
             Debug.Log($"CollectItem ID: {id}, Result: {check}, CollectedItems: {collectedItems}");
             if (!check)
             {
+                ScoreManager.Instance.ResetScore();
                 if (collectedItems > 1)
                 {
                     ScoreManager.Instance.ShakeCamera(1);
@@ -83,10 +93,13 @@ public class CollectableUIManager : MonoBehaviour
             }
             else
             {
+                StartCoroutine(PlayVideo());
                 collectedItems++;
+                ScoreManager.Instance.AddScore(10 * collectedItems);
 
                 if (collectedItems >= totalItems)
                 {
+                    OnAllItemsCollected?.Invoke();
                     Debug.Log("All items collected! You win!");
                     if (!isFinished) isFinished = true;
                     // Trigger win condition here
@@ -95,5 +108,20 @@ public class CollectableUIManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private bool isPlayingVideo = false;
+    IEnumerator PlayVideo()
+    {
+        if (!isPlayingVideo)
+        {
+            isPlayingVideo = true;
+            videoPlayer.playbackSpeed = 2;
+            videoPlayer.Play();
+            yield return new WaitForSeconds((float)videoPlayer.clip.length / 2);
+            videoPlayer.playbackSpeed = 0;
+            isPlayingVideo = false;
+        }
+
     }
 }

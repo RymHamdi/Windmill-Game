@@ -39,7 +39,11 @@ public class IntroManager : MonoBehaviourPun
         if (!isRunning) return;
 
         timer -= Time.deltaTime;
-        timerText.text = Mathf.Ceil(timer).ToString();
+        if (timerText != null)
+        {
+            timerText.text = Mathf.Ceil(timer).ToString();
+        }
+
         timeBeforeRunDivider -= Time.deltaTime;
         if (timeBeforeRunDivider <= 0)
         {

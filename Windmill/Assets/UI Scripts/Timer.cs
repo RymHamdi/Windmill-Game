@@ -28,6 +28,11 @@ public class Timer : MonoBehaviourPun
 
         if (alertImage != null)
             alertImage.gameObject.SetActive(false); // hide at start
+
+        if (CollectableUIManager.Instance != null)
+        {
+            CollectableUIManager.Instance.OnAllItemsCollected += EndGame;
+        }
     }
 
     void Update()
@@ -69,6 +74,13 @@ public class Timer : MonoBehaviourPun
             photonView.RPC("ShowHidePanel", RpcTarget.AllBuffered);
     }
 
+    private void EndGame()
+    {
+        isRunning = false;
+        StopAlert();
+        photonView.RPC("ShowHidePanel", RpcTarget.AllBuffered);
+    }
+
     [PunRPC]
     public void ShowHidePanel()
     {
@@ -98,5 +110,13 @@ public class Timer : MonoBehaviourPun
 
         alertImage.DOKill(); // stop any tweens
         alertImage.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        if (CollectableUIManager.Instance != null)
+        {
+            CollectableUIManager.Instance.OnAllItemsCollected -= EndGame;
+        }
     }
 }
