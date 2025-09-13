@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Unity.VisualScripting;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class Leaderboard : MonoBehaviour
     private static readonly WaitForSeconds leaderboardDelay = new WaitForSeconds(1f);
 
     public string ScoreKey = "Score";
+
+    public GameObject NextButton;
 
     void Start()
     {
@@ -42,6 +46,25 @@ public class Leaderboard : MonoBehaviour
             index++;
         }
     }
+
+    void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            NextButton.SetActive(true);
+        }
+        else
+        {
+            NextButton.SetActive(false);
+        }
+    }
+
+    public void StartNextGame(string nextSceneName)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(nextSceneName); // syncs load for all
+    }
+
 
     IEnumerator ActivateModelWithDelay(PlayerLeaderBoardModel model, string playerName, int score, Sprite avatar)
     {
