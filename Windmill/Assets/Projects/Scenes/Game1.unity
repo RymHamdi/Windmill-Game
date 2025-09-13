@@ -8118,7 +8118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 733862689}
-  ScoreKey: Score
+  ScoreKey: Score1
   BingoEffect: {fileID: 1364516164}
   BingoEffectDuration: 1
   timeIntervalToGetBingo: 4
@@ -15465,7 +15465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51bd2f66ed45a90498819ef105e5cbd6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.04
+      value: 1.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51bd2f66ed45a90498819ef105e5cbd6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15975,8 +15975,31 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30e20a82950a4b14aa5720401f344054, type: 3}
       insertIndex: -1
       addedObject: {fileID: 930966048}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30e20a82950a4b14aa5720401f344054, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1618403421}
   m_SourcePrefab: {fileID: 100100000, guid: 30e20a82950a4b14aa5720401f344054, type: 3}
+--- !u!1 &1618403420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 30e20a82950a4b14aa5720401f344054, type: 3}
+  m_PrefabInstance: {fileID: 1618403419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1618403421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618403420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d516f7fb3487fe44ab0bf6130302a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterSurface: {fileID: 930966048}
+  maxWaterHeight: 2.8
+  minWaterHeight: 0.47
 --- !u!1 &1622995206
 GameObject:
   m_ObjectHideFlags: 0
