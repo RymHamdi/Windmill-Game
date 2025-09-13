@@ -12,6 +12,7 @@ public class HitZone : MonoBehaviour
     private Vector3 originScale;
 
     public Image keyImage;
+    
 
     void OnEnable()
     {
