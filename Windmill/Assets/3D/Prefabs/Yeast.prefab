@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitHalfPrefabL: {fileID: 1158765001484487261, guid: c22f701d8151bc34990d565be550f96f, type: 3}
   fruitHalfPrefabR: {fileID: 313045553950234485, guid: c63ff16396a3f554a94424becb128be1, type: 3}
-  sliceVFXPrefab: {fileID: 0}
+  sliceVFXPrefab: {fileID: 110638, guid: 1e9dc57b9c268e84dbb8ede9289e1474, type: 3}
   sliceSound: {fileID: 0}
   explosionForce: 0.5
   explosionTorque: 0.5

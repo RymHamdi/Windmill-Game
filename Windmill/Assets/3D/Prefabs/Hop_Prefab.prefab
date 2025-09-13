@@ -56,7 +56,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.19
+  m_Radius: 0.1
   m_Center: {x: -0.0016197562, y: 0, z: 0}
 --- !u!54 &4085770239060342939
 Rigidbody:
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitHalfPrefabL: {fileID: 6345702761954924268, guid: df376bad84651634cac05fbda75f5073, type: 3}
   fruitHalfPrefabR: {fileID: 5616456412143423105, guid: 341a1e7ddc562674e94739ba69e12890, type: 3}
-  sliceVFXPrefab: {fileID: 0}
+  sliceVFXPrefab: {fileID: 142060, guid: 67374d3ca0b3eb74983e945af267bc0d, type: 3}
   sliceSound: {fileID: 0}
   explosionForce: 0.5
   explosionTorque: 0.5
