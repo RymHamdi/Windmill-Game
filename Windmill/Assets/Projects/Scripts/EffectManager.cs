@@ -3,8 +3,22 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
+    public static EffectManager Instance;
     public List<GameObject> BgEffects;
-    // need time to activate this effect every 2 seconds
+
+    public GameObject badEffect;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -15,12 +29,19 @@ public class EffectManager : MonoBehaviour
     public void ActivateEffect()
     {
         int index = Random.Range(0, BgEffects.Count);
-         CancelInvoke(nameof(DeactivateEffect));
+        CancelInvoke(nameof(DeactivateEffect));
         if (index >= 0 && index < BgEffects.Count)
         {
             BgEffects[index].SetActive(true);
             Invoke("DeactivateEffect", 1.0f);
         }
+    }
+
+    public void PlayBadEffect()
+    {
+        badEffect.SetActive(true);
+        CancelInvoke(nameof(DeactivateEffect));
+        Invoke("DesactivateBadEffect", 1.0f);
     }
 
     private void DeactivateEffect()
@@ -29,6 +50,11 @@ public class EffectManager : MonoBehaviour
         {
             effect.SetActive(false);
         }
+    }
+    
+    public void DesactivateBadEffect()
+    {
+         badEffect.SetActive(false);
     }
     
 

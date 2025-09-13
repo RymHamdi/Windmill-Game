@@ -67,6 +67,7 @@ public class Note : MonoBehaviour
         else
         {
             WaterManager.Instance.RaiseWater(-0.1f, 0.5f);
+            EffectManager.Instance.PlayBadEffect();
         }
 
         Destroy(gameObject);

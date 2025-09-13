@@ -97,6 +97,6 @@ public class IntroManager : MonoBehaviourPun
         isRunning = false;
         introPanel.SetActive(false);
         gamePanel.SetActive(true);
-        Debug.Log("Intro finished → Game 1 started");
+        Debug.Log("Intro finished → Game 2 started");
     }
 }
