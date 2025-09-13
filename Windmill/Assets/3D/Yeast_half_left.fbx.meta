@@ -3,7 +3,12 @@ guid: f00024b145199154a98bcce55cadfa3f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yeast
+    second: {fileID: 2100000, guid: 27a226ca1d669e64a992d6cf80025126, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

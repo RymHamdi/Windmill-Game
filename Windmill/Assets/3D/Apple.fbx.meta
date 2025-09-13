@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 93e7b1156f2f64b42bbb92084922b02b
+guid: ec52500a6beb415498d71cecc76445de
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Yeast
-    second: {fileID: 2100000, guid: 27a226ca1d669e64a992d6cf80025126, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

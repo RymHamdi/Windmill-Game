@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93e7b1156f2f64b42bbb92084922b02b
+guid: 30e20a82950a4b14aa5720401f344054
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Yeast
-    second: {fileID: 2100000, guid: 27a226ca1d669e64a992d6cf80025126, type: 2}
+      name: blinn2
+    second: {fileID: 2100000, guid: a476193b37efa2e45a87c5cfaa53be7a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

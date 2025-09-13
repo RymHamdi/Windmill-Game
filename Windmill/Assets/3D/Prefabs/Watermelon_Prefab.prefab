@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8569651404847996941}
@@ -183,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc9bc3719974b34e9df95875d4ccc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitHalfPrefabL: {fileID: 8708781273001153546, guid: 0300ad514972f754a873f4709b34c0e7, type: 3}
-  fruitHalfPrefabR: {fileID: 4751951730346706455, guid: b22e9b73d577bb54eb5ca3f9db125143, type: 3}
+  fruitHalfPrefabL: {fileID: 4751951730346706455, guid: b22e9b73d577bb54eb5ca3f9db125143, type: 3}
+  fruitHalfPrefabR: {fileID: 8708781273001153546, guid: 0300ad514972f754a873f4709b34c0e7, type: 3}
   sliceVFXPrefab: {fileID: 176804, guid: 4889039938a567444827eafcfbc2b267, type: 3}
   sliceSound: {fileID: 0}
   explosionForce: 0.5
