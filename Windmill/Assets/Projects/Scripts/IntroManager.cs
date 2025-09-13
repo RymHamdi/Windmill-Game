@@ -55,7 +55,7 @@ public class IntroManager : MonoBehaviourPun
         {
             //SkipIntro(); // auto skip when timer ends
         }
-        skipButton.SetActive(PhotonNetwork.IsMasterClient);
+        //skipButton.SetActive(PhotonNetwork.IsMasterClient);
     }
 
     private void RunDivider()
