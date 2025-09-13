@@ -99,13 +99,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitHalfPrefabL: {fileID: 7534255737446136526, guid: c14a83911bf3f8c43b791d7b9ad4a74b, type: 3}
   fruitHalfPrefabR: {fileID: 8981461727560064675, guid: 6817a32d2b506b04685566439f7d29aa, type: 3}
-  juiceParticles: {fileID: 0}
+  sliceVFXPrefab: {fileID: 0}
   sliceSound: {fileID: 0}
   explosionForce: 1
   explosionTorque: 3
   type: 1
   bingoSpritePrefab: {fileID: 6511528371435352685, guid: 50ba03dc8af299e43985a282e8e6495e, type: 3}
   badSpritePrefab: {fileID: 6511528371435352685, guid: 6c9af83b535c09e4782d1f838d28abe9, type: 3}
+  id: 0
 --- !u!1001 &5084051216886117258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,6 +115,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8569651404847996941}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.016
@@ -153,6 +166,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b9ffc444dabc11e48bcb1dab43822cdd, type: 3}
       propertyPath: m_Name

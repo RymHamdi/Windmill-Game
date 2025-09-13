@@ -8,7 +8,7 @@ public class IntroManager : MonoBehaviourPun
 {
     [Header("UI")]
     public TMP_Text timerText;
-    public TMP_Text titleText;
+    //public TMP_Text titleText;
 
     [Header("Objects")]
     public GameObject introPanel;   // The intro UI
@@ -29,7 +29,7 @@ public class IntroManager : MonoBehaviourPun
     void Start()
     {
         timer = introDuration;
-        titleText.text = "Intro will be skipped in:";
+        //titleText.text = "Intro will be skipped in:";
         introPanel.SetActive(true);
         gamePanel.SetActive(false);
     }

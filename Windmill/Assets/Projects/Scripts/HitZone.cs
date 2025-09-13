@@ -10,8 +10,8 @@ public class HitZone : MonoBehaviour
 
     void OnEnable()
     {
-        MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
-        MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
+//        MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
+     //   MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
     }
 
     private void OnMultiTouchPressed(Vector2 vector, int arg2)
@@ -90,7 +90,7 @@ public class HitZone : MonoBehaviour
 
     void OnDisable()
     {
-        MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
-        MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
+    //    MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
+      //  MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
     }
 }
