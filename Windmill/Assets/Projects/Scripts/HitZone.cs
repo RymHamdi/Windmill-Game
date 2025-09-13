@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class HitZone : MonoBehaviour
 {
@@ -7,11 +9,15 @@ public class HitZone : MonoBehaviour
 
     public GameObject goodEffect;
     public GameObject missEffect;
+    private Vector3 originScale;
+
+    public Image keyImage;
 
     void OnEnable()
     {
-//        MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
-     //   MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
+        MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
+        MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
+        originScale = keyImage.transform.localScale;
     }
 
     private void OnMultiTouchPressed(Vector2 vector, int arg2)
@@ -53,6 +59,7 @@ public class HitZone : MonoBehaviour
 
     void CheckHit()
     {
+        SacleUPANDDOWN();
         Collider[] hits = Physics.OverlapSphere(transform.position, 1);
         foreach (var hit in hits)
         {
@@ -76,6 +83,12 @@ public class HitZone : MonoBehaviour
         Invoke("DisableMissEffect", 0.2f);
     }
 
+    void SacleUPANDDOWN()
+    {
+        keyImage.transform.localScale = originScale * 1.2f;
+        keyImage.transform.DOScale(originScale, 0.1f).SetEase(Ease.OutBack);
+    }
+
     private void DisableGoodEffect()
     {
         if (goodEffect != null)
@@ -90,7 +103,7 @@ public class HitZone : MonoBehaviour
 
     void OnDisable()
     {
-    //    MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
-      //  MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
+        MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
+        MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
     }
 }
