@@ -47,7 +47,7 @@ public class Note : MonoBehaviour
     {
         // Note reached the end position without being hit
         Debug.Log("Missed Note");
-        WaterManager.Instance.RaiseWater(-0.1f, 0.5f);
+        WaterManager.Instance.RaiseWater(+0.1f, 0.5f);
         Destroy(gameObject);
     }
 
@@ -60,13 +60,13 @@ public class Note : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
             PlaySplash();
-            WaterManager.Instance.RaiseWater(0.1f, 0.5f);
+            WaterManager.Instance.RaiseWater(-0.1f, 0.5f);
             if (ScoreManager.Instance != null)
                 ScoreManager.Instance.AddScore(10);
         }
         else
         {
-            WaterManager.Instance.RaiseWater(-0.1f, 0.5f);
+            WaterManager.Instance.RaiseWater(+0.1f, 0.5f);
             EffectManager.Instance.PlayBadEffect();
         }
 

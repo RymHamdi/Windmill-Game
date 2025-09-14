@@ -23,7 +23,7 @@ public class NoteSpawner : MonoBehaviour
 
     private void UpdateSpwnerInterval()
     {
-        spawnInterval = Random.Range(0.5f, 1f);
+        spawnInterval = Random.Range(0.1f, 1f);
     }
 
     void SpawnNote()
