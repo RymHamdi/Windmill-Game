@@ -15,6 +15,9 @@ public class IntroDivider : MonoBehaviour
     private int currentIndex = 0;
     private bool isTransitioning = false;
     Action OnComplete;
+    TMP_Text currentText;
+
+    public List<TMP_Text> scricpts;
 
 
     public void Init(Action onComlete)
@@ -35,6 +38,7 @@ public class IntroDivider : MonoBehaviour
 
     private IEnumerator PlayIntroSequence()
     {
+        StartCoroutine(ShowScripts());
         while (true)
         {
             if (!isTransitioning && currentIndex < introItems.Count)
@@ -50,8 +54,10 @@ public class IntroDivider : MonoBehaviour
 
                 currentIndex++;
                 isTransitioning = false;
-                StartCoroutine(DispalyText(item.text));
-
+                if (item.text != null)
+                {
+                    StartCoroutine(DispalyText(item.text));
+                }
                 // Wait before next item
                 yield return new WaitForSeconds(delayBetweenItems);
             }
@@ -90,6 +96,16 @@ public class IntroDivider : MonoBehaviour
 
     private IEnumerator DispalyText(TMP_Text tMP_Text)
     {
+        if (currentText != null)
+        {
+            yield return new WaitForSeconds(1.5f);
+            HideText(currentText);
+            yield return new WaitForSeconds(1.5f);
+        }
+
+
+
+        currentText = tMP_Text;
         string fullText = tMP_Text.text;
         tMP_Text.text = "";
         tMP_Text.gameObject.SetActive(true);
@@ -100,8 +116,36 @@ public class IntroDivider : MonoBehaviour
         }
     }
 
+    IEnumerator ShowScripts()
+    {
+        foreach (var item in scricpts)
+        {
+            string fullText = item.text;
+            item.text = "";
+            item.gameObject.SetActive(true);
+            for (int i = 0; i < fullText.Length; i++)
+            {
+                item.text += fullText[i];
+                yield return new WaitForSeconds(0.05f); // Adjust typing speed here
+            }
+            yield return new WaitForSeconds(2f);
+            HideText(item, 0.2f);
+        }
+    }
+
+    private void HideText(TMP_Text tMP_Text, float duration = 2f)
+    {
+        //Make it with Dotween
+        tMP_Text.DOFade(0, duration).OnComplete(() =>
+        {
+            tMP_Text.gameObject.SetActive(false);
+            tMP_Text.alpha = 1;
+        });
+    }
+
     private IEnumerator DisableAllCanvasGroups()
     {
+        yield return new WaitForSeconds(4f);
         foreach (var item in introItems)
         {
             yield return StartCoroutine(FadeCanvasGroup(item.canvasGroup, item.canvasGroup.alpha, 0, fadeDuration / 2));
