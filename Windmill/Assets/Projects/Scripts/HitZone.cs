@@ -16,6 +16,11 @@ public class HitZone : MonoBehaviour
 
     void OnEnable()
     {
+        
+    }
+
+    void Start()
+    {
         MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
         MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
         originScale = keyImage.transform.localScale;
@@ -30,25 +35,26 @@ public class HitZone : MonoBehaviour
             {
                 CheckHit();
             }
-            
+
         }
     }
 
-    private void OnTouchPressed(Vector2 vector)
+private void OnTouchPressed(Vector2 vector)
+{
+    Ray ray = Camera.main.ScreenPointToRay(vector);
+    if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, ~0, QueryTriggerInteraction.Collide))
     {
-        Ray ray = Camera.main.ScreenPointToRay(vector);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        // Only accept trigger colliders
+        if (hitInfo.collider.isTrigger && hitInfo.collider.gameObject == gameObject)
         {
-            if (hitInfo.collider == GetComponent<Collider>())
-            {
-                CheckHit();
-            }
-            else
-            {
-                Debug.Log(hitInfo.collider.gameObject.transform.parent.name);
-            }
+            CheckHit();
+        }
+        else
+        {
+            Debug.Log($"Hit non-trigger: {hitInfo.collider.name}");
         }
     }
+}
 
     private void Update()
     {
@@ -83,6 +89,7 @@ public class HitZone : MonoBehaviour
             missEffect.SetActive(true);
         Invoke("DisableMissEffect", 0.2f);
     }
+
 
     void SacleUPANDDOWN()
     {
