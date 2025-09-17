@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1d4d3274d88c28c458fb3a831cbd691e
+guid: 3fc5adcf16df94b4488ccb85ef105236
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7418706503542194279
-    second: De_Nolet_0
+      213: 979418975875536626
+    second: Up_Right01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: De_Nolet_0
+      name: Up_Right01_0
       rect:
         serializedVersion: 2
-        x: 203
-        y: 111
-        width: 646
-        height: 852
+        x: 49
+        y: 21
+        width: 202
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 760438c424a84f660800000000000000
-      internalID: 7418706503542194279
+      spriteID: 2f6965f8e58979d00800000000000000
+      internalID: 979418975875536626
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      De_Nolet_0: 7418706503542194279
+      Up_Right01_0: 979418975875536626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

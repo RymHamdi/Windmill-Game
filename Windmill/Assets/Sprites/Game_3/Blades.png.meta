@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cfb5534ced7be8c4d83a95e00a18ccef
+guid: 06e41a6ffdbdf7947ad85d0c263909a0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4066175466062927980
-    second: De_Hoop-removebg-preview_0
+      213: 2248177538716262146
+    second: Blades_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: De_Hoop-removebg-preview_0
+      name: Blades_0
       rect:
         serializedVersion: 2
-        x: 57
-        y: 48
-        width: 332
-        height: 514
+        x: 203
+        y: 354
+        width: 637
+        height: 597
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49729e605fa0297c0800000000000000
-      internalID: -4066175466062927980
+      spriteID: 20fd1336f81233f10800000000000000
+      internalID: 2248177538716262146
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      De_Hoop-removebg-preview_0: -4066175466062927980
+      Blades_0: 2248177538716262146
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

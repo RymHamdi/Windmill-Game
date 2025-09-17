@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: eabc0435ea892ab42b723e8a3a407c85
+guid: 7a50a9ba52f626d4ebecf285f5f1be24
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6045434809068036014
-    second: comic-book-background-comic-book-background_0
+      213: 8466291920901893952
+    second: A_01.jpg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: comic-book-background-comic-book-background_0
+      name: A_01.jpg_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 800
-        height: 540
+        x: 90
+        y: 53
+        width: 846
+        height: 691
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eaf1843cde2b5e350800000000000000
-      internalID: 6045434809068036014
+      spriteID: 04fed1e45af4e7570800000000000000
+      internalID: 8466291920901893952
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      comic-book-background-comic-book-background_0: 6045434809068036014
+      A_01.jpg_0: 8466291920901893952
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

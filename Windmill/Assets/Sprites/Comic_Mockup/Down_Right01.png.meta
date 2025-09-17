@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 295c1fbf3fda2ea44b29cdc88fea83ee
+guid: 81cec2fe8cf23f24fbb34779367f228b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8257526753859941474
-    second: De_Valk__1_-removebg-preview_0
+      213: 4808991301739933425
+    second: Down_Right01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: De_Valk__1_-removebg-preview_0
+      name: Down_Right01_0
       rect:
         serializedVersion: 2
-        x: 169
-        y: 45
-        width: 228
-        height: 334
+        x: 52
+        y: 24
+        width: 184
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2643b1715d0a89270800000000000000
-      internalID: 8257526753859941474
+      spriteID: 1fee62c1c18fcb240800000000000000
+      internalID: 4808991301739933425
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      De_Valk__1_-removebg-preview_0: 8257526753859941474
+      Down_Right01_0: 4808991301739933425
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

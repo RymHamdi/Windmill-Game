@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9c4c85aba27d2e742b2cf32d7117a7c4
+guid: 0d023ad7038ae6943874879122185523
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3667060755095789141
-    second: De Hoop_0
+      213: -9095424351133228032
+    second: Starry night_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: De Hoop_0
+      name: Starry night_0
       rect:
         serializedVersion: 2
-        x: 37
+        x: 0
         y: 0
-        width: 406
-        height: 450
+        width: 612
+        height: 432
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba16db21cabfb1dc0800000000000000
-      internalID: -3667060755095789141
+      spriteID: 00424450ebf86c180800000000000000
+      internalID: -9095424351133228032
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      De Hoop_0: -3667060755095789141
+      Starry night_0: -9095424351133228032
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
