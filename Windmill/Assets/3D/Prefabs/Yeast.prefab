@@ -106,7 +106,7 @@ MonoBehaviour:
   type: 0
   bingoSpritePrefab: {fileID: 6511528371435352685, guid: 50ba03dc8af299e43985a282e8e6495e, type: 3}
   badSpritePrefab: {fileID: 6511528371435352685, guid: 6c9af83b535c09e4782d1f838d28abe9, type: 3}
-  id: 5
+  id: 4
 --- !u!1001 &4646341873524331832
 PrefabInstance:
   m_ObjectHideFlags: 0
