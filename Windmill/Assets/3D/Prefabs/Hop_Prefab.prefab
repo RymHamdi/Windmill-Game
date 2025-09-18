@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5603880742537981994}
@@ -106,7 +106,7 @@ MonoBehaviour:
   type: 0
   bingoSpritePrefab: {fileID: 6511528371435352685, guid: 50ba03dc8af299e43985a282e8e6495e, type: 3}
   badSpritePrefab: {fileID: 6511528371435352685, guid: 6c9af83b535c09e4782d1f838d28abe9, type: 3}
-  id: 2
+  id: 3
 --- !u!1001 &960610160524520487
 PrefabInstance:
   m_ObjectHideFlags: 0
