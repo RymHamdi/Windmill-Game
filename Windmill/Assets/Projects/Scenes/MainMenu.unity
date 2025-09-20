@@ -2303,7 +2303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3146271754327076094, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 3146271754327076094, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3439,7 +3439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876092693664773035, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 5876092693664773035, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4175,7 +4175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7566711976789893891, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 7566711976789893891, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4951,7 +4951,7 @@ MonoBehaviour:
   CharacterPanels: {fileID: 1965530714}
   RoomPanel: {fileID: 299647622}
   localPlayerindex: 0
-  waitTime: 15
+  waitTime: 2
 --- !u!1 &1765493512
 GameObject:
   m_ObjectHideFlags: 0

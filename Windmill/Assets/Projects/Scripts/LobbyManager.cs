@@ -59,7 +59,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.LoadLevel("Game1"); // syncs load for all
+            PhotonNetwork.LoadLevel("Game3"); // syncs load for all
     }
 
     public bool IsAnyPlayerInRoom()
