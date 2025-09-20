@@ -811,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &522681484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1402,7 +1402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39, y: -169}
+  m_AnchoredPosition: {x: 39, y: 44.99997}
   m_SizeDelta: {x: 703.7, y: 574.771}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943063299
@@ -2083,7 +2083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -131, y: -431}
+  m_AnchoredPosition: {x: -131, y: -217.00003}
   m_SizeDelta: {x: 221.649, y: 114.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1452802811
@@ -2695,7 +2695,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 109}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28, y: 78.99999}
+  m_AnchoredPosition: {x: 28, y: 292.99997}
   m_SizeDelta: {x: 637, y: 597}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1955159116
@@ -2832,11 +2832,11 @@ RectTransform:
   - {fileID: 1876268250}
   - {fileID: 943063298}
   - {fileID: 1955159115}
+  - {fileID: 2132950304}
+  - {fileID: 1452802810}
   - {fileID: 1781955973}
   - {fileID: 495558023}
   - {fileID: 1141870651}
-  - {fileID: 2132950304}
-  - {fileID: 1452802810}
   - {fileID: 1386739753}
   m_Father: {fileID: 9605491}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2917,7 +2917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170.675, y: -434}
+  m_AnchoredPosition: {x: 170.675, y: -220}
   m_SizeDelta: {x: 221.649, y: 114.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132950305
@@ -3023,6 +3023,9 @@ MonoBehaviour:
   currentBladeImage: {fileID: 1955159116}
   infoText: {fileID: 1781955974}
   scrollRect: {fileID: 134786233}
+  goodSpriteFXPrefab: {fileID: 6511528371435352685, guid: 50fb0a43a1c385441887544c1130a3a7, type: 3}
+  badSpriteFXPrefab: {fileID: 6511528371435352685, guid: bd77b553fdcbba240bacdb9647d2cdec, type: 3}
+  fxParent: {fileID: 9605491}
 --- !u!114 &461523265744016803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3695,7 +3698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3544616329698196769
 GameObject:
   m_ObjectHideFlags: 0

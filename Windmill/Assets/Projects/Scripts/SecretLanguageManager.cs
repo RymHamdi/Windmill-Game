@@ -179,7 +179,10 @@ public class SecretLanguageManager : MonoBehaviour
         scrollRect.horizontalNormalizedPosition = 1f;
 
     }
-
+        [Header("Feedback FX")]
+        public GameObject goodSpriteFXPrefab;
+        public GameObject badSpriteFXPrefab;
+        public Transform fxParent; 
     private void InstantiteModelUI(float rotationZ)
     {
         FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);
@@ -187,12 +190,14 @@ public class SecretLanguageManager : MonoBehaviour
         if (rotationZ == rightRotation)
         {
             //Todo @Rim You can Play Good Effect
+            Instantiate(goodSpriteFXPrefab, fxParent);
             //ToDo @Hakim you need to start woirking on the score
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
         else if (rotationZ >= rightRotation - 15f && rotationZ <= rightRotation + 15f)
         {
             //Todo @Rim You can Play almost good  Effect
+            Instantiate(goodSpriteFXPrefab, fxParent);
             //ToDo @Hakim you need to start woirking on the score
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
 
@@ -201,6 +206,7 @@ public class SecretLanguageManager : MonoBehaviour
         else
         {
             //Todo @Rim You can Play Bad Effect
+            Instantiate(badSpriteFXPrefab, fxParent);
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Wrong, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
     }
