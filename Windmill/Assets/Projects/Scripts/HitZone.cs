@@ -12,17 +12,17 @@ public class HitZone : MonoBehaviour
     private Vector3 originScale;
 
     public Image keyImage;
-    
+
 
     void OnEnable()
     {
-        
+
     }
 
     void Start()
     {
-        MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
-        MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
+        //MultiTouchActions.Instance.OnTouchPress += OnTouchPressed;
+        //MultiTouchActions.Instance.OnMultiTouchPress += OnMultiTouchPressed;
         originScale = keyImage.transform.localScale;
     }
 
@@ -39,22 +39,22 @@ public class HitZone : MonoBehaviour
         }
     }
 
-private void OnTouchPressed(Vector2 vector)
-{
-    Ray ray = Camera.main.ScreenPointToRay(vector);
-    if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, ~0, QueryTriggerInteraction.Collide))
+    private void OnTouchPressed(Vector2 vector)
     {
-        // Only accept trigger colliders
-        if (hitInfo.collider.isTrigger && hitInfo.collider.gameObject == gameObject)
+        Ray ray = Camera.main.ScreenPointToRay(vector);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f, ~0, QueryTriggerInteraction.Collide))
         {
-            CheckHit();
-        }
-        else
-        {
-            Debug.Log($"Hit non-trigger: {hitInfo.collider.name}");
+            // Only accept trigger colliders
+            if (hitInfo.collider.isTrigger && hitInfo.collider.gameObject == gameObject)
+            {
+                CheckHit();
+            }
+            else
+            {
+                Debug.Log($"Hit non-trigger: {hitInfo.collider.name}");
+            }
         }
     }
-}
 
     private void Update()
     {
@@ -64,10 +64,11 @@ private void OnTouchPressed(Vector2 vector)
         }
     }
 
-    void CheckHit()
+    public void CheckHit()
     {
         SacleUPANDDOWN();
-        Collider[] hits = Physics.OverlapSphere(transform.position, 1);
+        Collider[] hits = Physics.OverlapSphere(transform.position, 0.8f);
+        Note[] notes = Array.ConvertAll(hits, hit => hit.GetComponent<Note>());
         foreach (var hit in hits)
         {
             Note note = hit.GetComponent<Note>();
@@ -83,11 +84,14 @@ private void OnTouchPressed(Vector2 vector)
                 return;
             }
         }
+      
+            Debug.Log("Miss " + key);
+            if (missEffect != null)
+                missEffect.SetActive(true);
+            Invoke("DisableMissEffect", 0.2f);
+        
+       
 
-        Debug.Log("Miss " + key);
-        if (missEffect != null)
-            missEffect.SetActive(true);
-        Invoke("DisableMissEffect", 0.2f);
     }
 
 
@@ -111,7 +115,7 @@ private void OnTouchPressed(Vector2 vector)
 
     void OnDisable()
     {
-        MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
-        MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
+        //MultiTouchActions.Instance.OnTouchPress -= OnTouchPressed;
+        //MultiTouchActions.Instance.OnMultiTouchPress -= OnMultiTouchPressed;
     }
 }
