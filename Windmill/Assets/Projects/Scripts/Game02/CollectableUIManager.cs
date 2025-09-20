@@ -93,7 +93,13 @@ public class CollectableUIManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(PlayVideo());
+                    if (videoRoutine != null)
+                    {
+                        StopCoroutine(videoRoutine);
+                    }
+
+        // Start a new one
+                    videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2f));
                 collectedItems++;
                 ScoreManager.Instance.AddScore(10 * collectedItems);
 
@@ -110,18 +116,16 @@ public class CollectableUIManager : MonoBehaviour
         return true;
     }
 
-    private bool isPlayingVideo = false;
-    IEnumerator PlayVideo()
-    {
-        if (!isPlayingVideo)
-        {
-            isPlayingVideo = true;
-            videoPlayer.playbackSpeed = 2;
-            videoPlayer.Play();
-            yield return new WaitForSeconds((float)videoPlayer.clip.length / 2);
-            videoPlayer.playbackSpeed = 0;
-            isPlayingVideo = false;
-        }
+private Coroutine videoRoutine;
 
+IEnumerator ShowVideoObjectTemporarily(float duration)
+{
+    if (videoPlayer != null)
+    {
+        // Make sure it starts fresh
+        videoPlayer.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        videoPlayer.gameObject.SetActive(false);
     }
+}
 }
