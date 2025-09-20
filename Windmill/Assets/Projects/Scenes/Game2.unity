@@ -2082,7 +2082,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163990668}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 14127afe88dde6f448f8aa00cb374ff7, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 3fc4a51c4b784514d9a08daf9a4ff01e, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1118705367}
@@ -8527,7 +8527,7 @@ MonoBehaviour:
   - {fileID: 4107167106849712173, guid: e45bb39393ba188468925b41b2757a7d, type: 3}
   - {fileID: 4107167106849712173, guid: 2aad63dc62a9ad5458b9a0a3dcceb82a, type: 3}
   - {fileID: 4107167106849712173, guid: facfe918e119fec4380849f05d23386d, type: 3}
-  spawnInterval: 1
+  spawnInterval: 0.5
   spawnAreaCenter: {x: 0, y: 0, z: 0}
   spawnAreaSize: {x: 3.5, y: 0.3, z: 0}
   minUpForce: 4
@@ -10606,7 +10606,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003962952}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e2064374a4fa2fd488340261a07478e0, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: f59f95927ef16014b96c350b4db234dc, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1118705367}
