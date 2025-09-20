@@ -93,7 +93,7 @@ public class SecretLanguageManager : MonoBehaviour
         for (int i = (int)delay; i > 0; i--)
         {
             //Todo @Rim fix text
-            infoText.text = $"Try to save all image indicators before: {i} seconds";
+            infoText.text = $"Memorize the secret message: {i} seconds";
             yield return new WaitForSeconds(1f);
         }
         infoText.text = "";
@@ -120,7 +120,7 @@ public class SecretLanguageManager : MonoBehaviour
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
             //Todo @Rim fix text
-            infoText.text = $"You need to resolve blade in: {i} seconds";
+            infoText.text = $"Place the blade in the right position in: {i} seconds";
             yield return new WaitForSeconds(1f);
         }
 
