@@ -54,12 +54,18 @@ public class MultiTouchActions : MonoBehaviour
         // Works with mouse or single touch
         if (input.Gameplay.TouchPress.ReadValue<float>() > 0)
         {
+
             Vector2 pos = input.Gameplay.TouchPosition.ReadValue<Vector2>();
             OnTouchPress?.Invoke(pos);
 
         }
+        else
+        {
+            Vector2 pos = input.Gameplay.TouchPosition.ReadValue<Vector2>();
+            OnTouchRelease?.Invoke(pos);
+        }
 
         // For multiple touches (needs direct Touchscreen access)
-        
+
     }
 }
