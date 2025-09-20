@@ -37,11 +37,6 @@ public class SecretLanguageManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        //StartRound(1);
-    }
-
     public void StartRound(int roundIndex)
     {
         currentBladeImage.enabled = false;
@@ -79,6 +74,7 @@ public class SecretLanguageManager : MonoBehaviour
         else
         {
             Debug.Log("All rounds completed!");
+            //ToDo Show Leaderboard
             // Handle end of game logic here
             return;
         }
@@ -96,6 +92,7 @@ public class SecretLanguageManager : MonoBehaviour
     {
         for (int i = (int)delay; i > 0; i--)
         {
+            //Todo @Rim fix text
             infoText.text = $"Try to save all image indicators before: {i} seconds";
             yield return new WaitForSeconds(1f);
         }
@@ -122,10 +119,12 @@ public class SecretLanguageManager : MonoBehaviour
     {
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
+            //Todo @Rim fix text
             infoText.text = $"You need to resolve blade in: {i} seconds";
             yield return new WaitForSeconds(1f);
         }
 
+        //Todo @Rim fix text
         infoText.text = "Time is over!";
         bladeMouseRotator.DisableRotation();
         modelIndex++;
@@ -136,6 +135,7 @@ public class SecretLanguageManager : MonoBehaviour
 
         if (modelIndex > formUiParent.childCount && modelIndex <= currentUsedRoundPropSyncs.Count)
         {
+            //ToDo @Rim Here the timer complete and is instatited alone
             InstantiteModelUI(bladeMouseRotator.GetCurrentRotation());
             scrollRect.horizontalNormalizedPosition = 1f;
         }
@@ -143,6 +143,7 @@ public class SecretLanguageManager : MonoBehaviour
 
         if (isroundCompleted)
         {
+            //Todo @Rim fix text
             infoText.text = "Round Completed!";
             StartCoroutine(NextRoundAfterDelay(5));
         }
@@ -185,17 +186,21 @@ public class SecretLanguageManager : MonoBehaviour
         float rightRotation = currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation;
         if (rotationZ == rightRotation)
         {
-
+            //Todo @Rim You can Play Good Effect
+            //ToDo @Hakim you need to start woirking on the score
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
         else if (rotationZ >= rightRotation - 15f && rotationZ <= rightRotation + 15f)
         {
+            //Todo @Rim You can Play almost good  Effect
+            //ToDo @Hakim you need to start woirking on the score
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
 
         }
 
         else
         {
+            //Todo @Rim You can Play Bad Effect
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Wrong, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
     }
@@ -305,10 +310,9 @@ public class SecretLanguageManager : MonoBehaviour
                 Debug.LogWarning($"No matching SecretLanguageRoundPropSync found for itemId: {syncedProp.itemId}");
             }
         }
-        StartCoroutine(RunAfterDelay(2f));
     }
 
-    IEnumerator RunAfterDelay(float delay)
+    public IEnumerator RunAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         StartRound(1);
