@@ -74,6 +74,7 @@ public class SecretLanguageManager : MonoBehaviour
         else
         {
             Debug.Log("All rounds completed!");
+            StartCoroutine(ShowLeaderboardAfterDelay(1));
             //ToDo Show Leaderboard
             // Handle end of game logic here
             return;
@@ -86,6 +87,13 @@ public class SecretLanguageManager : MonoBehaviour
         scrollRect.horizontalNormalizedPosition = -4;
         currentRoundPropSync = null;
         StartCoroutine(StartPlayinngRoundAfterDelay(saveTime));
+    }
+
+    public GameObject leaderboard;
+    IEnumerator ShowLeaderboardAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        leaderboard.SetActive(true);
     }
 
     IEnumerator StartPlayinngRoundAfterDelay(float delay)
@@ -192,12 +200,14 @@ public class SecretLanguageManager : MonoBehaviour
             //Todo @Rim You can Play Good Effect
             Instantiate(goodSpriteFXPrefab, fxParent);
             //ToDo @Hakim you need to start woirking on the score
+            ScoreManager.Instance.AddScore(10);
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
         else if (rotationZ >= rightRotation - 15f && rotationZ <= rightRotation + 15f)
         {
             //Todo @Rim You can Play almost good  Effect
             Instantiate(goodSpriteFXPrefab, fxParent);
+            ScoreManager.Instance.AddScore(5);
             //ToDo @Hakim you need to start woirking on the score
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
 
