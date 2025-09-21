@@ -31,7 +31,7 @@ public class Timer : MonoBehaviourPun
 
         if (CollectableUIManager.Instance != null)
         {
-            CollectableUIManager.Instance.OnAllItemsCollected += EndGame;
+            //CollectableUIManager.Instance.OnAllItemsCollected += EndGame;
         }
     }
 
@@ -116,7 +116,7 @@ public class Timer : MonoBehaviourPun
     {
         if (CollectableUIManager.Instance != null)
         {
-            CollectableUIManager.Instance.OnAllItemsCollected -= EndGame;
+            //CollectableUIManager.Instance.OnAllItemsCollected -= EndGame;
         }
     }
 }

@@ -93,13 +93,13 @@ public class CollectableUIManager : MonoBehaviour
             }
             else
             {
-                    if (videoRoutine != null)
-                    {
-                        StopCoroutine(videoRoutine);
-                    }
+                if (videoRoutine != null)
+                {
+                    StopCoroutine(videoRoutine);
+                }
 
-        // Start a new one
-                    videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2f));
+                // Start a new one
+                videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2f));
                 collectedItems++;
                 ScoreManager.Instance.AddScore(10 * collectedItems);
 
@@ -108,6 +108,7 @@ public class CollectableUIManager : MonoBehaviour
                     OnAllItemsCollected?.Invoke();
                     Debug.Log("All items collected! You win!");
                     if (!isFinished) isFinished = true;
+                    StartCoroutine(LetsCollectAgain());
                     // Trigger win condition here
                 }
                 return true;
@@ -116,16 +117,25 @@ public class CollectableUIManager : MonoBehaviour
         return true;
     }
 
-private Coroutine videoRoutine;
+    private Coroutine videoRoutine;
 
-IEnumerator ShowVideoObjectTemporarily(float duration)
-{
-    if (videoPlayer != null)
+    IEnumerator LetsCollectAgain()
     {
-        // Make sure it starts fresh
-        videoPlayer.gameObject.SetActive(true);
-        yield return new WaitForSeconds(duration);
-        videoPlayer.gameObject.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        ScoreManager.Instance.ResetScore();
+        isFinished = false;
+        collectedItems = 0;
+        OnResetItems?.Invoke();
     }
-}
+
+    IEnumerator ShowVideoObjectTemporarily(float duration)
+    {
+        if (videoPlayer != null)
+        {
+            // Make sure it starts fresh
+            videoPlayer.gameObject.SetActive(true);
+            yield return new WaitForSeconds(duration);
+            videoPlayer.gameObject.SetActive(false);
+        }
+    }
 }

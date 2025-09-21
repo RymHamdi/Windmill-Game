@@ -28,6 +28,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public VideoPlayer gameVideo;
 
+    private int lastScoreMilestone = 0;
+
 
     void Awake()
     {
@@ -40,6 +42,11 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        if (CollectableUIManager.Instance != null)
+        {
+            CollectableUIManager.Instance.OnAllItemsCollected += SaveScoreMilestone;
+        }
+        
         lastNoteHitTime = Time.time;
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(ScoreKey))
             score = (int)PhotonNetwork.LocalPlayer.CustomProperties[ScoreKey];
@@ -102,11 +109,24 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public void ResetScore()
     {
-        score = 0;
+        if (lastScoreMilestone != 0)
+        {
+         score = lastScoreMilestone;   
+        }
+        else
+        {
+            score = 0;
+        }
+
         ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
         props[ScoreKey] = score;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         UpdateScoreUI();
+    }
+
+    private void SaveScoreMilestone()
+    {
+        lastScoreMilestone = score;
     }
 
     private void UpdateVideoSpeed()
