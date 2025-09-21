@@ -4951,7 +4951,7 @@ MonoBehaviour:
   CharacterPanels: {fileID: 1965530714}
   RoomPanel: {fileID: 299647622}
   localPlayerindex: 0
-  waitTime: 2
+  waitTime: 15
 --- !u!1 &1765493512
 GameObject:
   m_ObjectHideFlags: 0
