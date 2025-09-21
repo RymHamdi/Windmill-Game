@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 1
+  m_HorizontalFit: 2
   m_VerticalFit: 0
 --- !u!114 &86401713
 MonoBehaviour:
@@ -4818,6 +4818,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1254565802}
   scoreText: {fileID: 1057986406}
   playerAvtar: {fileID: 305884674}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1181185332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5489,6 +5492,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1068882509}
   scoreText: {fileID: 154630801}
   playerAvtar: {fileID: 1824450197}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1335488745
 GameObject:
   m_ObjectHideFlags: 0
@@ -6131,6 +6137,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1364609053}
   scoreText: {fileID: 611126914}
   playerAvtar: {fileID: 2028593753}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1472818988
 GameObject:
   m_ObjectHideFlags: 0
@@ -7544,6 +7553,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1226200097}
   scoreText: {fileID: 206059862}
   playerAvtar: {fileID: 989698220}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1876268249
 GameObject:
   m_ObjectHideFlags: 0
@@ -7968,6 +7980,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1297010098}
   scoreText: {fileID: 874436821}
   playerAvtar: {fileID: 386645409}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1982592672
 GameObject:
   m_ObjectHideFlags: 0

@@ -84,7 +84,7 @@ public class SecretLanguageManager : MonoBehaviour
         {
             PrepareFormModellUI(1, i);
         }
-        scrollRect.horizontalNormalizedPosition = -4;
+        scrollRect.horizontalNormalizedPosition = 0;
         currentRoundPropSync = null;
         StartCoroutine(StartPlayinngRoundAfterDelay(saveTime));
     }
@@ -145,7 +145,7 @@ public class SecretLanguageManager : MonoBehaviour
         {
             //ToDo @Rim Here the timer complete and is instatited alone
             InstantiteModelUI(bladeMouseRotator.GetCurrentRotation());
-            scrollRect.horizontalNormalizedPosition = 1f;
+            StartCoroutine(UpdateScrollView());
         }
 
 
@@ -184,7 +184,7 @@ public class SecretLanguageManager : MonoBehaviour
             scrollRect.horizontalNormalizedPosition = 0;
         }
         InstantiteModelUI(rotationZ);
-        scrollRect.horizontalNormalizedPosition = 1f;
+        StartCoroutine(UpdateScrollView());
 
     }
         [Header("Feedback FX")]
@@ -218,6 +218,19 @@ public class SecretLanguageManager : MonoBehaviour
             //Todo @Rim You can Play Bad Effect
             Instantiate(badSpriteFXPrefab, fxParent);
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Wrong, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
+        }
+    }
+
+    private IEnumerator UpdateScrollView()
+    {
+        WaitForSeconds waitShort = new WaitForSeconds(0.1f);
+        yield return waitShort;
+        WaitForSeconds waitFrame = new WaitForSeconds(Time.deltaTime);
+        while (scrollRect.horizontalNormalizedPosition < 1)
+        {
+            scrollRect.horizontalNormalizedPosition += Time.deltaTime * 10;
+            yield return waitFrame;
+            yield return null;
         }
     }
 

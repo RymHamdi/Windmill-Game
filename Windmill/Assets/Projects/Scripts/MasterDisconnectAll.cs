@@ -11,7 +11,7 @@ public class MasterDisconnectAll : MonoBehaviourPunCallbacks, IOnEventCallback
     public Button disconnectButton; // assign in Inspector
     public string firstSceneName = "Launcher"; // change to your first scene
 
-    private const byte KickEventCode = 200; // custom Photon event
+    private const byte KickEventCode = 0; // custom Photon event
 
     void Start()
     {
