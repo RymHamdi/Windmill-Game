@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec52500a6beb415498d71cecc76445de
+guid: 464befa9d812ec44d92ac5e15215c280
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: GreenApple
-    second: {fileID: 2100000, guid: cf5df6c5810ee02469130a681e213410, type: 2}
+      name: Coriandre1_Diffuse
+    second: {fileID: 2100000, guid: 6e5384db66a926c45a1500d8e8dbd89f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

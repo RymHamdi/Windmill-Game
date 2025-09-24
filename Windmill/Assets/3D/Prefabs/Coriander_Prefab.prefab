@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc9bc3719974b34e9df95875d4ccc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruitHalfPrefabL: {fileID: 2489257073337034016, guid: 0e7308d93b8d98d45ba89399e927d20a, type: 3}
-  fruitHalfPrefabR: {fileID: 6584337585229333327, guid: b7737319004d6fc44977a0e0fec19739, type: 3}
+  fruitHalfPrefabL: {fileID: 6231913344299017907, guid: 5eb9bd74a8e9510449bc5c33a42a6128, type: 3}
+  fruitHalfPrefabR: {fileID: 6231913344299017907, guid: 5eb9bd74a8e9510449bc5c33a42a6128, type: 3}
   sliceVFXPrefab: {fileID: 173314, guid: 4d3473d4bd4973043a81c15073823353, type: 3}
   sliceSound: {fileID: 0}
   explosionForce: 1
