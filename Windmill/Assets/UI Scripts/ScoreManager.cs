@@ -42,13 +42,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        ResetForceScore();
         if (CollectableUIManager.Instance != null)
         {
             CollectableUIManager.Instance.OnAllItemsCollected += SaveScoreMilestone;
         }
         
         lastNoteHitTime = Time.time;
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(ScoreKey))
+        /*if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(ScoreKey))
             score = (int)PhotonNetwork.LocalPlayer.CustomProperties[ScoreKey];
         else
         {
@@ -58,7 +59,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
 
-        UpdateScoreUI();
+        UpdateScoreUI();*/
     }
 
     public void AddScore(int amount)
@@ -124,6 +125,15 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         UpdateScoreUI();
     }
 
+    private void ResetForceScore()
+    {
+        score = 0;
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
+        props[ScoreKey] = score;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        UpdateScoreUI();
+    }
+
     private void SaveScoreMilestone()
     {
         lastScoreMilestone = score;
@@ -144,6 +154,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             BingoEffect.SetActive(true);
             StartCoroutine(PlayScoreTexteffect());
             Invoke(nameof(DisableBingoEffect), BingoEffectDuration);
+            ShowControlTrigger.Instance?.SendTrigger("BingoEffectGameOne");
         }
     }
 

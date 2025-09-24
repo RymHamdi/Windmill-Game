@@ -1500,6 +1500,8 @@ MonoBehaviour:
   introDividers:
   - {fileID: 735273634}
   timeBeforeRunDivider: 0.1
+  IntroKey: IntroOne
+  GameKey: GameOne
 --- !u!114 &121736917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4001,6 +4003,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1218698687}
   scoreText: {fileID: 1492473799}
   playerAvtar: {fileID: 451296256}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &408824600
 GameObject:
   m_ObjectHideFlags: 0
@@ -4563,6 +4568,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1429954901}
   scoreText: {fileID: 1506459346}
   playerAvtar: {fileID: 1429192569}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &494546319
 GameObject:
   m_ObjectHideFlags: 0
@@ -10552,6 +10560,9 @@ MonoBehaviour:
   playerNameText: {fileID: 494546321}
   scoreText: {fileID: 143645255}
   playerAvtar: {fileID: 2032183616}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1026526539
 GameObject:
   m_ObjectHideFlags: 0
@@ -17335,6 +17346,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1928425388}
   scoreText: {fileID: 896537248}
   playerAvtar: {fileID: 1715821692}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1647978202
 GameObject:
   m_ObjectHideFlags: 0
@@ -20295,6 +20309,7 @@ MonoBehaviour:
   - {fileID: 477105557}
   ScoreKey: Score1
   NextButton: {fileID: 2101992395}
+  nextSceneName: Game2
 --- !u!114 &1888445063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22562,6 +22577,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1203860145}
   scoreText: {fileID: 787031561}
   playerAvtar: {fileID: 966949283}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &2072172191
 GameObject:
   m_ObjectHideFlags: 0

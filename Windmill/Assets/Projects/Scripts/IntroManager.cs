@@ -26,6 +26,9 @@ public class IntroManager : MonoBehaviourPun
     public float timeBeforeRunDivider = 3;
     private int currentDividerIndex = 0;
 
+    public string IntroKey;
+    public string GameKey;
+
     void Start()
     {
         timer = introDuration;
@@ -47,6 +50,10 @@ public class IntroManager : MonoBehaviourPun
         timeBeforeRunDivider -= Time.deltaTime;
         if (timeBeforeRunDivider <= 0)
         {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ShowControlTrigger.Instance?.SendTrigger(IntroKey.ToString());
+            }
             RunDivider();
             timeBeforeRunDivider = Mathf.Infinity;
         }
@@ -83,7 +90,11 @@ public class IntroManager : MonoBehaviourPun
     public void OnSkipButton()
     {
         if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger(GameKey.ToString());
             photonView.RPC("SkipIntroRPC", RpcTarget.AllBuffered);
+        }
+
     }
 
     private void SkipIntro()

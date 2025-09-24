@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notePrefab: {fileID: 910262782316348472, guid: 52f52c12ac2bc4e46bed72475c271f4c, type: 3}
+  trashPrefab: {fileID: 0}
   lanes:
   - {fileID: 864236712}
   - {fileID: 772838454}
@@ -1168,6 +1169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 114
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &62830848
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1624,11 +1628,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1031471255}
-  titleText: {fileID: 804016780}
   introPanel: {fileID: 121736911}
   gamePanel: {fileID: 495208010}
   skipButton: {fileID: 309031914}
   introDuration: 20
+  introDividers: []
+  timeBeforeRunDivider: 3
+  IntroKey: IntroOne
+  GameKey: GameOne
 --- !u!114 &121736917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1945,6 +1952,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 114
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &159713213
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2490,6 +2500,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!65 &177274167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4406,6 +4419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 2045332528}
   endPoint: {fileID: 1751545597}
+  hitZonePoint: {fileID: 0}
 --- !u!1 &428559822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +5040,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!65 &572351986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5173,6 +5190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 711908809}
   endPoint: {fileID: 1568096831}
+  hitZonePoint: {fileID: 0}
 --- !u!1 &594591107
 GameObject:
   m_ObjectHideFlags: 0
@@ -5526,6 +5544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 256752570}
   endPoint: {fileID: 1513102765}
+  hitZonePoint: {fileID: 0}
 --- !u!1 &666022170
 GameObject:
   m_ObjectHideFlags: 0
@@ -6251,6 +6270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 12259542}
   endPoint: {fileID: 1555007779}
+  hitZonePoint: {fileID: 0}
 --- !u!4 &772838455
 Transform:
   m_ObjectHideFlags: 0
@@ -6823,6 +6843,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 122
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &861922871
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7020,6 +7043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 1149379911}
   endPoint: {fileID: 408824601}
+  hitZonePoint: {fileID: 0}
 --- !u!1 &865814859
 GameObject:
   m_ObjectHideFlags: 0
@@ -7248,6 +7272,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 733862689}
+  ScoreKey: Score
+  BingoEffect: {fileID: 0}
+  BingoEffectDuration: 1
+  timeIntervalToGetBingo: 1.5
+  notesToGetBingo: 3
+  gameVideo: {fileID: 0}
 --- !u!1 &877750521
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,6 +7353,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877750521}
   m_CullTransparentMesh: 1
+--- !u!1 &883856314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883856316}
+  - component: {fileID: 883856315}
+  m_Layer: 0
+  m_Name: ShowControlReceiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &883856315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883856314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3036469703ec2424daf0668a8967f1bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listenPort: 5000
+--- !u!4 &883856316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883856314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 559.27576, y: 699.06445, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &911184818
 GameObject:
   m_ObjectHideFlags: 0
@@ -7520,6 +7595,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 101
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!1 &916055188
 GameObject:
   m_ObjectHideFlags: 0
@@ -7786,6 +7864,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!65 &928442716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9903,6 +9984,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!65 &1120221361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10568,6 +10652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 97
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &1179876218
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13149,6 +13236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 769697163}
   endPoint: {fileID: 2096952343}
+  hitZonePoint: {fileID: 0}
 --- !u!4 &1651877290
 Transform:
   m_ObjectHideFlags: 0
@@ -14345,6 +14433,8 @@ MonoBehaviour:
   timerText: {fileID: 58332086}
   alertImage: {fileID: 1441916881}
   startTime: 60
+  ObjectToHide: {fileID: 0}
+  ObjectToShow: {fileID: 0}
 --- !u!1 &1893576373
 GameObject:
   m_ObjectHideFlags: 0
@@ -14981,7 +15071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 598003.44
+      value: 1237867.1
       objectReference: {fileID: 0}
     - target: {fileID: 7442321177565666642, guid: 03afab48d3571df4d85198d598868eb4, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -15148,6 +15238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 114
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &2029206307
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15954,6 +16047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 807242409}
   endPoint: {fileID: 410628313}
+  hitZonePoint: {fileID: 0}
 --- !u!4 &2139759080
 Transform:
   m_ObjectHideFlags: 0
@@ -16091,6 +16185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 114
+  goodEffect: {fileID: 0}
+  missEffect: {fileID: 0}
+  keyImage: {fileID: 0}
 --- !u!135 &2145382514
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -17582,3 +17679,4 @@ SceneRoots:
   - {fileID: 495208011}
   - {fileID: 2041350421}
   - {fileID: 1115176336}
+  - {fileID: 883856316}

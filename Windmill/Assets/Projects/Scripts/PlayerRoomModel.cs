@@ -32,6 +32,16 @@ public class PlayerRoomModel : MonoBehaviour
         LobbyManager.Instance.OnPlayerLeft += RemovePlayer;
     }
 
+    public void Reset()
+    {
+        hasAPlayer = false;
+        isLocalPlayer = false;
+        characterImage.sprite = null;
+        playerNameText.text = "";
+        strenthText.text = "";
+        playerPhotonId = "";
+    }
+
     public void RemovePlayer(string photonId)
     {
         if (playerPhotonId == photonId)
@@ -42,7 +52,7 @@ public class PlayerRoomModel : MonoBehaviour
             playerNameText.text = "";
             strenthText.text = "";
             gameObject.SetActive(false);
-            
+
 
             Debug.Log($"Player with Photon ID {photonId} has left the room. Disabling their PlayerRoomModel.");
         }

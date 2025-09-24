@@ -28,6 +28,7 @@ public class CharacterDetailsManager : MonoBehaviour
             buttons[0].image.sprite = selectedSprite;
             currentIndex = 0;
         }
+        ShowDetails(0);
     }
 
     public void ShowDetails(int index)
@@ -42,7 +43,8 @@ public class CharacterDetailsManager : MonoBehaviour
         ResetAllButtons();
         buttons[index].image.sprite = selectedSprite;
         LobbyManager.Instance.localPlayerindex = index;
-
+        LobbyManager.Instance.UpdateLocalPlayerCharacter();
+        ShowControlTrigger.Instance?.SendTrigger("UpdateCharacterSelection");
        
     }
 

@@ -41,6 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - SkipIntroRPC
   - ShowHidePanel
+  - RPC_UpdatePanel
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
 public class SecretLanguageManager : MonoBehaviour
 {
@@ -98,6 +99,10 @@ public class SecretLanguageManager : MonoBehaviour
 
     IEnumerator StartPlayinngRoundAfterDelay(float delay)
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("GameThreeStartMemorize");
+        }
         for (int i = (int)delay; i > 0; i--)
         {
             //Todo @Rim fix text
@@ -125,6 +130,10 @@ public class SecretLanguageManager : MonoBehaviour
 
     IEnumerator RunCrono()
     {
+         if (PhotonNetwork.IsMasterClient)
+            {
+                ShowControlTrigger.Instance?.SendTrigger("GameThreePlaceBlade");
+            }
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
             //Todo @Rim fix text
@@ -152,6 +161,10 @@ public class SecretLanguageManager : MonoBehaviour
         if (isroundCompleted)
         {
             //Todo @Rim fix text
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ShowControlTrigger.Instance?.SendTrigger("GameThreeRoundCompleted");
+            }
             infoText.text = "Round Completed!";
             StartCoroutine(NextRoundAfterDelay(5));
         }
@@ -187,10 +200,10 @@ public class SecretLanguageManager : MonoBehaviour
         StartCoroutine(UpdateScrollView());
 
     }
-        [Header("Feedback FX")]
-        public GameObject goodSpriteFXPrefab;
-        public GameObject badSpriteFXPrefab;
-        public Transform fxParent; 
+    [Header("Feedback FX")]
+    public GameObject goodSpriteFXPrefab;
+    public GameObject badSpriteFXPrefab;
+    public Transform fxParent;
     private void InstantiteModelUI(float rotationZ)
     {
         FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);

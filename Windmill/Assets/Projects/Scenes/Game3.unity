@@ -5633,6 +5633,7 @@ MonoBehaviour:
   - {fileID: 1305506397}
   ScoreKey: Score3
   NextButton: {fileID: 2062130081}
+  nextSceneName: finalLeaderboard
 --- !u!114 &1359111333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9256,6 +9257,8 @@ MonoBehaviour:
   introDividers:
   - {fileID: 1888461591310399805}
   timeBeforeRunDivider: 0.1
+  IntroKey: IntroGameThree
+  GameKey: GameThree
 --- !u!225 &1481435080294200713
 CanvasGroup:
   m_ObjectHideFlags: 0

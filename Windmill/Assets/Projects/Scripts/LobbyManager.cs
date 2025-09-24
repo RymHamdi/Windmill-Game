@@ -22,12 +22,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public float waitTime = 15f;
     private float startTime;
     private bool hasUpdated = false;
+    private bool isGameStarted;
 
     //Create instance for easy access
     public static LobbyManager Instance { get; private set; }
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         Debug.Log("LobbyManager Awake");
         startTime = Time.time;
@@ -43,16 +49,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (playersCountText != null)
         {
-            playersCountText.text = PhotonNetwork.CurrentRoom.PlayerCount + " / " + 5;
+            // playersCountText.text = PhotonNetwork.CurrentRoom.PlayerCount + " / " + 5;
         }
 
-        startButton.SetActive(PhotonNetwork.IsMasterClient);
+        //startButton.SetActive(PhotonNetwork.IsMasterClient);
 
         // No just after the wait time update player prop with UpdateLocalPlayerCharacter
-        if (Time.time >= waitTime && !hasUpdated)
+        if (Time.time >= waitTime && !hasUpdated && PhotonNetwork.IsMasterClient)
         {
             hasUpdated = true;
-            UpdateLocalPlayerCharacter();
+            photonView.RPC("RPC_UpdatePanel", RpcTarget.All);
+        }
+
+        if (Time.time >= waitTime + 5  && PhotonNetwork.IsMasterClient && !isGameStarted)
+        {
+            isGameStarted = true;
+            StartGame();
         }
     }
 
@@ -100,7 +112,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -125,9 +137,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
+        
+
+    }
+    
+    [PunRPC]
+    private void RPC_UpdatePanel()
+    {
         CharacterPanels.SetActive(false);
         RoomPanel.SetActive(true);
-        
     }
+    
 
 }

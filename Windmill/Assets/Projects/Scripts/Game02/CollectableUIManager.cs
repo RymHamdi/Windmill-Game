@@ -109,7 +109,12 @@ public class CollectableUIManager : MonoBehaviour
                     Debug.Log("All items collected! You win!");
                     if (!isFinished) isFinished = true;
                     StartCoroutine(LetsCollectAgain());
+                    ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectallItems");
                     // Trigger win condition here
+                }
+                else
+                {
+                    ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectNewItem");
                 }
                 return true;
             }

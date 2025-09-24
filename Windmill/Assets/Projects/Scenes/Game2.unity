@@ -1053,6 +1053,8 @@ MonoBehaviour:
   - {fileID: 5850597894774493570}
   - {fileID: 1759104876}
   timeBeforeRunDivider: 2
+  IntroKey: IntroTwo
+  GameKey: GameTwo
 --- !u!114 &121736917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3953,6 +3955,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1218698687}
   scoreText: {fileID: 1492473799}
   playerAvtar: {fileID: 451296256}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &422487024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,6 +4671,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1429954901}
   scoreText: {fileID: 1506459346}
   playerAvtar: {fileID: 1429192569}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &494546319
 GameObject:
   m_ObjectHideFlags: 0
@@ -9954,6 +9962,9 @@ MonoBehaviour:
   playerNameText: {fileID: 494546321}
   scoreText: {fileID: 143645255}
   playerAvtar: {fileID: 2032183616}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!224 &1003029313 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4539875202608906361, guid: cb1f76712f31f964eb3db264bf9fedd5, type: 3}
@@ -13481,6 +13492,8 @@ MonoBehaviour:
   introDividers:
   - {fileID: 2055773081}
   timeBeforeRunDivider: 0.1
+  IntroKey: IntroTwo
+  GameKey: GameTwo
 --- !u!114 &1356026433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16570,6 +16583,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1928425388}
   scoreText: {fileID: 896537248}
   playerAvtar: {fileID: 1715821692}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &1647978202
 GameObject:
   m_ObjectHideFlags: 0
@@ -19230,6 +19246,7 @@ MonoBehaviour:
   - {fileID: 477105557}
   ScoreKey: Score2
   NextButton: {fileID: 2101992395}
+  nextSceneName: Game3
 --- !u!1 &1888674423
 GameObject:
   m_ObjectHideFlags: 0
@@ -21427,6 +21444,9 @@ MonoBehaviour:
   playerNameText: {fileID: 1203860145}
   scoreText: {fileID: 787031561}
   playerAvtar: {fileID: 966949283}
+  scaleUp: 1.2
+  scaleDuration: 0.2
+  scaleDownDuration: 0.2
 --- !u!1 &2072966108
 GameObject:
   m_ObjectHideFlags: 0

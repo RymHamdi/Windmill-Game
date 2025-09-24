@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class FinalLeaderboard : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class FinalLeaderboard : MonoBehaviour
             PlayerLeaderBoardModel model = playerModels[index];
             StartCoroutine(ActivateModelWithDelay(model, windmillCharacter.characterName, leaderBoardModel.Score, windmillCharacter.icon));
             index++;
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("ShowFinalLeaderboard");
         }
     }
 

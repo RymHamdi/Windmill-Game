@@ -14,6 +14,13 @@ public class Leaderboard : MonoBehaviour
 
     public GameObject NextButton;
 
+    public string nextSceneName;
+
+    private void OnEnable()
+    {
+        NextButton.SetActive(false);
+    }
+
     void Start()
     {
         var players = new List<PlayerLearderBoardStruct>();
@@ -29,7 +36,7 @@ public class Leaderboard : MonoBehaviour
                 Score = score
             });
         }
-        
+
 
         // Sort players by score descending
         players.Sort((a, b) => b.Score.CompareTo(a.Score));
@@ -45,21 +52,37 @@ public class Leaderboard : MonoBehaviour
             StartCoroutine(ActivateModelWithDelay(model, windmillCharacter.characterName, leaderBoardModel.Score, windmillCharacter.icon));
             index++;
         }
+        if (PhotonNetwork.IsMasterClient && nextSceneName != "")
+        {
+            ShowControlTrigger.Instance?.SendTrigger("ShowLeaderboard");
+        }
+        StartCoroutine(NextGameAfterDely());
     }
+
 
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
+        /*if (PhotonNetwork.IsMasterClient)
         {
             NextButton.SetActive(true);
         }
         else
         {
             NextButton.SetActive(false);
-        }
+        }*/
     }
 
-    public void StartNextGame(string nextSceneName)
+    IEnumerator NextGameAfterDely()
+    {
+        yield return new WaitForSeconds(5);
+        if (nextSceneName != "")
+        {
+            StartNextGame();
+        }
+
+    }
+
+    public void StartNextGame()
     {
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.LoadLevel(nextSceneName); // syncs load for all

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PlayerRoomManager : MonoBehaviour
@@ -8,8 +9,18 @@ public class PlayerRoomManager : MonoBehaviour
 
     void OnEnable()
     {
+        for (int i = 0; i < playersInRoom.Count; i++)
+        {
+            playersInRoom[i].Reset();
+            playersInRoom[i].gameObject.SetActive(false);
+        }
         LobbyManager.Instance.OnPlayerJoinedAndUpdateCharacter += CreateNewPlayer;
         LobbyManager.Instance.CheckPlayersInRoom();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("PlayerRoom");
+        }
+
     }
 
     private void CreateNewPlayer(string photonId, int characterId, bool isLocalPlayer)

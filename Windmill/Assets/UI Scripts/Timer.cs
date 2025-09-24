@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening; // for smooth fading
 using TMPro;
 using Photon.Pun;
+using System.Collections;
 
 public class Timer : MonoBehaviourPun
 {
@@ -71,7 +72,15 @@ public class Timer : MonoBehaviourPun
         Debug.Log("Timer Ended!");
         StopAlert();
         if (PhotonNetwork.IsMasterClient)
-            photonView.RPC("ShowHidePanel", RpcTarget.AllBuffered);
+        {
+            ShowControlTrigger.Instance?.SendTrigger("EndTimeAlert");
+            Invoke("ShowHidePanelAfterDely", 0.5f);
+        }
+    }
+
+    private void ShowHidePanelAfterDely()
+    {
+        photonView.RPC("ShowHidePanel", RpcTarget.AllBuffered);
     }
 
     private void EndGame()
@@ -93,6 +102,10 @@ public class Timer : MonoBehaviourPun
 
     private void StartAlert()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("StartTimeAlert");
+        }
         if (alertImage == null) return;
 
         alertImage.gameObject.SetActive(true);
