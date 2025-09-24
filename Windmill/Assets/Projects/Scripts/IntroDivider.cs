@@ -107,13 +107,13 @@ public class IntroDivider : MonoBehaviour
 
         currentText = tMP_Text;
         string fullText = tMP_Text.text;
-        tMP_Text.text = "";
+       // tMP_Text.text = "";
         tMP_Text.gameObject.SetActive(true);
-        for (int i = 0; i < fullText.Length; i++)
+       /* for (int i = 0; i < fullText.Length; i++)
         {
             tMP_Text.text += fullText[i];
             yield return new WaitForSeconds(0.05f); // Adjust typing speed here
-        }
+        }*/
     }
 
     IEnumerator ShowScripts()
@@ -121,14 +121,15 @@ public class IntroDivider : MonoBehaviour
         foreach (var item in scricpts)
         {
             string fullText = item.text;
-            item.text = "";
+            yield return new WaitForSeconds(1);
+            //item.text = "";
             item.gameObject.SetActive(true);
-            for (int i = 0; i < fullText.Length; i++)
+           /* for (int i = 0; i < fullText.Length; i++)
             {
                 item.text += fullText[i];
                 yield return new WaitForSeconds(0.05f); // Adjust typing speed here
-            }
-            yield return new WaitForSeconds(2f);
+            }*/
+            yield return new WaitForSeconds(8f);
             HideText(item, 0.2f);
         }
     }

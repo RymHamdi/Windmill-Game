@@ -589,7 +589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isConnected: 0
   uniqueId: 001
-  gameState: {fileID: 11400000, guid: 81b78a100a5dc424fa93be753a846049, type: 2}
+  gameStateConfigManager:
+    gameStateConfigs: []
 --- !u!4 &1904315162
 Transform:
   m_ObjectHideFlags: 0

@@ -287,7 +287,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7119630}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 08c4331b64bf0934e82ec2788fb12ca8, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: e9fa16ef1012fad47be949961b3a529c, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1118705367}
@@ -328,11 +328,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoClips:
-  - {fileID: 32900000, guid: 08c4331b64bf0934e82ec2788fb12ca8, type: 3}
-  - {fileID: 32900000, guid: efc9a180e18c97a4a963f3ce0e838454, type: 3}
-  - {fileID: 32900000, guid: c70a8001f52a9794db9a4c8b3e527278, type: 3}
-  - {fileID: 32900000, guid: 1c9399a6723939f468ad32fb6959b5dc, type: 3}
-  - {fileID: 32900000, guid: f0f57f766395964408b4c5a9e0cd7e10, type: 3}
+  - {fileID: 32900000, guid: e9fa16ef1012fad47be949961b3a529c, type: 3}
+  - {fileID: 32900000, guid: ab3ded1509dd6f2479541a191b755257, type: 3}
+  - {fileID: 32900000, guid: f1cd70faae440ff49a8ac3327d554a05, type: 3}
+  - {fileID: 32900000, guid: a349c933db0d5a54d9a0d5907594a811, type: 3}
+  - {fileID: 32900000, guid: 2d39fec047d1afa49808fe624e02e38d, type: 3}
   videoPlayer: {fileID: 7119632}
 --- !u!1 &11895287
 GameObject:
@@ -11068,7 +11068,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -345, y: 197}
+  m_AnchoredPosition: {x: -325, y: 221}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055839084
@@ -11091,8 +11091,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: we kept it by keeping it safe  from raging storms and dangerously quick
-    rising waters! Without a doubt one of the most Without a doubt one of the most
+  m_text: "we kept it by keeping it safe  from raging storms and dangerously quick
+    rising waters! Without a doubt one of the most and dangerous jobs of \nour hero\u2019s. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -11135,7 +11135,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 2
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -11157,7 +11157,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -99.88067, y: -82.64834, z: -88.924, w: -104.89256}
+  m_margin: {x: -99.88067, y: -105.166756, z: -81.39452, w: -104.89256}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
