@@ -8,6 +8,8 @@ public class SecretLanguageRoundPropSync : ScriptableObject
     public int itemId;
     public Sprite iconSprite;
     public Sprite bigIconSprite;
+
+    public float divider = 180;
     public List<RandomSecretLanguageRoundProp> randomSecretLanguageRoundProps;
 
     public List<RandomSecretLanguageRoundProp> GetRandomSecretLanguageRoundProps(int count)

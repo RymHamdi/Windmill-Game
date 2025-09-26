@@ -28,6 +28,8 @@ public class SecretLanguageManager : MonoBehaviour
     public TextMeshProUGUI infoText;
     public ScrollRect scrollRect;
 
+    public float currentDividerangle = 180;
+
     bool isroundCompleted;
 
     private void Awake()
@@ -319,13 +321,13 @@ public class SecretLanguageManager : MonoBehaviour
 
     }
 
-    public float GetCanonicalBladeAngle(float rotationZ)
+    public float GetCanonicalBladeAngle(float rotationZ )
     {
         // Normalize the angle to be within -360 to 360
         rotationZ = Mathf.Repeat(rotationZ, 360f);
 
         // Map the angle to the range [0, 180] to match the "X" design symmetry
-        float canonicalAngle = Mathf.Abs(rotationZ % 180f);
+        float canonicalAngle = Mathf.Abs(rotationZ % currentDividerangle);
         return canonicalAngle;
     }
 
