@@ -26,20 +26,32 @@ public class SecretLanguageRoundSyncManager : MonoBehaviourPunCallbacks, IOnEven
 
     void Start()
     {
-        GenerateAndSyncSequence(17);
+        currentSequence.Clear();
+        GenerateAndSyncSequence(3);
     }
 
     // Master generates a sequence and syncs to others
     public void GenerateAndSyncSequence(int totalNeeded)
     {
         if (!PhotonNetwork.IsMasterClient) return;
-
-        currentSequence.Clear();
-
+        List<SyncedRoundProp> Sequence = new List<SyncedRoundProp>();
         for (int i = 0; i < totalNeeded; i++)
         {
             // pick random asset
-            int randomAssetIndex = Random.Range(0, allPropAssets.Count);
+            int randomAssetIndex;
+            if (Sequence.Count >= allPropAssets.Count)
+            {
+                // All assets already used at least once — allow repeats
+                randomAssetIndex = Random.Range(0, allPropAssets.Count);
+            }
+            else
+            {
+                // pick a random asset index that's not already in the Sequence (unique by itemId)
+                do
+                {
+                    randomAssetIndex = Random.Range(0, allPropAssets.Count);
+                } while (Sequence.Exists(s => s.itemId == allPropAssets[randomAssetIndex].itemId));
+            }
             var selectedAsset = allPropAssets[randomAssetIndex];
 
             // pick random prop inside it
@@ -47,14 +59,30 @@ public class SecretLanguageRoundSyncManager : MonoBehaviourPunCallbacks, IOnEven
                 Random.Range(0, selectedAsset.randomSecretLanguageRoundProps.Count)
             ];
 
-            currentSequence.Add(new SyncedRoundProp
+            Sequence.Add(new SyncedRoundProp
             {
                 itemId = selectedAsset.itemId,
                 itemRandomId = randomProp.itemRandomId
             });
         }
 
-        Debug.Log($"[Master] Generated sequence of {currentSequence.Count} items");
+        currentSequence.AddRange(Sequence);
+        totalNeeded = totalNeeded + 2;
+        if (totalNeeded <= 7)
+        {
+            GenerateAndSyncSequence(totalNeeded);
+        }
+        else
+        {
+            CreateAndSendData();
+        }
+
+       
+    }
+
+    public void CreateAndSendData()
+    {
+         Debug.Log($"[Master] Generated sequence of {currentSequence.Count} items");
 
         // pack into flat object[] for Photon
         object[] data = new object[currentSequence.Count * 2];

@@ -6597,9 +6597,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e12358df6623051479e7747b65117e22, type: 2}
   - {fileID: 11400000, guid: 0fc891695ae895441b9f0f8fb87c97f5, type: 2}
   - {fileID: 11400000, guid: 23a520364c92b13489c8732d3c744eac, type: 2}
-  - {fileID: 11400000, guid: c8585a7e4264b62419515df98469629f, type: 2}
-  - {fileID: 11400000, guid: bcd79beb91f46df49aedcee35b7a81fb, type: 2}
-  - {fileID: 11400000, guid: e42bd4bc616dda140b7d2d59ac71e13b, type: 2}
   currentSequence: []
 --- !u!4 &1565074568
 Transform:
@@ -9101,9 +9098,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e12358df6623051479e7747b65117e22, type: 2}
   - {fileID: 11400000, guid: 0fc891695ae895441b9f0f8fb87c97f5, type: 2}
   - {fileID: 11400000, guid: 23a520364c92b13489c8732d3c744eac, type: 2}
-  - {fileID: 11400000, guid: c8585a7e4264b62419515df98469629f, type: 2}
-  - {fileID: 11400000, guid: bcd79beb91f46df49aedcee35b7a81fb, type: 2}
-  - {fileID: 11400000, guid: e42bd4bc616dda140b7d2d59ac71e13b, type: 2}
   currentUsedRoundPropSyncs: []
   fullUsedRoundPropSyncs: []
   bladeMouseRotator: {fileID: 1955159118}
@@ -9112,6 +9106,7 @@ MonoBehaviour:
   currentBladeImage: {fileID: 1955159116}
   infoText: {fileID: 1781955974}
   scrollRect: {fileID: 134786233}
+  currentDividerangle: 180
   leaderboard: {fileID: 1359111330}
   goodSpriteFXPrefab: {fileID: 6511528371435352685, guid: 50fb0a43a1c385441887544c1130a3a7, type: 3}
   badSpriteFXPrefab: {fileID: 6511528371435352685, guid: bd77b553fdcbba240bacdb9647d2cdec, type: 3}
