@@ -2843,7 +2843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &495558023
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4905,11 +4905,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarImage: {fileID: 943063299}
   avatarSprites:
-  - {fileID: 8466291920901893952, guid: 7a50a9ba52f626d4ebecf285f5f1be24, type: 3}
-  - {fileID: -5692005729491409138, guid: 686ea90f50c764948894e8db7a59aadc, type: 3}
-  - {fileID: -3440627964879927922, guid: 454b8c23b965bf241ba74836994fc835, type: 3}
-  - {fileID: -689118643145704552, guid: 18726e9fbd826a149bf73c334683ae38, type: 3}
-  - {fileID: 6131082289131974691, guid: f725ed7f0ff71a145ab0f7df869b78d7, type: 3}
+  - {fileID: 21300000, guid: f07582f439b09a845abf0d1a178f2e39, type: 3}
+  - {fileID: 21300000, guid: 1c3fe1df0a0407243b6929cd142ed6a6, type: 3}
+  - {fileID: 21300000, guid: de6302a47632f2e4ebc16910737278d9, type: 3}
+  - {fileID: 21300000, guid: df700945063bd3b4595fe25933c512dc, type: 3}
+  - {fileID: 21300000, guid: a21018b50aa629e498139a3daf7b7f76, type: 3}
 --- !u!1 &952257959
 GameObject:
   m_ObjectHideFlags: 0
@@ -8525,7 +8525,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549464404}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f4f65f05ee802044baf9a1b4f7da35d0, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a21cbd28801c39145aa6db3b43a8d6f9, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1118705367}
@@ -9150,7 +9150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1747512071
 RectTransform:
   m_ObjectHideFlags: 0
