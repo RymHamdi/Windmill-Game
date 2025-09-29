@@ -9,8 +9,8 @@ public class SecretLanguageManager : MonoBehaviour
 {
     public static SecretLanguageManager Instance;
 
-    public Transform formUiParent;
-    public FormModellUI formModellPrefab;
+    //public Transform formUiParent;
+    //public FormModellUI formModellPrefab;
 
     public List<SecretLanguageRoundPropSync> secretLanguageRoundPropSyncs;
     private SecretLanguageRoundPropSync currentRoundPropSync;
@@ -26,11 +26,15 @@ public class SecretLanguageManager : MonoBehaviour
 
     public Image currentBladeImage;
     public TextMeshProUGUI infoText;
-    public ScrollRect scrollRect;
+    //public ScrollRect scrollRect;
 
     public float currentDividerangle = 180;
 
     bool isroundCompleted;
+
+    public List<BladesController> bladesControllers;
+    private BladesController currentBladesController;
+
 
     private void Awake()
     {
@@ -40,39 +44,54 @@ public class SecretLanguageManager : MonoBehaviour
         }
     }
 
+    private void DisbaleAllBladesController()
+    {
+        foreach (var item in bladesControllers)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
+
     public void StartRound(int roundIndex)
     {
         currentBladeImage.enabled = false;
         currentRoundIndex = roundIndex;
         int totalModelsNeeded = 0;
-        RectTransform rt = formUiParent.GetComponent<RectTransform>();
+        DisbaleAllBladesController();
+        //RectTransform rt = formUiParent.GetComponent<RectTransform>();
         if (currentRoundIndex == 1)
         {
-            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            /*rt.anchorMin = new Vector2(0.5f, 0.5f);
             rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);*/
 
             totalModelsNeeded = 3;
             saveTime = 8;
             timeToResolve = 5;
+            currentBladesController = bladesControllers[0];
+            currentBladesController.gameObject.SetActive(true);
         }
         else if (currentRoundIndex == 2)
         {
-            rt.anchorMin = new Vector2(0f, 0.5f);
+            /*rt.anchorMin = new Vector2(0f, 0.5f);
             rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot = new Vector2(0f, 0.5f);
+            rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 5;
             saveTime = 15;
             timeToResolve = 5;
+            currentBladesController = bladesControllers[1];
+            currentBladesController.gameObject.SetActive(true);
         }
         else if (currentRoundIndex == 3)
         {
-            rt.anchorMin = new Vector2(0f, 0.5f);
+            /*rt.anchorMin = new Vector2(0f, 0.5f);
             rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot = new Vector2(0f, 0.5f);
+            rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 7;
             saveTime = 25;
             timeToResolve = 5;
+            currentBladesController = bladesControllers[2];
+            currentBladesController.gameObject.SetActive(true);
         }
         else
         {
@@ -87,7 +106,7 @@ public class SecretLanguageManager : MonoBehaviour
         {
             PrepareFormModellUI(1, i);
         }
-        scrollRect.horizontalNormalizedPosition = 0;
+        //scrollRect.horizontalNormalizedPosition = 0;
         currentRoundPropSync = null;
         StartCoroutine(StartPlayinngRoundAfterDelay(saveTime));
     }
@@ -123,7 +142,7 @@ public class SecretLanguageManager : MonoBehaviour
             ClearFormModellUI();
         }
         StartCoroutine(RunCrono());
-        scrollRect.horizontal = false;
+        //scrollRect.horizontal = false;
         currentRoundPropSync = currentUsedRoundPropSyncs[modelIndex];
         currentBladeImage.sprite = currentRoundPropSync.bigIconSprite;
         bladeMouseRotator.EnableRotation();
@@ -152,11 +171,11 @@ public class SecretLanguageManager : MonoBehaviour
             isroundCompleted = true;
         }
 
-        if (modelIndex > formUiParent.childCount && modelIndex <= currentUsedRoundPropSyncs.Count)
+        if (modelIndex > currentBladesController.GetActivatedImageCount() && modelIndex <= currentUsedRoundPropSyncs.Count)
         {
             //ToDo @Rim Here the timer complete and is instatited alone
             InstantiteModelUI(bladeMouseRotator.GetCurrentRotation());
-            StartCoroutine(UpdateScrollView());
+            //StartCoroutine(UpdateScrollView());
         }
 
 
@@ -179,10 +198,8 @@ public class SecretLanguageManager : MonoBehaviour
 
     private void ClearFormModellUI()
     {
-        foreach (Transform child in formUiParent)
-        {
-            Destroy(child.gameObject);
-        }
+        
+        currentBladesController.ResetBlades();
     }
 
     public void ValidateBlade(float rotationZ)
@@ -194,12 +211,12 @@ public class SecretLanguageManager : MonoBehaviour
             Debug.LogWarning("No current round prop sync selected.");
             return;
         }
-        if (scrollRect.horizontalNormalizedPosition < 0)
+       /* if (scrollRect.horizontalNormalizedPosition < 0)
         {
             scrollRect.horizontalNormalizedPosition = 0;
-        }
+        }*/
         InstantiteModelUI(rotationZ);
-        StartCoroutine(UpdateScrollView());
+        ///StartCoroutine(UpdateScrollView());
 
     }
     [Header("Feedback FX")]
@@ -208,7 +225,7 @@ public class SecretLanguageManager : MonoBehaviour
     public Transform fxParent;
     private void InstantiteModelUI(float rotationZ)
     {
-        FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);
+        FormModellUI newFormModellUI = currentBladesController.GetNextOneNeedToBeUpdated();
         float rightRotation = currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation;
         if (rotationZ == rightRotation)
         {
@@ -241,12 +258,12 @@ public class SecretLanguageManager : MonoBehaviour
         WaitForSeconds waitShort = new WaitForSeconds(0.1f);
         yield return waitShort;
         WaitForSeconds waitFrame = new WaitForSeconds(Time.deltaTime);
-        while (scrollRect.horizontalNormalizedPosition < 1)
+        /*while (scrollRect.horizontalNormalizedPosition < 1)
         {
             scrollRect.horizontalNormalizedPosition += Time.deltaTime * 10;
             yield return waitFrame;
             yield return null;
-        }
+        }*/
     }
 
     IEnumerator NextRoundAfterDelay(float delay)
@@ -255,10 +272,10 @@ public class SecretLanguageManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         isroundCompleted = false;
         yield return new WaitForSeconds(delay);
-        scrollRect.horizontal = true;
+        //scrollRect.horizontal = true;
         currentBladeImage.enabled = false;
         currentUsedRoundPropSyncs.Clear();
-        ClearFormModellUI();
+        //ClearFormModellUI();
         currentRoundIndex++;
         modelIndex = 0;
         StartRound(currentRoundIndex);
@@ -307,7 +324,7 @@ public class SecretLanguageManager : MonoBehaviour
     {
 
         SelectRandomSecretLanguageRoundPropSync(roundIndex, index);
-        if (currentRoundPropSync == null)
+        if (currentRoundPropSync == null || currentBladesController == null)
         {
             return;
         }
@@ -315,8 +332,13 @@ public class SecretLanguageManager : MonoBehaviour
         // Instantiate new UI elements based on the selected round props
         foreach (var prop in currentRoundPropSync.randomSecretLanguageRoundProps)
         {
-            FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);
-            newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Normal, prop.rightRotation);
+            //FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);
+            //newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Normal, prop.rightRotation);
+            FormModellUI formModellUI = currentBladesController.bladeSlots[index].formModellUI;
+            if (formModellUI != null)
+            {
+                formModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Normal, prop.rightRotation);
+            }
         }
 
     }
