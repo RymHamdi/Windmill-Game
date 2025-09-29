@@ -99,7 +99,7 @@ public class CollectableUIManager : MonoBehaviour
                 }
 
                 // Start a new one
-                videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2f));
+                videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.7f));
                 collectedItems++;
                 ScoreManager.Instance.AddScore(10 * collectedItems);
 
@@ -141,6 +141,7 @@ public class CollectableUIManager : MonoBehaviour
             videoPlayer.gameObject.SetActive(true);
             yield return new WaitForSeconds(duration);
             videoPlayer.gameObject.SetActive(false);
+            videoRoutine = null;
         }
     }
 }

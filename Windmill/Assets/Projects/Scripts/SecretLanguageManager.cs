@@ -345,6 +345,7 @@ public class SecretLanguageManager : MonoBehaviour
 
     public float GetCanonicalBladeAngle(float rotationZ )
     {
+        currentDividerangle = currentRoundPropSync.divider;
         // Normalize the angle to be within -360 to 360
         rotationZ = Mathf.Repeat(rotationZ, 360f);
 
