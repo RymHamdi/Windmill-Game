@@ -13,8 +13,21 @@ public class CollectableUIManager : MonoBehaviour
     public Action OnAllItemsCollected;
     public Action OnResetItems;
 
+    public Action<int> OnCollectedItemCountChanged;
+
+
     public int totalItems = 5;
     private int collectedItems = 0;
+
+    public int CollectedItems
+    {
+        get { return collectedItems; }
+        set
+        {
+            collectedItems = value;
+            OnCollectedItemCountChanged?.Invoke(collectedItems);
+        }
+    }
 
     private bool isFinished = false;
 
@@ -42,14 +55,14 @@ public class CollectableUIManager : MonoBehaviour
             return true;
         }
 
-        if (id > collectedItems + 1)
+        if (id > CollectedItems + 1)
         {
-            if (collectedItems > 1)
+            if (CollectedItems > 1)
             {
                 ScoreManager.Instance.ShakeCamera(1);
                 Globaleffect.Instance.PlayEffect(EffestType.Bad);
             }
-            collectedItems = 0;
+            CollectedItems = 0;
             ScoreManager.Instance.ResetScore();
             OnResetItems?.Invoke();
             return false;
@@ -57,13 +70,13 @@ public class CollectableUIManager : MonoBehaviour
 
         if (id <= 0)
         {
-            if (collectedItems > 1)
+            if (CollectedItems > 1)
             {
                 ScoreManager.Instance.ShakeCamera(1);
                 Globaleffect.Instance.PlayEffect(EffestType.Bad);
             }
             OnResetItems?.Invoke();
-            collectedItems = 0;
+            CollectedItems = 0;
             ScoreManager.Instance.ResetScore();
             return false;
         }
@@ -78,16 +91,15 @@ public class CollectableUIManager : MonoBehaviour
                     break;
                 }
             }
-            Debug.Log($"CollectItem ID: {id}, Result: {check}, CollectedItems: {collectedItems}");
             if (!check)
             {
                 ScoreManager.Instance.ResetScore();
-                if (collectedItems > 1)
+                if (CollectedItems > 1)
                 {
                     ScoreManager.Instance.ShakeCamera(1);
                     Globaleffect.Instance.PlayEffect(EffestType.Bad);
                 }
-                collectedItems = 0;
+                CollectedItems = 0;
                 OnResetItems?.Invoke();
                 return false;
             }
@@ -100,10 +112,10 @@ public class CollectableUIManager : MonoBehaviour
 
                 // Start a new one
                 videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.7f));
-                collectedItems++;
-                ScoreManager.Instance.AddScore(10 * collectedItems);
+                CollectedItems++;
+                ScoreManager.Instance.AddScore(10 * CollectedItems);
 
-                if (collectedItems >= totalItems)
+                if (CollectedItems >= totalItems)
                 {
                     OnAllItemsCollected?.Invoke();
                     Debug.Log("All items collected! You win!");
@@ -129,7 +141,7 @@ public class CollectableUIManager : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         ScoreManager.Instance.ResetScore();
         isFinished = false;
-        collectedItems = 0;
+        CollectedItems = 0;
         OnResetItems?.Invoke();
     }
 
