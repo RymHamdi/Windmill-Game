@@ -11,7 +11,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        gameVersion = "1.3";
+        gameVersion = "1.4";
     }
 
     void Start()

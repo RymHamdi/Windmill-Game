@@ -328,11 +328,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoClips:
-  - {fileID: 32900000, guid: e9fa16ef1012fad47be949961b3a529c, type: 3}
-  - {fileID: 32900000, guid: ab3ded1509dd6f2479541a191b755257, type: 3}
-  - {fileID: 32900000, guid: f1cd70faae440ff49a8ac3327d554a05, type: 3}
-  - {fileID: 32900000, guid: a349c933db0d5a54d9a0d5907594a811, type: 3}
-  - {fileID: 32900000, guid: 2d39fec047d1afa49808fe624e02e38d, type: 3}
+  - {fileID: 32900000, guid: a926a4cf8b0df62449d78d970703a730, type: 3}
+  - {fileID: 32900000, guid: 769de69ab7da9694ea5c4bf986ab749f, type: 3}
+  - {fileID: 32900000, guid: 6e7b93c0b5c0f6b4a9ced6a65eb710d8, type: 3}
+  - {fileID: 32900000, guid: e1cc806eef7bc3044af75c1f6252ea45, type: 3}
+  - {fileID: 32900000, guid: c589dfe9b0002324facbafebfe2d681c, type: 3}
   videoPlayer: {fileID: 7119632}
 --- !u!1 &11895287
 GameObject:
@@ -14986,7 +14986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 80.088}
+  m_AnchoredPosition: {x: -0.00048828125, y: 80.08801}
   m_SizeDelta: {x: 378.62, y: 458.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1441916881
