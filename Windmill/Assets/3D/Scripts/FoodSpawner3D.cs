@@ -6,6 +6,8 @@ public class FoodSpawner3D : MonoBehaviour
     [Header("Prefabs")]
     public GameObject[] fruitPrefabs; // Assign your 3D fruit prefabs
 
+    private List<Fruit> listOfFruits = new List<Fruit>();
+
     [Header("Spawn timing")]
     public float spawnInterval = 1f;
 
@@ -31,6 +33,14 @@ public class FoodSpawner3D : MonoBehaviour
     void Start()
     {
         timer = 0f;
+        foreach (var fruitPrefab in fruitPrefabs)
+        {
+            var fruitComponent = fruitPrefab.GetComponent<Fruit>();
+            if (fruitComponent != null)
+            {
+                listOfFruits.Add(fruitComponent);
+            }
+        }
     }
 
     void Update()
@@ -48,7 +58,19 @@ public class FoodSpawner3D : MonoBehaviour
     {
         if (fruitPrefabs.Length == 0) return;
 
-        GameObject prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
+        int currentRequireFruitIndex = CollectableUIManager.Instance.CollectedItems + 1;
+        Fruit requiredFruit = listOfFruits.Find(f => f.id == currentRequireFruitIndex);
+        // Let's make sure that percentage chance to spawn required fruit is higher
+        GameObject prefab;
+        if (requiredFruit != null && Random.value <= 0.3f) // 30% chance to spawn required fruit
+        {
+            prefab = requiredFruit.gameObject;
+        }
+        else
+        {
+            prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
+        }
+
         if (prefab == null) return;
 
         // Spawn at the bottom of the spawn area
