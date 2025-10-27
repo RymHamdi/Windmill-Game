@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using System;
 
 public class SecretLanguageManager : MonoBehaviour
 {
@@ -383,5 +384,26 @@ public class SecretLanguageManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         StartRound(1);
+    }
+
+     public List<float> newAngles = new List<float> { 5,42,72,102,130};
+
+    public float GetClosestCanonicalAngle(float canonicalAngle)
+    {
+        
+        float closestAngle = newAngles[0];
+        float smallestDifference = Mathf.Abs(canonicalAngle - closestAngle);
+
+        foreach (float angle in newAngles)
+        {
+            float difference = Mathf.Abs(canonicalAngle - angle);
+            if (difference < smallestDifference)
+            {
+                smallestDifference = difference;
+                closestAngle = angle;
+            }
+        }
+        Debug.Log("i dont know what happend but let check " + canonicalAngle + " and what we return" + closestAngle);
+        return closestAngle;
     }
 }

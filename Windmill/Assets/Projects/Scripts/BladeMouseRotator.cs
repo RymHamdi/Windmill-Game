@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,6 +71,13 @@ public class BladeMouseRotator : MonoBehaviour
     public void OnRelease(Vector2 pos)
     {
         isDragging = false;
+        float canonicalAngle = SecretLanguageManager.Instance.GetCanonicalBladeAngle(transform.eulerAngles.z);
+        float closestAngle = SecretLanguageManager.Instance.GetClosestCanonicalAngle(canonicalAngle);
+        if (useCanonicalAngle)
+        {
+            // Snap to closest canonical angle
+            transform.rotation = Quaternion.Euler(0, 0, closestAngle);
+        }
     }
 
     void Update()
@@ -106,6 +114,7 @@ public class BladeMouseRotator : MonoBehaviour
 
     public void DisableRotation()
     {
+        OnRelease(Vector2.zero);
         validateButton.image.color = normalButtonColor;
         canRotate = false;
         isDragging = false;
@@ -124,7 +133,7 @@ public class BladeMouseRotator : MonoBehaviour
     // Optional: Reset rotation with key press for testing
     public void ResetRotation()
     {
-        transform.rotation = Quaternion.identity;
+        transform.localEulerAngles = new Vector3(0, 0, 5);
         Debug.Log("Rotation reset to 0°");
     }
 
