@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8931473163784d91532e982cb518c, type: 3}
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
-  isEnglish: 0
+  isEnglish: 1
   wordPairs:
   - englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
       coastal village. Its name, \u201CHope,\u201D reflects the lifeline it gave
