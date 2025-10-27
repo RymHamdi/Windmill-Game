@@ -12,11 +12,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8931473163784d91532e982cb518c, type: 3}
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
-  isEnglish: 1
+  isEnglish: 0
   wordPairs:
   - englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
       coastal village. Its name, \u201CHope,\u201D reflects the lifeline it gave
       to Ouddorp."
-    germanWord: Test
+    germanWord: "Gebouwd in 1845, diende De Hoop als een belangrijke graanmolen voor
+      het kustdorp. De naam \u2018Hoop\u2019 weerspiegelt de levensader die zij Ouddorp
+      schonk."
   - englishWord: "\u201CIsland stormbreaker, grinding gales to dust.\u201D"
-    germanWord: Test2
+    germanWord: "\u201CEilandenstormbreker, die stormwinden tot stof vermaalt.\u201D"
+  - englishWord: "Constructed in 1743, De Valk operated as a grain mill and home
+      to millers\u2019 families. It now functions as a museum, preserving Leiden\u2019s
+      milling history."
+    germanWord: Gebouwd in 1743, functioneerde De Valk als graanmolen en woonhuis
+      voor molenaarsfamilies. Tegenwoordig doet zij dienst als museum dat de molengeschiedenis
+      van Leiden bewaart.
+  - englishWord: " \u2018\u2019The falcon\u2019s eye, striking from above.\u201D"
+    germanWord: "\u201CHet oog van de valk, dat van boven toeslaat.\u201D"
+  - englishWord: "De Kat is the world\u2019s only functioning wind-powered paint
+      mill. It grinds minerals and pigments that once colored Dutch masterpieces."
+    germanWord: "De Kat is \u2019s werelds enige nog werkende, door wind aangedreven
+      verfmolen. Zij maalt mineralen en pigmenten die ooit de Nederlandse meesterwerken
+      kleur gaven."
+  - englishWord: "\u201CPainter of power, mixing colors into chaos.\u201D"
+    germanWord: "\u201CSchilder van macht, mengt kleuren tot chaos.\u201D"
+  - englishWord: " \u201CThe towering titan, fueled by raw windrage.\u201D"
+    germanWord: "\u201CDe torenhoge titaan, gevoed door de woede van de wind.\u201D"
+  - englishWord: De Nolet combines a classic windmill design with modern distilling
+      technology.  It produces spirits while standing as the tallest traditional-style
+      windmill in the  world.
+    germanWord: De Nolet combineert een klassiek molenontwerp met moderne distillatietechnologie.
+      Zij produceert sterke dranken en staat bekend als de hoogste windmolen ter
+      wereld in traditionele stijl.
+  - englishWord: " \u201CThe city giant, cutting wind like steel.\u201D"
+    germanWord: "\u201CDe stedelijke reus, snijdt door de wind als staal.\u201D"
+  - englishWord: " Originally built in the 16th century, De Gooyer is Amsterdam\u2019s
+      tallest wooden windmill. Today it stands beside a brewery, drawing visitors
+      from all over the world."
+    germanWord: Oorspronkelijk gebouwd in de 16e eeuw, is De Gooyer de hoogste houten
+      windmolen van Amsterdam. Tegenwoordig staat hij naast een brouwerij en trekt
+      bezoekers van over de hele wereld.
+  - englishWord: CHOOSE YOUR HERO
+    germanWord: KIES JOUW HELD
+  - englishWord: Select Character
+    germanWord: Karakters selecteren
+  - englishWord: Heroes
+    germanWord: Helden
+  - englishWord: 'Talking about a real super hero these wind mills kept the people
+      dry and safe!  They not only provided us with new land but also made sure '
+    germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
+      veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar
+      ook dat
+  - englishWord: "we kept it by keeping it safe  from raging storms and dangerously
+      quick rising waters! Without a doubt one of the most and dangerous jobs of 
+      our hero\u2019s. "
+    germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
+      veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar
+      ook dat deze veilig bleven voor woeste stormen en gevaarlijk snel stijgend
+      water. Zonder twijfel een van de zwaarste en gevaarlijkste taken van onze helden.
+  - englishWord: 'Back in the day wind mills where use for a lot of stuff. But without
+      a  doubt the best thing they produced was our beloved golden drink, beer! '
+    germanWord: 'Vroeger werden windmolens voor van alles gebruikt. Maar zonder twijfel
+      was het beste dat ze produceerden ons geliefde gouden drankje: bier!'
+  - englishWord: "And as all good brewers know you can only make the best beer with
+      the  best ingredients! These mills where the backbone of the economy at that 
+      time. The people\u2019s favourite superhero!  "
+    germanWord: "En zoals alle goede brouwers weten, kun je alleen het beste bier
+      maken met de beste ingredi\xEBnten! Deze molens waren de ruggengraat van de
+      economie in die tijd. De favoriete superheld van het volk!"
+  - englishWord: ' In the darkest of days our wind mills kept us safe on a whole
+      new level.  The resistance found a new way to communicate with each other through 
+      our heroes. '
+    germanWord: "In de donkerste dagen hielden onze windmolens ons op een heel nieuw
+      niveau veilig. Het verzet vond een nieuwe manier om met elkaar te communiceren
+      \u2014 via onze helden."
+  - englishWord: ' They changed the stance of the wicks to send messages. A very
+      very dangerous job for both men and mill. Destruction by the enemy was the
+      verdict when caught. True heroes. '
+    germanWord: Ze veranderden de stand van de wieken om boodschappen door te geven.
+      Een uiterst gevaarlijke taak, zowel voor de mannen als voor de molen. Vernietiging
+      door de vijand was het oordeel bij ontdekking. Echte helden.

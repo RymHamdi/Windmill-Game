@@ -12198,16 +12198,12 @@ MonoBehaviour:
   goodSpriteFXPrefab: {fileID: 6511528371435352685, guid: 50fb0a43a1c385441887544c1130a3a7, type: 3}
   badSpriteFXPrefab: {fileID: 6511528371435352685, guid: bd77b553fdcbba240bacdb9647d2cdec, type: 3}
   fxParent: {fileID: 9605491}
-  newAngless:
+  newAngles:
   - 5
   - 42
-  - 93
+  - 72
+  - 102
   - 130
-  - 179
-  - 22
-  - 70
-  - 113
-  - 153
 --- !u!1 &2135423614
 GameObject:
   m_ObjectHideFlags: 0
@@ -12736,6 +12732,7 @@ GameObject:
   - component: {fileID: 7902457669791820194}
   - component: {fileID: 8988585204929446220}
   - component: {fileID: 1823286382504732463}
+  - component: {fileID: 8988585204929446221}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13187,6 +13184,7 @@ GameObject:
   - component: {fileID: 9044680371144558391}
   - component: {fileID: 4783050121898003951}
   - component: {fileID: 3902335611846523279}
+  - component: {fileID: 9044680371144558392}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -13874,6 +13872,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2240230227941783465}
   m_CullTransparentMesh: 1
+--- !u!114 &8988585204929446221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2240230227941783465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d011c020dc04edc4899d6dab06c790e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 1823286382504732463}
 --- !u!224 &9044680371144558391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13893,6 +13904,19 @@ RectTransform:
   m_AnchoredPosition: {x: -336, y: 232}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9044680371144558392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160697143379820734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d011c020dc04edc4899d6dab06c790e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 3902335611846523279}
 --- !u!114 &9095519009299072577
 MonoBehaviour:
   m_ObjectHideFlags: 0
