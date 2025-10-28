@@ -10,8 +10,9 @@ public class CharacterDetailsManager : MonoBehaviour
     public GameObject P2;
 
     public Button[] buttons;          
-    public Sprite normalSprite;      
+    public Sprite normalSprite;
     public Sprite selectedSprite;
+    public GameObject SelectCharacterText;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class CharacterDetailsManager : MonoBehaviour
             currentIndex = 0;
         }
         ShowDetails(0);
+        SelectCharacterText.SetActive(true);
     }
 
     public void ShowDetails(int index)

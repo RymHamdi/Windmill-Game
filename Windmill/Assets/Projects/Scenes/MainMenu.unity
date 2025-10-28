@@ -1888,6 +1888,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1149705725748782535, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: P2
+      value: 
+      objectReference: {fileID: 1691401519}
+    - target: {fileID: 1149705725748782535, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: SelectCharacterText
+      value: 
+      objectReference: {fileID: 1691401519}
     - target: {fileID: 1167963736176243210, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -2726,6 +2734,10 @@ PrefabInstance:
     - target: {fileID: 3169306796434033494, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184169643255745364, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3187513320904539680, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5481,7 +5493,7 @@ MonoBehaviour:
   CharacterPanels: {fileID: 1965530714}
   RoomPanel: {fileID: 299647622}
   localPlayerindex: 0
-  waitTime: 2
+  waitTime: 15
 --- !u!114 &1512209691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5504,6 +5516,11 @@ MonoBehaviour:
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &1691401519 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3184169643255745364, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+  m_PrefabInstance: {fileID: 1500865086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1765493512
 GameObject:
   m_ObjectHideFlags: 0

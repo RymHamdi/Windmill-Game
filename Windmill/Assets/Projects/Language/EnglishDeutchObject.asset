@@ -63,15 +63,12 @@ MonoBehaviour:
   - englishWord: 'Talking about a real super hero these wind mills kept the people
       dry and safe!  They not only provided us with new land but also made sure '
     germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
-      veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar
-      ook dat
+      veilig! Ze zorgden niet alleen voor nieuwe landerijen, maar ook dat
   - englishWord: "we kept it by keeping it safe from raging storms and dangerously
       quick rising waters! Without a doubt one of the most and dangerous jobs of
       our hero\u2019s. "
-    germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
-      veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar
-      ook dat deze veilig bleven voor woeste stormen en gevaarlijk snel stijgend
-      water. Zonder twijfel een van de zwaarste en gevaarlijkste taken van onze helden.
+    germanWord: "Als echte superhelden hielden deze windmolens mensen droog en veilig,
+      cre\xEBerden nieuwe landerijen en beschermden tegen stormen en hoog water."
   - englishWord: 'Back in the day wind mills where use for a lot of stuff. But without
       a  doubt the best thing they produced was our beloved golden drink, beer! '
     germanWord: 'Vroeger werden windmolens voor van alles gebruikt. Maar zonder twijfel
@@ -79,9 +76,9 @@ MonoBehaviour:
   - englishWord: "And as all good brewers know you can only make the best beer with
       the  best ingredients! These mills where the backbone of the economy at that 
       time. The people\u2019s favourite superhero!  "
-    germanWord: "En zoals alle goede brouwers weten, kun je alleen het beste bier
-      maken met de beste ingredi\xEBnten! Deze molens waren de ruggengraat van de
-      economie in die tijd. De favoriete superheld van het volk!"
+    germanWord: "Alle goede brouwers weten: het beste bier maak je met de beste ingredi\xEBnten!
+      Deze molens waren de ruggengraat van de economie en de favoriete held van het
+      volk!"
   - englishWord: ' In the darkest of days our wind mills kept us safe on a whole
       new level.  The resistance found a new way to communicate with each other through 
       our heroes. '
@@ -91,9 +88,9 @@ MonoBehaviour:
   - englishWord: ' They changed the stance of the wicks to send messages. A very
       very dangerous job for both men and mill. Destruction by the enemy was the
       verdict when caught. True heroes. '
-    germanWord: Ze veranderden de stand van de wieken om boodschappen door te geven.
-      Een uiterst gevaarlijke taak, zowel voor de mannen als voor de molen. Vernietiging
-      door de vijand was het oordeel bij ontdekking. Echte helden.
+    germanWord: Ze veranderden de wieken om boodschappen door te geven, een gevaarlijke
+      taak voor mannen en molen. Ontdekking door de vijand betekende vernietiging.
+      Echte helden.
   - englishWord: Drain The Water
     germanWord: Het water wegpompen
   - englishWord: Ranking

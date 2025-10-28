@@ -139,12 +139,19 @@ public class SecretLanguageManager : MonoBehaviour
         for (int i = (int)delay; i > 0; i--)
         {
             //Todo @Rim fix text
-            infoText.text = $"Memorize the secret message: {i} seconds";
+            if (Language.Instance.languageData.isEnglish)
+            {
+                infoText.text = $"Memorize the secret message: {i} seconds";
+            }
+            else
+            {
+                infoText.text = $"Onthoud het geheime bericht: {i} seconden";
+            }
             yield return new WaitForSeconds(1f);
         }
         infoText.text = "";
         currentBladeImage.enabled = true;
-         ClothChild.gameObject.SetActive(true);
+        ClothChild.gameObject.SetActive(true);
         ToggleBtn.gameObject.SetActive(true);
         StartPlayerRound(true);
     }
@@ -171,13 +178,31 @@ public class SecretLanguageManager : MonoBehaviour
         }
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
-            //Todo @Rim fix text
-            infoText.text = $"Place the blade in the right position in: {i} seconds";
+            if (Language.Instance.languageData.isEnglish)
+            {
+                infoText.text = $"Place the blade in the right position in: {i} seconds";
+            }
+            else
+            {
+                infoText.text = $"Plaats het blad in de juiste positie over: {i} seconden";
+
+            }
+
+
+
             yield return new WaitForSeconds(1f);
         }
 
         //Todo @Rim fix text
-        infoText.text = "Time is over!";
+        if (Language.Instance.languageData.isEnglish)
+        {
+            infoText.text = "Time is over!";
+        }
+        else
+        {
+            infoText.text = "De tijd is om!";
+        }
+
         bladeMouseRotator.DisableRotation();
         modelIndex++;
         if (modelIndex == currentUsedRoundPropSyncs.Count)
@@ -200,7 +225,15 @@ public class SecretLanguageManager : MonoBehaviour
             {
                 ShowControlTrigger.Instance?.SendTrigger("GameThreeRoundCompleted");
             }
-            infoText.text = "Round Completed!";
+            if (Language.Instance.languageData.isEnglish)
+            {
+                infoText.text = "Round Completed!";
+            }
+            else
+            {
+                infoText.text = "Ronde voltooid!";
+            }
+            
             StartCoroutine(NextRoundAfterDelay(5));
         }
         else
@@ -288,7 +321,7 @@ public class SecretLanguageManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         //scrollRect.horizontal = true;
         currentBladeImage.enabled = false;
-         ClothChild.gameObject.SetActive(false);
+        ClothChild.gameObject.SetActive(false);
         //ToggleBtn.gameObject.SetActive(false);
         currentUsedRoundPropSyncs.Clear();
         //ClearFormModellUI();
