@@ -1018,11 +1018,11 @@ RectTransform:
   - {fileID: 1118920353}
   m_Father: {fileID: 868176350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -17.049988, y: -24.94}
-  m_SizeDelta: {x: 84, y: 67}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -26.2, y: 0}
+  m_SizeDelta: {x: 46.6605, y: 46.6605}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1086637636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 43eab687d6837446b9d72edd2cde5ba1, type: 3}
+  m_Sprite: {fileID: -445328287032723131, guid: 2e3a1ad39d8dc8846a9bacbe8557c2bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1129,8 +1129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d73bae4df92b34ba563229dd72bac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnglandSprite: {fileID: 21300000, guid: deab55cf64cb74065b4a46c8fce5eca9, type: 3}
-  DetuchSprite: {fileID: 21300000, guid: a87c61c76029b449793ed20267cb4952, type: 3}
+  EnglandSprite: {fileID: -445328287032723131, guid: 2e3a1ad39d8dc8846a9bacbe8557c2bb, type: 3}
+  DetuchSprite: {fileID: 6879121406133926810, guid: ca77b561b02bbd74096b22103e1940cc, type: 3}
   langButton: {fileID: 1086637636}
 --- !u!1 &1118920352
 GameObject:
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2137,7 +2137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1627559618564351816, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 1627559618564351816, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4033,7 +4033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6136197921050818176, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 6136197921050818176, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4141,7 +4141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6405575321398283085, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 6405575321398283085, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5481,7 +5481,7 @@ MonoBehaviour:
   CharacterPanels: {fileID: 1965530714}
   RoomPanel: {fileID: 299647622}
   localPlayerindex: 0
-  waitTime: 15
+  waitTime: 2
 --- !u!114 &1512209691
 MonoBehaviour:
   m_ObjectHideFlags: 0

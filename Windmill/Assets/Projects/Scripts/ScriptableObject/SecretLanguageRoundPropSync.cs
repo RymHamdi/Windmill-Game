@@ -7,6 +7,8 @@ public class SecretLanguageRoundPropSync : ScriptableObject
 {
     public int itemId;
     public Sprite iconSprite;
+    public Sprite Cloth;
+    public Sprite BigCloth;
     public Sprite bigIconSprite;
 
     public float divider = 180;

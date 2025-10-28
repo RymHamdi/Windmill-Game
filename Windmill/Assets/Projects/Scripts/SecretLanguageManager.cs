@@ -26,6 +26,8 @@ public class SecretLanguageManager : MonoBehaviour
     public float timeToResolve;
 
     public Image currentBladeImage;
+    public Image ClothChild;
+    public GameObject ToggleBtn;
     public TextMeshProUGUI infoText;
     //public ScrollRect scrollRect;
 
@@ -35,6 +37,8 @@ public class SecretLanguageManager : MonoBehaviour
 
     public List<BladesController> bladesControllers;
     private BladesController currentBladesController;
+    public bool IsCloth = true;
+    public Action<bool> OnClothChange;
 
 
     private void Awake()
@@ -56,6 +60,8 @@ public class SecretLanguageManager : MonoBehaviour
     public void StartRound(int roundIndex)
     {
         currentBladeImage.enabled = false;
+        ClothChild.gameObject.SetActive(false);
+        //ToggleBtn.gameObject.SetActive(false);
         currentRoundIndex = roundIndex;
         int totalModelsNeeded = 0;
         DisbaleAllBladesController();
@@ -112,6 +118,11 @@ public class SecretLanguageManager : MonoBehaviour
         StartCoroutine(StartPlayinngRoundAfterDelay(saveTime));
     }
 
+    public void OnClickOnClothChange()
+    {
+        IsCloth = !IsCloth;
+        OnClothChange?.Invoke(IsCloth);
+    }
     public GameObject leaderboard;
     IEnumerator ShowLeaderboardAfterDelay(float delay)
     {
@@ -133,6 +144,8 @@ public class SecretLanguageManager : MonoBehaviour
         }
         infoText.text = "";
         currentBladeImage.enabled = true;
+         ClothChild.gameObject.SetActive(true);
+        ToggleBtn.gameObject.SetActive(true);
         StartPlayerRound(true);
     }
 
@@ -152,10 +165,10 @@ public class SecretLanguageManager : MonoBehaviour
 
     IEnumerator RunCrono()
     {
-         if (PhotonNetwork.IsMasterClient)
-            {
-                ShowControlTrigger.Instance?.SendTrigger("GameThreePlaceBlade");
-            }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("GameThreePlaceBlade");
+        }
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
             //Todo @Rim fix text
@@ -199,7 +212,7 @@ public class SecretLanguageManager : MonoBehaviour
 
     private void ClearFormModellUI()
     {
-        
+
         currentBladesController.ResetBlades();
     }
 
@@ -212,10 +225,10 @@ public class SecretLanguageManager : MonoBehaviour
             Debug.LogWarning("No current round prop sync selected.");
             return;
         }
-       /* if (scrollRect.horizontalNormalizedPosition < 0)
-        {
-            scrollRect.horizontalNormalizedPosition = 0;
-        }*/
+        /* if (scrollRect.horizontalNormalizedPosition < 0)
+         {
+             scrollRect.horizontalNormalizedPosition = 0;
+         }*/
         InstantiteModelUI(rotationZ);
         ///StartCoroutine(UpdateScrollView());
 
@@ -275,6 +288,8 @@ public class SecretLanguageManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         //scrollRect.horizontal = true;
         currentBladeImage.enabled = false;
+         ClothChild.gameObject.SetActive(false);
+        //ToggleBtn.gameObject.SetActive(false);
         currentUsedRoundPropSyncs.Clear();
         //ClearFormModellUI();
         currentRoundIndex++;
@@ -344,7 +359,7 @@ public class SecretLanguageManager : MonoBehaviour
 
     }
 
-    public float GetCanonicalBladeAngle(float rotationZ )
+    public float GetCanonicalBladeAngle(float rotationZ)
     {
         currentDividerangle = currentRoundPropSync.divider;
         // Normalize the angle to be within -360 to 360
@@ -386,11 +401,11 @@ public class SecretLanguageManager : MonoBehaviour
         StartRound(1);
     }
 
-     public List<float> newAngles = new List<float> { 5,42,72,102,130};
+    public List<float> newAngles = new List<float> { 5, 42, 72, 102, 130 };
 
     public float GetClosestCanonicalAngle(float canonicalAngle)
     {
-        
+
         float closestAngle = newAngles[0];
         float smallestDifference = Mathf.Abs(canonicalAngle - closestAngle);
 
