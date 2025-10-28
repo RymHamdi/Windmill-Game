@@ -19,6 +19,34 @@ public class EnglishDeutchObject : ScriptableObject
         var pair = wordPairs.Find(p => p.germanWord.ToLower() == germanWord.ToLower());
         return pair?.englishWord ?? "";
     }
+
+    public string ChangeToEnglishWord(string word)
+    {
+        var pair = wordPairs.Find(p => p.englishWord.ToLower() == word.ToLower());
+        if (pair == null)
+        {
+            pair = wordPairs.Find(p => p.germanWord.ToLower() == word.ToLower());
+            return pair.englishWord;
+        }
+        else
+        {
+            return pair.englishWord;
+        }
+    }
+
+    public string ChangeGeramnLang(string word)
+    {
+        var pair = wordPairs.Find(p => p.germanWord.ToLower() == word.ToLower());
+        if (pair == null)
+        {
+            pair = wordPairs.Find(p => p.englishWord.ToLower() == word.ToLower());
+            return pair.germanWord;
+        }
+        else
+        {
+            return pair.germanWord;
+        }
+    }
 }
 
     [System.Serializable]
