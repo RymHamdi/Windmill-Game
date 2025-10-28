@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8931473163784d91532e982cb518c, type: 3}
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
-  isEnglish: 1
+  isEnglish: 0
   wordPairs:
   - englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
       coastal village. Its name, \u201CHope,\u201D reflects the lifeline it gave
@@ -35,13 +35,14 @@ MonoBehaviour:
     germanWord: "De Kat is \u2019s werelds enige nog werkende, door wind aangedreven
       verfmolen. Zij maalt mineralen en pigmenten die ooit de Nederlandse meesterwerken
       kleur gaven."
-  - englishWord: "\u201CPainter of power, mixing colors into chaos.\u201D"
+  - englishWord: " \u201CPainter of power, mixing colors into chaos.\u201D"
     germanWord: "\u201CSchilder van macht, mengt kleuren tot chaos.\u201D"
   - englishWord: " \u201CThe towering titan, fueled by raw windrage.\u201D"
     germanWord: "\u201CDe torenhoge titaan, gevoed door de woede van de wind.\u201D"
   - englishWord: De Nolet combines a classic windmill design with modern distilling
-      technology.  It produces spirits while standing as the tallest traditional-style
-      windmill in the  world.
+      technology. It produces spirits while standing as the tallest traditional-style
+      windmill in the                                                                                                                                                         
+      world.
     germanWord: De Nolet combineert een klassiek molenontwerp met moderne distillatietechnologie.
       Zij produceert sterke dranken en staat bekend als de hoogste windmolen ter
       wereld in traditionele stijl.
@@ -64,8 +65,8 @@ MonoBehaviour:
     germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
       veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar
       ook dat
-  - englishWord: "we kept it by keeping it safe  from raging storms and dangerously
-      quick rising waters! Without a doubt one of the most and dangerous jobs of 
+  - englishWord: "we kept it by keeping it safe from raging storms and dangerously
+      quick rising waters! Without a doubt one of the most and dangerous jobs of
       our hero\u2019s. "
     germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
       veilig! Ze zorgden er niet alleen voor dat we nieuwe landerijen kregen, maar

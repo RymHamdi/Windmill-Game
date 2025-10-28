@@ -1960,6 +1960,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -15.996
       objectReference: {fileID: 0}
+    - target: {fileID: 1321518071194087729, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: m_text
+      value: "De Nolet combines a classic windmill design with modern distilling
+        technology.\r\nIt produces spirits while standing as the tallest traditional-style
+        windmill in the\r                                                                                                                           
+        world."
+      objectReference: {fileID: 0}
     - target: {fileID: 1379821124371420351, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

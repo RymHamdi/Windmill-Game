@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Mono.Cecil;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnglishDeutchObject", menuName = "Scriptable Objects/EnglishDeutchObject")]
@@ -8,44 +10,51 @@ public class EnglishDeutchObject : ScriptableObject
 
     public List<WordPair> wordPairs = new List<WordPair>();
 
+
     public string GetGermanWord(string englishWord)
     {
-        var pair = wordPairs.Find(p => p.englishWord.ToLower() == englishWord.ToLower());
-        return pair?.germanWord ?? "";
+        if (string.IsNullOrWhiteSpace(englishWord)) return "";
+
+        var pair = wordPairs.Find(p => (p.englishWord == englishWord));
+        return pair != null ? pair.germanWord : "";
     }
 
     public string GetEnglishWord(string germanWord)
     {
-        var pair = wordPairs.Find(p => p.germanWord.ToLower() == germanWord.ToLower());
-        return pair?.englishWord ?? "";
+        if (string.IsNullOrWhiteSpace(germanWord)) return "";
+
+        var pair = wordPairs.Find(p => p.germanWord == germanWord);
+        return pair != null ? pair.englishWord : "";
     }
 
     public string ChangeToEnglishWord(string word)
     {
-        var pair = wordPairs.Find(p => p.englishWord.ToLower() == word.ToLower());
-        if (pair == null)
-        {
-            pair = wordPairs.Find(p => p.germanWord.ToLower() == word.ToLower());
-            return pair.englishWord;
-        }
-        else
-        {
-            return pair.englishWord;
-        }
+        if (string.IsNullOrWhiteSpace(word)) return "";
+
+        var pair = wordPairs.Find(p => p.englishWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
+        if (pair != null) return pair.englishWord;
+
+        pair = wordPairs.Find(p => p.germanWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
+        if (pair != null) return pair.englishWord;
+
+        Debug.LogWarning($"⚠️ No match found for '{word}' in ChangeToEnglishWord()");
+        return word;
     }
 
-    public string ChangeGeramnLang(string word)
+    public string ChangeGermanLang(string word)
     {
-        var pair = wordPairs.Find(p => p.germanWord.ToLower() == word.ToLower());
-        if (pair == null)
-        {
-            pair = wordPairs.Find(p => p.englishWord.ToLower() == word.ToLower());
-            return pair.germanWord;
-        }
-        else
-        {
-            return pair.germanWord;
-        }
+        if (string.IsNullOrWhiteSpace(word)) return "";
+
+       
+
+        var pair = wordPairs.Find(p => p.germanWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
+        if (pair != null) return pair.germanWord;
+
+        pair = wordPairs.Find(p => p.englishWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
+        if (pair != null) return pair.germanWord;
+
+        Debug.LogWarning($"⚠️ No match found for '{word}' in ChangeGermanLang()");
+        return word;
     }
 }
 

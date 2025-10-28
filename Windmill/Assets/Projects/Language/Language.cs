@@ -25,7 +25,7 @@ public class Language : MonoBehaviour
     public string GetWord(string word)
     {
         string engWord = languageData.ChangeToEnglishWord(word);
-        string germandLang = languageData.ChangeGeramnLang(word);
+        string germandLang = languageData.ChangeGermanLang(word);
 
         if (languageData.isEnglish)
         {

@@ -24,19 +24,29 @@ public class TextMeshProLang : MonoBehaviour
         }
     }
 
-    private void Start() 
+    private void Start()
     {
         if (Language.Instance != null)
         {
             Language.Instance.onLangUpdated += OnUserUpdateLang;
         }
     }
+    
+    private string Clean(string text)
+{
+    if (string.IsNullOrWhiteSpace(text))
+        return "";
+
+    // Remove all whitespace & invisible unicode
+    string cleaned = System.Text.RegularExpressions.Regex.Replace(text, @"\s+|\u200B|\u200C|\u200D|\uFEFF", "");
+    return cleaned.ToLowerInvariant();
+}
 
     public void UpdateText()
     {
         if (textMeshPro != null && Language.Instance != null && !isInitialized)
         {
-            string originalText = textMeshPro.text;
+            string originalText = Clean(textMeshPro.text);
             textMeshPro.text = Language.Instance.GetWord(originalText);
             isInitialized = true;
         }
@@ -44,7 +54,7 @@ public class TextMeshProLang : MonoBehaviour
 
     public void OnUserUpdateLang(bool check)
     {
-        string originalText = textMeshPro.text;;
+        string originalText = Clean(textMeshPro.text);
         textMeshPro.text = Language.Instance.GetWord(originalText);
             
     }
