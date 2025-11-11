@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8931473163784d91532e982cb518c, type: 3}
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
-  isEnglish: 0
+  isEnglish: 1
   wordPairs:
   - englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
       coastal village. Its name, \u201CHope,\u201D reflects the lifeline it gave
       to Ouddorp."
-    germanWord: "Gebouwd in 1845, diende De Hoop als een belangrijke graanmolen voor
-      het kustdorp. De naam \u2018Hoop\u2019 weerspiegelt de levensader die zij Ouddorp
-      schonk."
+    germanWord: Gebouwd in 1845, diende De Hoop als een belangrijke graanmolen voor
+      het kustdorp. De naam "Hoop" weerspiegelt het gevoel dat het Ouddorp schonk.
   - englishWord: "\u201CIsland stormbreaker, grinding gales to dust.\u201D"
-    germanWord: "\u201CEilandenstormbreker, die stormwinden tot stof vermaalt.\u201D"
+    germanWord: '"Eilandenstormbreker, die stormwinden tot stof vermaalt."'
   - englishWord: "Constructed in 1743, De Valk operated as a grain mill and home
       to millers\u2019 families. It now functions as a museum, preserving Leiden\u2019s
       milling history."
@@ -29,14 +28,14 @@ MonoBehaviour:
       voor molenaarsfamilies. Tegenwoordig doet zij dienst als museum dat de molengeschiedenis
       van Leiden bewaart.
   - englishWord: " \u2018\u2019The falcon\u2019s eye, striking from above.\u201D"
-    germanWord: "\u201CHet oog van de valk, dat van boven toeslaat.\u201D"
+    germanWord: '"Het oog van de valk, dat van boven toeslaat."'
   - englishWord: "De Kat is the world\u2019s only functioning wind-powered paint
       mill. It grinds minerals and pigments that once colored Dutch masterpieces."
     germanWord: "De Kat is \u2019s werelds enige nog werkende, door wind aangedreven
       verfmolen. Zij maalt mineralen en pigmenten die ooit de Nederlandse meesterwerken
       kleur gaven."
   - englishWord: " \u201CPainter of power, mixing colors into chaos.\u201D"
-    germanWord: "\u201CSchilder van macht, mengt kleuren tot chaos.\u201D"
+    germanWord: '"Schilder van macht, mengt kleuren tot chaos."'
   - englishWord: " \u201CThe towering titan, fueled by raw windrage.\u201D"
     germanWord: "\u201CDe torenhoge titaan, gevoed door de woede van de wind.\u201D"
   - englishWord: De Nolet combines a classic windmill design with modern distilling
@@ -63,16 +62,16 @@ MonoBehaviour:
   - englishWord: 'Talking about a real super hero these wind mills kept the people
       dry and safe!  They not only provided us with new land but also made sure '
     germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
-      veilig! Ze zorgden niet alleen voor nieuwe landerijen, maar ook dat
+      veilig! Ze zorgden niet alleen voor nieuw land, maar ook dat
   - englishWord: "we kept it by keeping it safe from raging storms and dangerously
       quick rising waters! Without a doubt one of the most and dangerous jobs of
       our hero\u2019s. "
-    germanWord: "Als echte superhelden hielden deze windmolens mensen droog en veilig,
-      cre\xEBerden nieuwe landerijen en beschermden tegen stormen en hoog water."
+    germanWord: we het droog en veilig bleef en land behielden, en ons beschermden
+      tegen stormen en hoog water.
   - englishWord: 'Back in the day wind mills where use for a lot of stuff. But without
       a  doubt the best thing they produced was our beloved golden drink, beer! '
     germanWord: 'Vroeger werden windmolens voor van alles gebruikt. Maar zonder twijfel
-      was het beste dat ze produceerden ons geliefde gouden drankje: bier!'
+      was het beste dat ze produceerden ons geliefde geel gouden rakker: bier!'
   - englishWord: "And as all good brewers know you can only make the best beer with
       the  best ingredients! These mills where the backbone of the economy at that 
       time. The people\u2019s favourite superhero!  "
@@ -82,8 +81,8 @@ MonoBehaviour:
   - englishWord: ' In the darkest of days our wind mills kept us safe on a whole
       new level.  The resistance found a new way to communicate with each other through 
       our heroes. '
-    germanWord: "In de donkerste dagen hielden onze windmolens ons op een heel nieuw
-      niveau veilig. Het verzet vond een nieuwe manier om met elkaar te communiceren
+    germanWord: "In onze moeilijkste tijden hielden onze windmolens ons op een heel
+      nieuw niveau veilig. Het verzet vond een nieuwe manier om met elkaar te communiceren
       \u2014 via onze helden."
   - englishWord: ' They changed the stance of the wicks to send messages. A very
       very dangerous job for both men and mill. Destruction by the enemy was the
@@ -92,7 +91,7 @@ MonoBehaviour:
       taak voor mannen en molen. Ontdekking door de vijand betekende vernietiging.
       Echte helden.
   - englishWord: Drain The Water
-    germanWord: Het water wegpompen
+    germanWord: Pomp het water weg
   - englishWord: Ranking
     germanWord: Ranglijst
   - englishWord: Up For A Second Round?

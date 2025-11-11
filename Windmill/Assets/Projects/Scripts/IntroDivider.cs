@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using UnityEngine.Video;
 
 public class IntroDivider : MonoBehaviour
 {
@@ -74,9 +75,24 @@ public class IntroDivider : MonoBehaviour
         }
     }
 
+    
+
     private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
     {
         float elapsed = 0f;
+        
+        if (cg.GetComponentInChildren<VideoPlayer>())
+        {
+            bool isVideoWasPlay = cg.GetComponentInChildren<VideoPlayer>().frame == 0;
+            if (!isVideoWasPlay)
+            {
+                cg.GetComponentInChildren<VideoPlayer>().Play();
+            }
+        }
+            
+            
+        
+
         //Popup the transfrom of the canvas group
         Vector3 originalScale = cg.transform.localScale;
 
