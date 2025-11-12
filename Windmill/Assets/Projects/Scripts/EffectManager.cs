@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
     public List<GameObject> BgEffects;
 
     public GameObject badEffect;
+    public GameObject Fog;
 
     void Awake()
     {
@@ -22,8 +23,14 @@ public class EffectManager : MonoBehaviour
 
     void Start()
     {
+        Invoke("ActivateFog", 0.3f);
         DeactivateEffect();
         InvokeRepeating("ActivateEffect", 2.0f, 2.0f);
+    }
+
+    public void ActivateFog()
+    {
+        Fog.gameObject.SetActive(true);
     }
 
     public void ActivateEffect()

@@ -7,6 +7,8 @@ public class EnglishDeutchObject : ScriptableObject
 {
     public bool isEnglish = true;
 
+    public LangState currentLangState;
+
     public List<WordPair> wordPairs = new List<WordPair>();
 
 
@@ -44,7 +46,7 @@ public class EnglishDeutchObject : ScriptableObject
     {
         if (string.IsNullOrWhiteSpace(word)) return "";
 
-       
+
 
         var pair = wordPairs.Find(p => p.germanWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
         if (pair != null) return pair.germanWord;
@@ -55,11 +57,34 @@ public class EnglishDeutchObject : ScriptableObject
         Debug.LogWarning($"⚠️ No match found for '{word}' in ChangeGermanLang()");
         return word;
     }
+
+    public int ReturnIndex(string word)
+    {
+        if (string.IsNullOrWhiteSpace(word)) return -1;
+         var pair = wordPairs.Find(p => p.englishWord.Replace(" ", "").ToLower() == word.Replace(" ", "").ToLower());
+        if (pair != null) return pair.index;
+        return -1;
+    }
+
+    public void InitIndex()
+    {
+        for (int i = 0; i < wordPairs.Count; i++)
+        {
+            wordPairs[i].index = i;
+        }
+    }
 }
 
-    [System.Serializable]
-    public class WordPair
-    {
-        public string englishWord;
-        public string germanWord;
-    }
+[System.Serializable]
+public class WordPair
+{
+    public int index;
+    public string englishWord;
+    public string germanWord;
+
+    public string Allmand;
+    public string Spanish;
+    public string Italian;
+    public string French;
+    public string Chinese;
+}

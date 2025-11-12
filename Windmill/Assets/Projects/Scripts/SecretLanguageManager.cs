@@ -139,14 +139,37 @@ public class SecretLanguageManager : MonoBehaviour
         for (int i = (int)delay; i > 0; i--)
         {
             //Todo @Rim fix text
-            if (Language.Instance.languageData.isEnglish)
+            switch (Language.Instance.languageData.currentLangState)
             {
-                infoText.text = $"Memorize the secret message: {i} seconds";
+                case LangState.English:
+                    infoText.text = $"Memorize the secret message: {i} seconds";
+                    break;
+
+                case LangState.Frensh:
+                    infoText.text = $"Mémorisez le message secret : {i} secondes";
+                    break;
+
+                case LangState.Netherland:
+                    infoText.text = $"Onthoud het geheime bericht: {i} seconden";
+                    break;
+
+                case LangState.Germand:
+                    infoText.text = $"Merken Sie sich die geheime Nachricht: {i} Sekunden";
+                    break;
+
+                case LangState.Spanish:
+                    infoText.text = $"Memoriza el mensaje secreto: {i} segundos";
+                    break;
+
+                case LangState.Chineese:
+                    infoText.text = $"记住秘密信息：{i} 秒";
+                    break;
+
+                default:
+                    infoText.text = $"Memorize the secret message: {i} seconds";
+                    break;
             }
-            else
-            {
-                infoText.text = $"Onthoud het geheime bericht: {i} seconden";
-            }
+
             yield return new WaitForSeconds(1f);
         }
         infoText.text = "";
@@ -178,30 +201,71 @@ public class SecretLanguageManager : MonoBehaviour
         }
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
-            if (Language.Instance.languageData.isEnglish)
+            switch (Language.Instance.languageData.currentLangState)
             {
-                infoText.text = $"Place the blade in the right position in: {i} seconds";
+                case LangState.English:
+                    infoText.text = $"Place the blade in the right position in: {i} seconds";
+                    break;
+
+                case LangState.Frensh:
+                    infoText.text = $"Placez la lame dans la bonne position dans : {i} secondes";
+                    break;
+
+                case LangState.Netherland:
+                    infoText.text = $"Plaats het blad in de juiste positie over: {i} seconden";
+                    break;
+
+                case LangState.Germand:
+                    infoText.text = $"Bringen Sie die Klinge in die richtige Position in: {i} Sekunden";
+                    break;
+
+                case LangState.Spanish:
+                    infoText.text = $"Coloca la hoja en la posición correcta en: {i} segundos";
+                    break;
+
+                case LangState.Chineese:
+                    infoText.text = $"在 {i} 秒内将刀片放在正确的位置";
+                    break;
+
+                default:
+                    infoText.text = $"Place the blade in the right position in: {i} seconds";
+                    break;
             }
-            else
-            {
-                infoText.text = $"Plaats het blad in de juiste positie over: {i} seconden";
-
-            }
-
-
 
             yield return new WaitForSeconds(1f);
         }
 
-        //Todo @Rim fix text
-        if (Language.Instance.languageData.isEnglish)
+        switch (Language.Instance.languageData.currentLangState)
         {
-            infoText.text = "Time is over!";
+            case LangState.English:
+                infoText.text = "Time is over!";
+                break;
+
+            case LangState.Frensh:
+                infoText.text = "Le temps est écoulé !";
+                break;
+
+            case LangState.Netherland:
+                infoText.text = "De tijd is om!";
+                break;
+
+            case LangState.Germand:
+                infoText.text = "Die Zeit ist vorbei!";
+                break;
+
+            case LangState.Spanish:
+                infoText.text = "¡Se acabó el tiempo!";
+                break;
+
+            case LangState.Chineese:
+                infoText.text = "时间到了！";
+                break;
+
+            default:
+                infoText.text = "Time is over!";
+                break;
         }
-        else
-        {
-            infoText.text = "De tijd is om!";
-        }
+
 
         bladeMouseRotator.DisableRotation();
         modelIndex++;
@@ -225,15 +289,40 @@ public class SecretLanguageManager : MonoBehaviour
             {
                 ShowControlTrigger.Instance?.SendTrigger("GameThreeRoundCompleted");
             }
-            if (Language.Instance.languageData.isEnglish)
+
+            switch (Language.Instance.languageData.currentLangState)
             {
-                infoText.text = "Round Completed!";
+                case LangState.English:
+                    infoText.text = "Round Completed!";
+                    break;
+
+                case LangState.Frensh:
+                    infoText.text = "Manche terminée !";
+                    break;
+
+                case LangState.Netherland:
+                    infoText.text = "Ronde voltooid!";
+                    break;
+
+                case LangState.Germand:
+                    infoText.text = "Runde abgeschlossen!";
+                    break;
+
+                case LangState.Spanish:
+                    infoText.text = "¡Ronda completada!";
+                    break;
+
+                case LangState.Chineese:
+                    infoText.text = "回合完成！";
+                    break;
+
+                default:
+                    infoText.text = "Round Completed!";
+                    break;
             }
-            else
-            {
-                infoText.text = "Ronde voltooid!";
-            }
-            
+
+
+
             StartCoroutine(NextRoundAfterDelay(5));
         }
         else
@@ -255,7 +344,7 @@ public class SecretLanguageManager : MonoBehaviour
 
         if (currentRoundPropSync == null)
         {
-            Debug.LogWarning("No current round prop sync selected.");
+            
             return;
         }
         /* if (scrollRect.horizontalNormalizedPosition < 0)
@@ -346,7 +435,7 @@ public class SecretLanguageManager : MonoBehaviour
         currentUsedRoundPropSyncs.Add(currentRoundPropSync);*/
         if (fullUsedRoundPropSyncs.Count == 0)
         {
-            Debug.LogWarning("No fullUsedRoundPropSyncs available.");
+           
             return;
         }
 
@@ -451,7 +540,7 @@ public class SecretLanguageManager : MonoBehaviour
                 closestAngle = angle;
             }
         }
-        Debug.Log("i dont know what happend but let check " + canonicalAngle + " and what we return" + closestAngle);
+        
         return closestAngle;
     }
 }

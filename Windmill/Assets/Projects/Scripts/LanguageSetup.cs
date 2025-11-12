@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,26 +9,80 @@ public class LanguageSetup : MonoBehaviour
     public Sprite DetuchSprite;
     public Button langButton;
 
-    void Start()
-    {
-        
-        if (Language.Instance != null)
-        {
-            OnLangUpdated(Language.Instance.languageData.isEnglish);
-            Language.Instance.onLangUpdated += OnLangUpdated;
-        }
-    }
+    public Transform container;
 
-    private void OnLangUpdated(bool isEnglish)
+    public Button buttonPrefab;
+
+    public List<ButtonLang> buttonLangs;
+
+    public Image openButtonImage;
+
+    public List<Button> childObjects;
+
+    public void CreateLangButtons()
     {
-        if (isEnglish)
+        if (!container.gameObject.activeInHierarchy)
         {
-            langButton.image.sprite = EnglandSprite;
+            // Show container & create buttons
+            container.gameObject.SetActive(true);
+
+            // Clear old children just in case
+            childObjects.Clear();
+
+            foreach (var lang in buttonLangs)
+            {
+                if (lang.langState == Language.Instance.languageData.currentLangState)
+                {
+                    continue;
+                }
+                Button newButton = Instantiate(buttonPrefab, container);
+                newButton.image.sprite = lang.sprite;
+                newButton.onClick.AddListener(() => UpdateLangState(lang.langState, lang.sprite));
+                childObjects.Add(newButton);
+            }
         }
         else
         {
-            langButton.image.sprite = DetuchSprite;
+            List<Button> toDestroy = new List<Button>(childObjects);
+
+            foreach (var btn in toDestroy)
+            {
+                btn.onClick.RemoveAllListeners();
+                Destroy(btn.gameObject);
+            }
+
+            childObjects.Clear();
+            container.gameObject.SetActive(false);
         }
+    }
+
+    private void UpdateLangState(LangState langState, Sprite sprite)
+    {
+        Language.Instance.languageData.currentLangState = langState;
+        openButtonImage.sprite = sprite;
+        CreateLangButtons();
+        UpdateLang();
+    }
+
+
+    void Start()
+    {
+
+        if (Language.Instance != null)
+        {
+            OnLangUpdated(Language.Instance.languageData.currentLangState);
+        }
+    }
+
+    private void OnLangUpdated(LangState langState)
+    {
+        //Find the correct image
+        int index = buttonLangs.FindIndex(x => x.langState == langState);
+        if (index != -1)
+        {
+            langButton.image.sprite = buttonLangs[index].sprite;
+        }
+        
     }
 
     public void UpdateLang()
@@ -42,7 +97,16 @@ public class LanguageSetup : MonoBehaviour
     {
         if (Language.Instance != null)
         {
-            Language.Instance.onLangUpdated -= OnLangUpdated;
+            
         }
     }
+}
+
+public enum LangState { English, Frensh, Netherland, Germand, Spanish, Chineese }
+
+[System.Serializable]
+public class ButtonLang
+{
+    public LangState langState;
+    public Sprite sprite;
 }

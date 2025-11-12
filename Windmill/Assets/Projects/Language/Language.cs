@@ -7,8 +7,8 @@ public class Language : MonoBehaviour
     public EnglishDeutchObject languageData;
 
     public static Language Instance;
-    public Action<bool> onLangUpdated;
-    
+    public Action onLangUpdated;
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,33 +22,43 @@ public class Language : MonoBehaviour
         }
     }
 
-    public string GetWord(string word)
+    public string GetWord(int index)
     {
-        string engWord = languageData.ChangeToEnglishWord(word);
-        string germandLang = languageData.ChangeGermanLang(word);
+        string word = "";
+        switch (languageData.currentLangState)
+        {
+            case LangState.English:
+                word = languageData.wordPairs.Find(x => x.index == index).englishWord;
 
-        if (languageData.isEnglish)
-        {
-            string str = languageData.GetEnglishWord(germandLang);
-            if (str != "")
-            {
-                return str;
-            }
-            return word;
+
+                break;
+            case LangState.Frensh:
+            word = languageData.wordPairs.Find(x => x.index == index).French;
+                break;
+            case LangState.Netherland:
+            //Keep in mind please
+                word = languageData.wordPairs.Find(x => x.index == index).germanWord;
+                break;
+            case LangState.Germand:
+            word = languageData.wordPairs.Find(x => x.index == index).Allmand;
+                break;
+            case LangState.Spanish:
+            word = languageData.wordPairs.Find(x => x.index == index).Spanish;
+                break;
+            case LangState.Chineese:
+            word = languageData.wordPairs.Find(x => x.index == index).Chinese;
+                break;
+            default:
+                break;
         }
-        else
-        {
-            return languageData.GetGermanWord(engWord);
-        }
+
+        return word;
     }
 
     public void ChangeLanguage()
     {
-        bool currentLang = languageData.isEnglish;
-        bool updateLang = !currentLang;
-        languageData.isEnglish = updateLang;
         //if true => so the current lang is english
-        onLangUpdated(updateLang);
+        onLangUpdated?.Invoke();
     }
 
 

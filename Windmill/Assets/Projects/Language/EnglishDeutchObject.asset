@@ -13,92 +13,326 @@ MonoBehaviour:
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
   isEnglish: 1
+  currentLangState: 0
   wordPairs:
-  - englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
+  - index: 0
+    englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
       coastal village. Its name, \u201CHope,\u201D reflects the lifeline it gave
       to Ouddorp."
     germanWord: Gebouwd in 1845, diende De Hoop als een belangrijke graanmolen voor
       het kustdorp. De naam "Hoop" weerspiegelt het gevoel dat het Ouddorp schonk.
-  - englishWord: "\u201CIsland stormbreaker, grinding gales to dust.\u201D"
+    Allmand: "De Hoop stammt aus dem Jahr 1845 und diente als wichtige Getreidem\xFChle
+      f\xFCr das K\xFCstendorf. Sein Name \"Hoop\" (Hoffnung) spiegelt die Lebensader
+      wider, die es Ouddorp bot."
+    Spanish: "De 1845, De Hoop sirvi\xF3 como un molino de grano vital para el pueblo
+      costero. Su nombre, \"Esperanza,\" refleja la salvaci\xF3n que dio a Ouddorp."
+    Italian: Datato 1845, De Hoop fungeva da mulino a grano vitale per il villaggio
+      costiero. Il suo nome, "Speranza," riflette il salvavita che ha dato a Ouddorp.
+    French: "Datant de 1845, De Hoop a servi de moulin \xE0 grain vital pour le village
+      c\xF4tier. Son nom,  \"Espoir\", refl\xE8te la bou\xE9e de sauvetage qu'il
+      a donn\xE9e \xE0 Ouddorp."
+    Chinese: "De Hoop \u59CB\u5EFA\u4E8E 1845 \u5E74\uFF0C\u662F\u6CBF\u6D77\u6751\u5E84\u91CD\u8981\u7684\u8C37\u7269\u78E8\u574A\u3002\u5B83\u7684\u540D\u5B57\u201C\u5E0C\u671B\u201D\u53CD\u6620\u4E86\u5B83\u5E26\u7ED9
+      Ouddorp \u7684\u751F\u547D\u7EBF\u3002"
+  - index: 1
+    englishWord: "\u201CIsland stormbreaker, grinding gales to dust.\u201D"
     germanWord: '"Eilandenstormbreker, die stormwinden tot stof vermaalt."'
-  - englishWord: "Constructed in 1743, De Valk operated as a grain mill and home
+    Allmand: "\"Inselsturmbrecher, der St\xFCrme zu Staub zermahlt.\""
+    Spanish: '"Rompetormentas de la isla, moliendo vendavales hasta convertirlos
+      en polvo."'
+    Italian: '"Frangitempeste dell''isola, che macina le tempeste in polvere."'
+    French: "\"Brise-temp\xEAte insulaire, r\xE9duisant les coups de vent en poussi\xE8re.\""
+    Chinese: "\"\u5C9B\u5C7F\u7834\u98CE\u8005\uFF0C\u5C06\u72C2\u98CE\u78E8\u6210\u5C18\u57C3\u3002\""
+  - index: 2
+    englishWord: "Constructed in 1743, De Valk operated as a grain mill and home
       to millers\u2019 families. It now functions as a museum, preserving Leiden\u2019s
       milling history."
     germanWord: Gebouwd in 1743, functioneerde De Valk als graanmolen en woonhuis
       voor molenaarsfamilies. Tegenwoordig doet zij dienst als museum dat de molengeschiedenis
       van Leiden bewaart.
-  - englishWord: " \u2018\u2019The falcon\u2019s eye, striking from above.\u201D"
+    Allmand: "De Valk wurde 1743 erbaut und diente als Getreidem\xFChle und Zuhause
+      f\xFCr M\xFCllerfamilien. Heute fungiert sie als Museum und bewahrt die M\xFChlengeschichte
+      Leidens."
+    Spanish: "Construido en 1743, De Valk funcion\xF3 como un molino de grano y hogar
+      para las familias de los molineros. Ahora funciona como un museo, conservando
+      la historia de la molienda de Leiden."
+    Italian: Costruito nel 1743, De Valk funzionava come mulino a grano e dimora
+      per le famiglie di mugnai. Ora funge da museo, preservando la storia della
+      molitura di Leida.
+    French: "Construit en 1743, De Valk fonctionnait comme un moulin \xE0 grain et
+      la maison des familles de meuniers. Il fonctionne maintenant comme un mus\xE9e,
+      pr\xE9servant l'histoire de la minoterie de Leiden."
+    Chinese: "De Valk \u5EFA\u4E8E 1743 \u5E74\uFF0C\u66FE\u662F\u8C37\u7269\u78E8\u574A\u548C\u78E8\u574A\u4E3B\u5BB6\u5EAD\u7684\u4F4F\u6240\u3002\u73B0\u5728\u5B83\u4F5C\u4E3A\u535A\u7269\u9986\u8FD0\u8425\uFF0C\u4FDD\u5B58\u7740\u83B1\u987F\u7684\u78E8\u574A\u5386\u53F2\u3002"
+  - index: 3
+    englishWord: " \u2018\u2019The falcon\u2019s eye, striking from above.\u201D"
     germanWord: '"Het oog van de valk, dat van boven toeslaat."'
-  - englishWord: "De Kat is the world\u2019s only functioning wind-powered paint
+    Allmand: "\"Das Falkenauge, das von oben zuschl\xE4gt.\""
+    Spanish: "\"El ojo del halc\xF3n, golpeando desde arriba.\""
+    Italian: '"L''occhio del falco, che colpisce dall''alto."'
+    French: "\"L'\u0153il du faucon, frappant d'en haut.\""
+    Chinese: "\"\u730E\u9E70\u4E4B\u773C\uFF0C\u81EA\u4E0A\u65B9\u88AD\u51FB\u3002\""
+  - index: 4
+    englishWord: "De Kat is the world\u2019s only functioning wind-powered paint
       mill. It grinds minerals and pigments that once colored Dutch masterpieces."
     germanWord: "De Kat is \u2019s werelds enige nog werkende, door wind aangedreven
       verfmolen. Zij maalt mineralen en pigmenten die ooit de Nederlandse meesterwerken
       kleur gaven."
-  - englishWord: " \u201CPainter of power, mixing colors into chaos.\u201D"
+    Allmand: "De Kat ist die weltweit einzige funktionierende windbetriebene Farbm\xFChle.
+      Sie mahlt Mineralien und Pigmente, die einst holl\xE4ndische Meisterwerke f\xE4rbten."
+    Spanish: "De Kat es el \xFAnico molino de pintura del mundo que funciona con
+      energ\xEDa e\xF3lica. Muele minerales y pigmentos que una vez colorearon obras
+      maestras holandesas."
+    Italian: "De Kat \xE8 l'unico mulino a vento funzionante al mondo per la pittura.
+      Macina minerali e pigmenti che un tempo coloravano i capolavori olandesi."
+    French: "De Kat est le seul moulin \xE0 peinture au monde fonctionnant \xE0 l'\xE9nergie
+      \xE9olienne. Il broie les min\xE9raux et les pigments qui coloraient autrefois
+      les chefs-d'\u0153uvre n\xE9erlandais."
+    Chinese: "De Kat \u662F\u4E16\u754C\u4E0A\u552F\u4E00\u4ECD\u5728\u8FD0\u884C\u7684\u98CE\u529B\u9A71\u52A8\u989C\u6599\u78E8\u574A\u3002\u5B83\u7814\u78E8\u66FE\u4E3A\u8377\u5170\u6770\u4F5C\u7740\u8272\u7684\u77FF\u7269\u8D28\u548C\u989C\u6599\u3002"
+  - index: 5
+    englishWord: " \u201CPainter of power, mixing colors into chaos.\u201D"
     germanWord: '"Schilder van macht, mengt kleuren tot chaos."'
-  - englishWord: " \u201CThe towering titan, fueled by raw windrage.\u201D"
+    Allmand: '"Maler der Macht, der Farben ins Chaos mischt."'
+    Spanish: '"Pintor de poder, mezclando colores en el caos."'
+    Italian: '"Pittore di potere, che mescola i colori nel caos."'
+    French: "\"Peintre de pouvoir, m\xEAlant les couleurs au chaos.\""
+    Chinese: "\"\u529B\u91CF\u7684\u753B\u5BB6\uFF0C\u5C06\u8272\u5F69\u6DF7\u5165\u6DF7\u6C8C\u3002\""
+  - index: 6
+    englishWord: " \u201CThe towering titan, fueled by raw windrage.\u201D"
     germanWord: "\u201CDe torenhoge titaan, gevoed door de woede van de wind.\u201D"
-  - englishWord: De Nolet combines a classic windmill design with modern distilling
+    Allmand: '"Der aufragende Titan, angetrieben von roher Windwut."'
+    Spanish: "\"El tit\xE1n imponente, alimentado por la furia del viento.\""
+    Italian: '"Il titano torreggiante, alimentato dalla furia del vento."'
+    French: "\"Le titan imposant, aliment\xE9 par la fureur brute du vent.\""
+    Chinese: "\"\u9AD8\u8038\u7684\u6CF0\u5766\uFF0C\u88AB\u539F\u59CB\u7684\u98CE\u66B4\u4E4B\u6012\u6240\u9A71\u52A8\u3002\""
+  - index: 7
+    englishWord: De Nolet combines a classic windmill design with modern distilling
       technology. It produces spirits while standing as the tallest traditional-style
       windmill in the                                                                                                                                                         
       world.
     germanWord: De Nolet combineert een klassiek molenontwerp met moderne distillatietechnologie.
       Zij produceert sterke dranken en staat bekend als de hoogste windmolen ter
       wereld in traditionele stijl.
-  - englishWord: " \u201CThe city giant, cutting wind like steel.\u201D"
+    Allmand: "De Nolet kombiniert ein klassisches Windm\xFChlendesign mit moderner
+      Destillationstechnologie. Sie produziert Spirituosen und ist gleichzeitig die
+      h\xF6chste Windm\xFChle im traditionellen Stil weltweit."
+    Spanish: "De Nolet combina un dise\xF1o cl\xE1sico de molino de viento con tecnolog\xEDa
+      de destilaci\xF3n moderna. Produce licores y es el molino de viento de estilo
+      tradicional m\xE1s alto del mundo."
+    Italian: "De Nolet combina un design classico del mulino a vento con la moderna
+      tecnologia di distillazione. Produce liquori pur essendo il mulino a vento
+      in stile tradizionale pi\xF9 alto del mondo."
+    French: "De Nolet combine un design de moulin \xE0 vent classique avec une technologie
+      de distillation moderne. Il produit des spiritueux tout en \xE9tant le plus
+      haut moulin \xE0 vent de style traditionnel au monde."
+    Chinese: "De Nolet \u5C06\u7ECF\u5178\u7684\u98CE\u8F66\u8BBE\u8BA1\u4E0E\u73B0\u4EE3\u84B8\u998F\u6280\u672F\u76F8\u7ED3\u5408\u3002\u5B83\u751F\u4EA7\u70C8\u9152\uFF0C\u540C\u65F6\u4E5F\u662F\u4E16\u754C\u4E0A\u6700\u9AD8\u7684\u4F20\u7EDF\u98CE\u683C\u98CE\u8F66\u3002"
+  - index: 8
+    englishWord: " \u201CThe city giant, cutting wind like steel.\u201D"
     germanWord: "\u201CDe stedelijke reus, snijdt door de wind als staal.\u201D"
-  - englishWord: " Originally built in the 16th century, De Gooyer is Amsterdam\u2019s
+    Allmand: '"Der Stadtriese, der den Wind wie Stahl zerschneidet."'
+    Spanish: '"El gigante de la ciudad, cortando el viento como el acero."'
+    Italian: "\"Il gigante della citt\xE0, che taglia il vento come l'acciaio.\""
+    French: "\"Le g\xE9ant de la ville, coupant le vent comme de l'acier.\""
+    Chinese: "\"\u57CE\u5E02\u5DE8\u4EBA\uFF0C\u5982\u94A2\u94C1\u822C\u5288\u98CE\u65A9\u6D6A\u3002\""
+  - index: 9
+    englishWord: " Originally built in the 16th century, De Gooyer is Amsterdam\u2019s
       tallest wooden windmill. Today it stands beside a brewery, drawing visitors
       from all over the world."
     germanWord: Oorspronkelijk gebouwd in de 16e eeuw, is De Gooyer de hoogste houten
       windmolen van Amsterdam. Tegenwoordig staat hij naast een brouwerij en trekt
       bezoekers van over de hele wereld.
-  - englishWord: CHOOSE YOUR HERO
+    Allmand: "De Gooyer, urspr\xFCnglich im 16. Jahrhundert erbaut, ist Amsterdams
+      h\xF6chste h\xF6lzerne Windm\xFChle. Heute steht sie neben einer Brauerei und
+      zieht Besucher aus aller Welt an."
+    Spanish: "Construido originalmente en el siglo XVI, De Gooyer es el molino de
+      viento de madera m\xE1s alto de \xC1msterdam. Hoy se encuentra junto a una
+      cervecer\xEDa, atrayendo a visitantes de todo el mundo."
+    Italian: "Originariamente costruito nel XVI secolo, De Gooyer \xE8 il mulino
+      a vento in legno pi\xF9 alto di Amsterdam. Oggi si trova accanto a un birrificio,
+      attirando visitatori da tutto il mondo."
+    French: "Construit \xE0 l'origine au XVIe si\xE8cle, De Gooyer est le plus haut
+      moulin \xE0 vent en bois d'Amsterdam. Aujourd'hui, il se dresse \xE0 c\xF4t\xE9
+      d'une brasserie, attirant des visiteurs du monde entier."
+    Chinese: "De Gooyer \u6700\u521D\u5EFA\u4E8E 16 \u4E16\u7EAA\uFF0C\u662F\u963F\u59C6\u65AF\u7279\u4E39\u6700\u9AD8\u7684\u6728\u5236\u98CE\u8F66\u3002\u5982\u4ECA\u5B83\u77D7\u7ACB\u5728\u4E00\u5BB6\u5564\u9152\u5382\u65C1\uFF0C\u5438\u5F15\u7740\u6765\u81EA\u4E16\u754C\u5404\u5730\u7684\u6E38\u5BA2\u3002"
+  - index: 10
+    englishWord: CHOOSE YOUR HERO
     germanWord: KIES JOUW HELD
-  - englishWord: Select Character
+    Allmand: "W\xC4HLE DEINEN HELDEN"
+    Spanish: "ELIGE A TU H\xC9ROE"
+    Italian: SCEGLI IL TUO EROE
+    French: "CHOISIS TON H\xC9ROS"
+    Chinese: "\u9009\u62E9\u4F60\u7684\u82F1\u96C4"
+  - index: 11
+    englishWord: Select Character
     germanWord: Karakters selecteren
-  - englishWord: Heroes
+    Allmand: "Charakter ausw\xE4hlen"
+    Spanish: Seleccionar Personaje
+    Italian: Seleziona Personaggio
+    French: "S\xE9lectionner un personnage"
+    Chinese: "\u9009\u62E9\u89D2\u8272"
+  - index: 12
+    englishWord: Heroes
     germanWord: Helden
-  - englishWord: 'Talking about a real super hero these wind mills kept the people
+    Allmand: Helden
+    Spanish: "H\xE9roes"
+    Italian: Eroi
+    French: "H\xE9ros"
+    Chinese: "\u82F1\u96C4"
+  - index: 13
+    englishWord: 'Talking about a real super hero these wind mills kept the people
       dry and safe!  They not only provided us with new land but also made sure '
     germanWord: Als echte superhelden hielden deze windmolens de mensen droog en
       veilig! Ze zorgden niet alleen voor nieuw land, maar ook dat
-  - englishWord: "we kept it by keeping it safe from raging storms and dangerously
+    Allmand: "Apropos echte Superhelden: Diese Windm\xFChlen hielten die Menschen
+      trocken und sicher! Sie versorgten uns nicht nur mit neuem Land, sondern sorgten
+      auch daf\xFCr"
+    Spanish: "Hablando de verdaderos superh\xE9roes, \xA1estos molinos de viento
+      mantuvieron a la gente seca y segura! No solo nos proporcionaron nuevas tierras,
+      sino que tambi\xE9n se aseguraron de que"
+    Italian: Parlando di veri supereroi, questi mulini a vento hanno mantenuto le
+      persone asciutte e al sicuro! Non solo ci hanno fornito nuova terra, ma hanno
+      anche assicurato che
+    French: "En parlant de vrais super-h\xE9ros, ces moulins \xE0 vent ont gard\xE9
+      les gens au sec et en s\xE9curit\xE9 ! Ils nous ont non seulement fourni de
+      nouvelles terres, mais ont \xE9galement veill\xE9 \xE0 ce que"
+    Chinese: "\u8BF4\u5230\u771F\u6B63\u7684\u8D85\u7EA7\u82F1\u96C4\uFF0C\u8FD9\u4E9B\u98CE\u8F66\u8BA9\u4EBA\u4EEC\u4FDD\u6301\u5E72\u71E5\u548C\u5B89\u5168\uFF01\u5B83\u4EEC\u4E0D\u4EC5\u4E3A\u6211\u4EEC\u63D0\u4F9B\u4E86\u65B0\u7684\u571F\u5730\uFF0C\u800C\u4E14\u8FD8\u786E\u4FDD\u4E86"
+  - index: 14
+    englishWord: "we kept it by keeping it safe from raging storms and dangerously
       quick rising waters! Without a doubt one of the most and dangerous jobs of
       our hero\u2019s. "
     germanWord: we het droog en veilig bleef en land behielden, en ons beschermden
       tegen stormen en hoog water.
-  - englishWord: 'Back in the day wind mills where use for a lot of stuff. But without
+    Allmand: "wir es sicher vor tobenden St\xFCrmen und gef\xE4hrlich schnell steigendem
+      Wasser hielten! Ohne Zweifel eine der gef\xE4hrlichsten Aufgaben unserer Helden."
+    Spanish: "lo mantuvi\xE9ramos a salvo de tormentas furiosas y aguas peligrosamente
+      crecientes. Sin duda, uno de los trabajos m\xE1s peligrosos de nuestros h\xE9roes."
+    Italian: "lo abbiamo mantenuto al sicuro da tempeste furiose e acque in rapido
+      aumento pericolose! Senza dubbio uno dei lavori pi\xF9 e pericolosi dei nostri
+      eroi."
+    French: "nous l'avons gard\xE9 en le prot\xE9geant des temp\xEAtes d\xE9cha\xEEn\xE9es
+      et des eaux dangereusement montantes ! Sans aucun doute l'un des emplois les
+      plus dangereux de nos h\xE9ros."
+    Chinese: "\u6211\u4EEC\u901A\u8FC7\u4FDD\u62A4\u5B83\u514D\u53D7\u72C2\u98CE\u66B4\u96E8\u548C\u5371\u9669\u7684\u5FEB\u901F\u4E0A\u6DA8\u7684\u6C34\u57DF\u7684\u4FB5\u5BB3\u6765\u4FDD\u6301\u5B83\uFF01\u6BEB\u65E0\u7591\u95EE\uFF0C\u8FD9\u662F\u6211\u4EEC\u82F1\u96C4\u4EEC\u6700\u5371\u9669\u7684\u5DE5\u4F5C\u4E4B\u4E00\u3002"
+  - index: 15
+    englishWord: 'Back in the day wind mills where use for a lot of stuff. But without
       a  doubt the best thing they produced was our beloved golden drink, beer! '
     germanWord: 'Vroeger werden windmolens voor van alles gebruikt. Maar zonder twijfel
       was het beste dat ze produceerden ons geliefde geel gouden rakker: bier!'
-  - englishWord: "And as all good brewers know you can only make the best beer with
+    Allmand: "Fr\xFCher wurden Windm\xFChlen f\xFCr vieles genutzt. Aber ohne Zweifel
+      war das Beste, was sie produzierten, unser geliebtes goldenes Getr\xE4nk, Bier!"
+    Spanish: "Antiguamente, los molinos de viento se usaban para muchas cosas. \xA1Pero
+      sin duda lo mejor que produc\xEDan era nuestra amada bebida dorada, la cerveza!"
+    Italian: Ai tempi, i mulini a vento erano usati per molte cose. Ma senza dubbio
+      la cosa migliore che producevano era la nostra amata bevanda dorata, la birra!
+    French: "Autrefois, les moulins \xE0 vent \xE9taient utilis\xE9s pour beaucoup
+      de choses. Mais sans aucun doute, la meilleure chose qu'ils produisaient \xE9tait
+      notre boisson dor\xE9e bien-aim\xE9e, la bi\xE8re !"
+    Chinese: "\u8FC7\u53BB\uFF0C\u98CE\u8F66\u88AB\u7528\u4E8E\u5F88\u591A\u4E8B\u60C5\u3002\u4F46\u6BEB\u65E0\u7591\u95EE\uFF0C\u5B83\u4EEC\u751F\u4EA7\u7684\u6700\u597D\u7684\u4E1C\u897F\u662F\u6211\u4EEC\u631A\u7231\u7684\u91D1\u8272\u996E\u54C1\u2014\u2014\u5564\u9152\uFF01"
+  - index: 16
+    englishWord: "And as all good brewers know you can only make the best beer with
       the  best ingredients! These mills where the backbone of the economy at that 
       time. The people\u2019s favourite superhero!  "
     germanWord: "Alle goede brouwers weten: het beste bier maak je met de beste ingredi\xEBnten!
       Deze molens waren de ruggengraat van de economie en de favoriete held van het
       volk!"
-  - englishWord: ' In the darkest of days our wind mills kept us safe on a whole
+    Allmand: "Und wie alle guten Brauer wissen, kann man das beste Bier nur mit den
+      besten Zutaten herstellen! Diese M\xFChlen waren damals das R\xFCckgrat der
+      Wirtschaft. Der Lieblingssuperheld des Volkes!"
+    Spanish: "\xA1Y como todos los buenos cerveceros saben, solo se puede hacer la
+      mejor cerveza con los mejores ingredientes! Estos molinos fueron la columna
+      vertebral de la econom\xEDa en ese momento. \xA1El superh\xE9roe favorito del
+      pueblo!"
+    Italian: E come tutti i buoni birrai sanno, puoi fare la migliore birra solo
+      con i migliori ingredienti! Questi mulini erano la spina dorsale dell'economia
+      di quel tempo. Il supereroe preferito della gente!
+    French: "Et comme tous les bons brasseurs le savent, on ne peut faire la meilleure
+      bi\xE8re qu'avec les meilleurs ingr\xE9dients ! Ces moulins \xE9taient l'\xE9pine
+      dorsale de l'\xE9conomie \xE0 cette \xE9poque. Le super-h\xE9ros pr\xE9f\xE9r\xE9
+      du peuple !"
+    Chinese: "\u6B63\u5982\u6240\u6709\u4F18\u79C0\u7684\u917F\u9152\u5E08\u6240\u77E5\uFF0C\u53EA\u6709\u7528\u6700\u597D\u7684\u539F\u6599\u624D\u80FD\u917F\u9020\u51FA\u6700\u597D\u7684\u5564\u9152\uFF01\u8FD9\u4E9B\u78E8\u574A\u5728\u5F53\u65F6\u662F\u7ECF\u6D4E\u7684\u652F\u67F1\u3002\u4EBA\u6C11\u6700\u559C\u6B22\u7684\u8D85\u7EA7\u82F1\u96C4\uFF01"
+  - index: 17
+    englishWord: ' In the darkest of days our wind mills kept us safe on a whole
       new level.  The resistance found a new way to communicate with each other through 
       our heroes. '
     germanWord: "In onze moeilijkste tijden hielden onze windmolens ons op een heel
       nieuw niveau veilig. Het verzet vond een nieuwe manier om met elkaar te communiceren
       \u2014 via onze helden."
-  - englishWord: ' They changed the stance of the wicks to send messages. A very
+    Allmand: "In den dunkelsten Tagen sch\xFCtzten uns unsere Windm\xFChlen auf einer
+      ganz neuen Ebene. Der Widerstand fand einen neuen Weg, \xFCber unsere Helden
+      miteinander zu kommunizieren."
+    Spanish: "En los d\xEDas m\xE1s oscuros, nuestros molinos de viento nos mantuvieron
+      a salvo a un nivel completamente nuevo. La resistencia encontr\xF3 una nueva
+      forma de comunicarse entre s\xED a trav\xE9s de nuestros h\xE9roes."
+    Italian: "Nei giorni pi\xF9 bui, i nostri mulini a vento ci hanno tenuti al sicuro
+      a un livello completamente nuovo. La resistenza ha trovato un nuovo modo di
+      comunicare tra loro attraverso i nostri eroi."
+    French: "Dans les jours les plus sombres, nos moulins \xE0 vent nous ont gard\xE9s
+      en s\xE9curit\xE9 \xE0 un tout autre niveau. La r\xE9sistance a trouv\xE9 une
+      nouvelle fa\xE7on de communiquer entre eux gr\xE2ce \xE0 nos h\xE9ros."
+    Chinese: "\u5728\u6700\u9ED1\u6697\u7684\u65E5\u5B50\u91CC\uFF0C\u6211\u4EEC\u7684\u98CE\u8F66\u4EE5\u5168\u65B0\u7684\u65B9\u5F0F\u4FDD\u62A4\u7740\u6211\u4EEC\u3002\u62B5\u6297\u7EC4\u7EC7\u901A\u8FC7\u6211\u4EEC\u7684\u82F1\u96C4\u627E\u5230\u4E86\u76F8\u4E92\u4EA4\u6D41\u7684\u65B0\u65B9\u5F0F\u3002"
+  - index: 18
+    englishWord: ' They changed the stance of the wicks to send messages. A very
       very dangerous job for both men and mill. Destruction by the enemy was the
       verdict when caught. True heroes. '
     germanWord: Ze veranderden de wieken om boodschappen door te geven, een gevaarlijke
       taak voor mannen en molen. Ontdekking door de vijand betekende vernietiging.
       Echte helden.
-  - englishWord: Drain The Water
+    Allmand: "Sie \xE4nderten die Stellung der Fl\xFCgel, um Botschaften zu senden.
+      Eine sehr, sehr gef\xE4hrliche Aufgabe f\xFCr M\xE4nner und M\xFChle. Zerst\xF6rung
+      durch den Feind war das Urteil bei Entdeckung. Wahre Helden."
+    Spanish: "Cambiaron la posici\xF3n de las aspas para enviar mensajes. Un trabajo
+      muy, muy peligroso tanto para los hombres como para el molino. La destrucci\xF3n
+      por parte del enemigo era el veredicto si eran atrapados. Verdaderos h\xE9roes."
+    Italian: Hanno cambiato la posizione delle pale per inviare messaggi. Un lavoro
+      molto, molto pericoloso sia per gli uomini che per il mulino. La distruzione
+      da parte del nemico era il verdetto se catturati. Veri eroi.
+    French: "Ils ont chang\xE9 la position des m\xE8ches pour envoyer des messages.
+      Un travail tr\xE8s tr\xE8s dangereux pour les hommes et le moulin. La destruction
+      par l'ennemi \xE9tait le verdict en cas de capture. De vrais h\xE9ros."
+    Chinese: "\u4ED6\u4EEC\u6539\u53D8\u4E86\u98CE\u8F66\u53F6\u7247\u7684\u65B9\u5411\u6765\u53D1\u9001\u4FE1\u606F\u3002\u8FD9\u5BF9\u4EBA\u548C\u98CE\u8F66\u6765\u8BF4\u90FD\u662F\u4E00\u9879\u975E\u5E38\u975E\u5E38\u5371\u9669\u7684\u5DE5\u4F5C\u3002\u4E00\u65E6\u88AB\u6293\uFF0C\u654C\u4EBA\u5C31\u4F1A\u5C06\u5176\u6467\u6BC1\u3002\u771F\u6B63\u7684\u82F1\u96C4\u3002"
+  - index: 19
+    englishWord: Drain The Water
     germanWord: Pomp het water weg
-  - englishWord: Ranking
+    Allmand: Das Wasser ablassen
+    Spanish: Drenar el agua
+    Italian: Svuota l'acqua
+    French: Drainer l'eau
+    Chinese: "\u62BD\u6C34"
+  - index: 20
+    englishWord: Ranking
     germanWord: Ranglijst
-  - englishWord: Up For A Second Round?
+    Allmand: Rangliste
+    Spanish: "Clasificaci\xF3n"
+    Italian: Classifica
+    French: Classement
+    Chinese: "\u6392\u540D"
+  - index: 21
+    englishWord: Up For A Second Round?
     germanWord: Klaar voor een tweede ronde?
-  - englishWord: Legends of the Match!
+    Allmand: "Bereit f\xFCr eine zweite Runde?"
+    Spanish: "\xBFListo para una segunda ronda?"
+    Italian: Pronto per un secondo round?
+    French: "Pr\xEAt pour un deuxi\xE8me tour ?"
+    Chinese: "\u51C6\u5907\u597D\u7B2C\u4E8C\u8F6E\u4E86\u5417\uFF1F"
+  - index: 22
+    englishWord: Legends of the Match!
     germanWord: Legendes van de Wedstrijd!
-  - englishWord: Up For A Second Round?
+    Allmand: Legenden des Spiels!
+    Spanish: "\xA1Leyendas del partido!"
+    Italian: Leggende della Partita!
+    French: "L\xE9gendes du Match !"
+    Chinese: "\u6BD4\u8D5B\u4F20\u5947\uFF01"
+  - index: 23
+    englishWord: Up For A Second Round?
     germanWord: Klaar voor een tweede ronde?
-  - englishWord: Ready For The Next Round?
+    Allmand: "Bereit f\xFCr eine zweite Runde?"
+    Spanish: "\xBFListo para una segunda ronda?"
+    Italian: Pronto per un secondo round?
+    French: "Pr\xEAt pour un deuxi\xE8me tour ?"
+    Chinese: "\u51C6\u5907\u597D\u7B2C\u4E8C\u8F6E\u4E86\u5417\uFF1F"
+  - index: 24
+    englishWord: Ready For The Next Round?
     germanWord: Klaar voor de volgende ronde?
+    Allmand: "Bereit f\xFCr die n\xE4chste Runde?"
+    Spanish: "\xBFListo para la pr\xF3xima ronda?"
+    Italian: Pronto per il prossimo round?
+    French: "Pr\xEAt pour le prochain tour ?"
+    Chinese: "\u51C6\u5907\u597D\u4E0B\u4E00\u8F6E\u4E86\u5417\uFF1F"

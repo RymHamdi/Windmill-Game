@@ -84,7 +84,7 @@ public class IntroDivider : MonoBehaviour
         if (cg.GetComponentInChildren<VideoPlayer>())
         {
             bool isVideoWasPlay = cg.GetComponentInChildren<VideoPlayer>().frame == 0;
-            if (!isVideoWasPlay)
+            if (!isVideoWasPlay && end != 0)
             {
                 cg.GetComponentInChildren<VideoPlayer>().Play();
             }
