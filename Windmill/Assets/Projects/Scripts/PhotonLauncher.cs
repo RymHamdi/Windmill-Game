@@ -11,7 +11,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        gameVersion = "1.5";
+        gameVersion = "1.6";
     }
 
     void Start()
@@ -59,12 +59,16 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.Log("Join Random Failed. No rooms available, creating room");
-        PhotonNetwork.CreateRoom(roomName, new Photon.Realtime.RoomOptions { MaxPlayers = 5, PublishUserId = true });
+        Debug.Log(message);
+        Debug.Log(returnCode);
+        PhotonNetwork.CreateRoom(roomName, new Photon.Realtime.RoomOptions { MaxPlayers = 5, PublishUserId = true, PlayerTtl = 0 });
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         base.OnCreateRoomFailed(returnCode, message);
+        Debug.Log(message);
+        Debug.Log(returnCode);
         PhotonNetwork.JoinRandomRoom();
     }
 
