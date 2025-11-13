@@ -61,7 +61,7 @@ public class Food : MonoBehaviour
 
         // audio & score
         if (AudioManager.Instance != null && sliceSfx != null)
-            AudioManager.Instance.PlaySFX(sliceSfx);
+            //AudioManager.Instance.PlaySFX(sliceSfx);
 
         if (ScoreManager.Instance != null)
             ScoreManager.Instance.AddScore(scoreValue);

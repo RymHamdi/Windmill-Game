@@ -33,12 +33,19 @@ public class CharacterDetailsManager : MonoBehaviour
         SelectCharacterText.SetActive(true);
     }
 
+    bool isFirstTime = true;
+
     public void ShowDetails(int index)
     {
         // Hide currently shown panel
         if (currentIndex >= 0)
             detailPanels[currentIndex].SetActive(false);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.clickSound);
+        //AudioManager.Instance.PlaySFX(AudioManager.Instance.clickSound);
+        if (!isFirstTime)
+        {
+            AudioManager.Instance.Play("Select Hero");
+        }
+        
         // Show the clicked one
         detailPanels[index].SetActive(true);
         currentIndex = index;
@@ -47,7 +54,7 @@ public class CharacterDetailsManager : MonoBehaviour
         LobbyManager.Instance.localPlayerindex = index;
         LobbyManager.Instance.UpdateLocalPlayerCharacter();
         ShowControlTrigger.Instance?.SendTrigger("UpdateCharacterSelection");
-       
+       isFirstTime = false;
     }
 
     public void NextPanel()

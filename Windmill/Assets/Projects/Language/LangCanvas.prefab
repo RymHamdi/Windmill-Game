@@ -373,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 5760843133640806917}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: childObjects.Array.size
@@ -400,6 +400,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2431385685500449502, guid: c9e73ebcd3ca0b84599eb1424d9a1199, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: buttonLangs.Array.data[5].sprite
+      value: 
+      objectReference: {fileID: -4089597084793155589, guid: 23665c088e03f424ca5d80ebaf90c110, type: 3}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[1].langState
       value: 1
       objectReference: {fileID: 0}
@@ -414,6 +418,10 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[4].langState
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: buttonLangs.Array.data[5].langState
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

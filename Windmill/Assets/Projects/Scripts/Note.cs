@@ -58,7 +58,7 @@ public class Note : MonoBehaviour
 
         if (!isTrash)
         {
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
+            //AudioManager.Instance.PlaySFX(AudioManager.Instance.splashSound);
             PlaySplash();
             WaterManager.Instance.RaiseWater(-0.1f, 0.5f);
             if (ScoreManager.Instance != null)
