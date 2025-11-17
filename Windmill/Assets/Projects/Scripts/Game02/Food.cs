@@ -24,7 +24,7 @@ public class Food : MonoBehaviour
         Collider2D col = GetComponent<Collider2D>();
         if (col) col.enabled = false;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb) rb.linearVelocity = Vector2.zero;
+        if (rb) rb.velocity = Vector2.zero;
 
         // spawn juice
         if (juicePrefab)

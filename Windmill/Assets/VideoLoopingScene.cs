@@ -115,22 +115,46 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
     // === FIND VIDEO ===
     private void FindVideoToPlay()
+{
+    string key = $"{PhotonNetwork.LocalPlayer.NickName}_video";
+
+    // If key does NOT exist → fallback to "Video1"
+    string assignedVideo = PlayerPrefs.HasKey(key)
+        ? PlayerPrefs.GetString(key)
+        : "Video1";
+
+    Debug.Log($"Video assigned from prefs: {assignedVideo}");
+
+    // Try to find a match
+    bool found = false;
+    foreach (var videoData in videoLoopDatas)
     {
-        string assignedVideo = PlayerPrefs.GetString(
-            $"{PhotonNetwork.LocalPlayer.NickName}_video",
-            "Video1"
-        );
+        if (videoData.videoName == assignedVideo)
+        {
+            videoLoopDataToPlay = videoData;
+            found = true;
+            Debug.Log($"Found video to play: {videoLoopDataToPlay.videoName}");
+            break;
+        }
+    }
+
+    // If NOT found → fallback to "Video1"
+    if (!found)
+    {
+        Debug.LogWarning($"Video '{assignedVideo}' not found. Defaulting to Video1.");
 
         foreach (var videoData in videoLoopDatas)
         {
-            if (videoData.videoName == assignedVideo)
+            if (videoData.videoName == "Video1")
             {
                 videoLoopDataToPlay = videoData;
-                Debug.Log($"Found video to play: {videoLoopDataToPlay.videoName}");
-                return;
+                Debug.Log("Fallback selected video: Video1");
+                break;
             }
         }
     }
+}
+
 
     // === PLAY VIDEO LOCALLY ===
     private void PlayVideo1()

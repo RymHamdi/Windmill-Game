@@ -57,6 +57,10 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     void Start()
     {
         Application.runInBackground = true;
+        PhotonNetwork.SendRate = 30;
+        PhotonNetwork.SerializationRate = 15;
+        
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         if (isServer)
             ServerConfigManager.SetActive(true);
@@ -73,6 +77,19 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+{
+    Debug.LogError("DISCONNECTED! Reason: " + cause);
+
+    if (isServer)
+    {
+        // If SERVER loses connection → shutdown fully
+        Debug.LogError("SERVER lost connection. Closing server app...");
+        Application.Quit();
+    }
+    
+}
+
     public void Connect()
     {
         if (PhotonNetwork.IsConnected && !PhotonNetwork.InRoom)
@@ -85,6 +102,16 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
             PhotonNetwork.GameVersion = this.gameVersion;
         }
     }
+
+    void OnApplicationFocus(bool hasFocus)
+{
+    Application.runInBackground = true;
+}
+
+void OnApplicationPause(bool pause)
+{
+    Application.runInBackground = true;
+}
 
     public void StartMainMenu()
     {
@@ -282,6 +309,8 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         }
 
     }
+
+    
 
     // === CONFIG PLAYER UI ===
 

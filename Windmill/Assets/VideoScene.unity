@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -520,20 +519,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: 162cc0a58dfaff64ba625874b37f8b51, type: 3}
-    videoClip2: {fileID: 32900000, guid: 17d58fbc6c050cd418fc6e9f9abe054d, type: 3}
+    videoClip1: {fileID: 32900000, guid: 366e3b3f348b1804baebc24b550d7131, type: 3}
+    videoClip2: {fileID: 32900000, guid: 0c0a138bc9cd98e4ca7f69536bc3a724, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: f4517d24bdb68fa42afad5523d42548c, type: 3}
-    videoClip2: {fileID: 32900000, guid: e7771f57ce646cf49815b3f9cb351ed9, type: 3}
+    videoClip1: {fileID: 32900000, guid: 79972d8e8390dfa4fa177c683b40258e, type: 3}
+    videoClip2: {fileID: 32900000, guid: 36ec431cd67a68a4b97417808b1d3153, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: b7123de0a9ade5c4abf5753d9de64c70, type: 3}
-    videoClip2: {fileID: 32900000, guid: b1bcf2879a10e0848b03ccf1c0f25f4c, type: 3}
+    videoClip1: {fileID: 32900000, guid: 7ac550af21f4fee478737841d4ade47e, type: 3}
+    videoClip2: {fileID: 32900000, guid: 0bf6edbbe073eab4fa1b42b57cea762d, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: d8ef01679cebec345b10dcb4c4214a1d, type: 3}
-    videoClip2: {fileID: 32900000, guid: c95c123ae5c28b04a82e9c96ca5dd725, type: 3}
+    videoClip1: {fileID: 32900000, guid: f045a77b3cafa9e4499c53c1360c1e0d, type: 3}
+    videoClip2: {fileID: 32900000, guid: 24dbae74c052ff341aca1f2d4be4e9bc, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 5f67ac8ebe7c79548a2c7d01e6b3facb, type: 3}
-    videoClip2: {fileID: 32900000, guid: fd27a196cb2b9d3478b8ac13ff95c2fc, type: 3}
+    videoClip1: {fileID: 32900000, guid: 10ee049d33e66f34d988d122e418f58d, type: 3}
+    videoClip2: {fileID: 32900000, guid: 393822aa859a8414c8718627caa1d29b, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
   videoPlayer2: {fileID: 159549043}
