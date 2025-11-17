@@ -16,8 +16,14 @@ public class SpritesCountDown : MonoBehaviour
 
     public CanvasGroup textCanvasGroup;
 
+    public CanvasGroup serverHideThis;
+
     private void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            serverHideThis.alpha = PhotonLauncher.Instance.isServer ? 0 : 1;
+        }
         StartCoroutine(PlayCountdown());
     }
 
@@ -57,13 +63,34 @@ public class SpritesCountDown : MonoBehaviour
         if (objectsToActivate.Count == 0) return;
 
 
-
-        foreach (var obj in objectsToActivate)
+        if (PhotonLauncher.Instance != null)
         {
-            obj.SetActive(true);
+            if (PhotonLauncher.Instance.isServer)
+            {
+                foreach (var obj in objectsToActivate)
+                {
+                    obj.SetActive(false);
+                }
+            }
+            else
+            {
+                foreach (var obj in objectsToActivate)
+                {
+                    obj.SetActive(true);
+                }
+            }
         }
-        
-         if (currentActiveObject != null)
+        else
+        {
+            foreach (var obj in objectsToActivate)
+            {
+                obj.SetActive(true);
+            }
+        }
+        objectsToActivate[0].SetActive(true);
+
+
+        if (currentActiveObject != null)
         {
             currentActiveObject.SetActive(false);
         }

@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Projects/Scenes/PlayFabLogin.unity
     guid: 8b889049b8443c24683aaadaf0fa7581
+  - enabled: 1
+    path: Assets/ServerConfig.unity
+    guid: 9d407984b852eeb49b0f2873bdbd1268
+  - enabled: 1
+    path: Assets/VideoScene.unity
+    guid: 4698672ac07aa6044ab4ce20432df3b6
   - enabled: 1
     path: Assets/Projects/Scenes/Launcher.unity
     guid: 3f58c291e9e98154b8f1d829ca2c2a66

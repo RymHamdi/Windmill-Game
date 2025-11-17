@@ -9,13 +9,24 @@ public class FinalLeaderboard : MonoBehaviour
 
     private static readonly WaitForSeconds leaderboardDelay = new WaitForSeconds(2f);
 
+    public GameObject canvasServer;
+
     void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                canvasServer.SetActive(true);
+            }
+        }
         var players = new List<PlayerLearderBoardStruct>();
         // Example: Assuming you have Photon installed and using Photon.Realtime.Player
         foreach (var photonPlayer in Photon.Pun.PhotonNetwork.PlayerList)
         {
-            int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
+            if (!photonPlayer.IsMasterClient)
+            {
+                int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
             int score1 = photonPlayer.CustomProperties.TryGetValue("Score1", out object scoreObj1) ? (int)scoreObj1 : 0;
             int score2 = photonPlayer.CustomProperties.TryGetValue("Score2", out object scoreObj2) ? (int)scoreObj2 : 0;
             int score3 = photonPlayer.CustomProperties.TryGetValue("Score3", out object scoreObj3) ? (int)scoreObj3 : 0;
@@ -26,6 +37,8 @@ public class FinalLeaderboard : MonoBehaviour
                 CharacterID = characterId,
                 Score = score
             });
+            }
+            
         }
 
 

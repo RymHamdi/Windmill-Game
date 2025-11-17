@@ -27,14 +27,18 @@ public class Leaderboard : MonoBehaviour
         // Example: Assuming you have Photon installed and using Photon.Realtime.Player
         foreach (var photonPlayer in Photon.Pun.PhotonNetwork.PlayerList)
         {
-            int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
-            int score = photonPlayer.CustomProperties.TryGetValue(ScoreKey, out object scoreObj) ? (int)scoreObj : 0;
+            if (!photonPlayer.IsMasterClient)
+            {
+                int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
+                int score = photonPlayer.CustomProperties.TryGetValue(ScoreKey, out object scoreObj) ? (int)scoreObj : 0;
 
             players.Add(new PlayerLearderBoardStruct
             {
                 CharacterID = characterId,
                 Score = score
             });
+            }
+            
         }
 
 

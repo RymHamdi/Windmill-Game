@@ -60,6 +60,10 @@ public class CollectableUIManager : MonoBehaviour
             if (CollectedItems > 1)
             {
                 ScoreManager.Instance.ShakeCamera(1);
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("Bad");
+                }
                 Globaleffect.Instance.PlayEffect(EffestType.Bad);
             }
             CollectedItems = 0;
@@ -73,6 +77,10 @@ public class CollectableUIManager : MonoBehaviour
             if (CollectedItems > 1)
             {
                 ScoreManager.Instance.ShakeCamera(1);
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("Bad");
+                }
                 Globaleffect.Instance.PlayEffect(EffestType.Bad);
             }
             OnResetItems?.Invoke();
@@ -97,6 +105,10 @@ public class CollectableUIManager : MonoBehaviour
                 if (CollectedItems > 1)
                 {
                     ScoreManager.Instance.ShakeCamera(1);
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.Play("Bad");
+                    }
                     Globaleffect.Instance.PlayEffect(EffestType.Bad);
                 }
                 CollectedItems = 0;
@@ -121,6 +133,10 @@ public class CollectableUIManager : MonoBehaviour
                     Debug.Log("All items collected! You win!");
                     if (!isFinished) isFinished = true;
                     StartCoroutine(LetsCollectAgain());
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.Play("Good");
+                    }
                     ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectallItems");
                     // Trigger win condition here
                 }

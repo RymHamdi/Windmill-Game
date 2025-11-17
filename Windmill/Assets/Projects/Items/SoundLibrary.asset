@@ -16,3 +16,15 @@ MonoBehaviour:
   - name: Select Hero
     clip: {fileID: 8300000, guid: 3df9c0d3e0c111d46aa25599aa81f3e5, type: 3}
     volume: 0.46
+  - name: Fruit slicing
+    clip: {fileID: 8300000, guid: b7462dc79e3b3e740aa9edc747f41169, type: 3}
+    volume: 0.8
+  - name: Bad
+    clip: {fileID: 8300000, guid: b3439c98eaec27747a5f15157e121e9c, type: 3}
+    volume: 0.3
+  - name: Good
+    clip: {fileID: 8300000, guid: 3cdaefa69fd97564a8141431242d5834, type: 3}
+    volume: 0.8
+  - name: Water Splash
+    clip: {fileID: 8300000, guid: 70732cc6814ec6a4cb28c754240e1de0, type: 3}
+    volume: 0.8

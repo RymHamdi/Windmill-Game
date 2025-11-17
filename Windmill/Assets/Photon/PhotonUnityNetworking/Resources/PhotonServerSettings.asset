@@ -42,6 +42,13 @@ MonoBehaviour:
   - SkipIntroRPC
   - ShowHidePanel
   - RPC_UpdatePanel
+  - RPC_AssignPlayer
+  - RPC_FlashDevice
+  - RPC_RemovePlayer
+  - RPC_RestartAll
+  - RPC_StartGameAll
+  - RPC_PlayVideo1
+  - RPC_PlayVideo2
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -11,6 +11,8 @@ public class PlayFabLogin : MonoBehaviour
     public bool isConnected;
     public string uniqueId;
 
+    public string playFabId;
+
     bool checkStateCompleted;
 
     public GameStateConfigManager gameStateConfigManager;
@@ -46,7 +48,7 @@ public class PlayFabLogin : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("Launcher");
+                SceneManager.LoadScene("ServerConfig");
             }
 
         }
@@ -77,7 +79,8 @@ public class PlayFabLogin : MonoBehaviour
             {
                 isConnected = true;
                 Debug.Log("✅ PlayFab Login Success: " + result.PlayFabId);
-                SceneManager.LoadScene("Launcher");
+                playFabId = result.PlayFabId;
+                SceneManager.LoadScene("ServerConfig");
                 // Start checking game state
                 //InvokeRepeating(nameof(CheckGameState), 2f, 1f); // every 5 seconds
             },
@@ -94,7 +97,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         if (Time.time > currentTime + timeToCheck && PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient && checkStateCompleted)
         {
-            CheckGameState();
+            //CheckGameState();
             currentTime = Time.time;
         }
     }
@@ -125,7 +128,7 @@ public class PlayFabLogin : MonoBehaviour
                     {
                         gameStateConfigManager.Add(gameStateConfig);
                         Debug.Log("🔄 GameState changed to " + state + " at " + stateTime);
-                        OnGameStateChanged(state);
+                        //OnGameStateChanged(state);
                     }
                 }
             },
@@ -140,7 +143,7 @@ public class PlayFabLogin : MonoBehaviour
     private float lastStateChangeTime = 0f;
     private float stateChangeCooldown = 1f; // seconds
 
-    void OnGameStateChanged(string state)
+    /*void OnGameStateChanged(string state)
     {
         if (Time.time - lastStateChangeTime < stateChangeCooldown)
         {
@@ -167,7 +170,7 @@ public class PlayFabLogin : MonoBehaviour
                 MasterDisconnectAll.Instance.OnMasterDisconnectClicked();
             }
         }
-    }
+    }*/
 
 }
 

@@ -40,8 +40,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         waitTime += startTime;
     }
 
+    public GameObject TexteServer;
     void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                TexteServer.SetActive(true);
+                return;
+            }
+        }
         CharacterPanels.SetActive(true);
     }
 
@@ -144,6 +153,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPC_UpdatePanel()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                return;
+            }
+        }
         CharacterPanels.SetActive(false);
         RoomPanel.SetActive(true);
     }

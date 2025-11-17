@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
   isEnglish: 1
-  currentLangState: 5
+  currentLangState: 3
   wordPairs:
   - index: 0
     englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
@@ -249,9 +249,9 @@ MonoBehaviour:
       du peuple !"
     Chinese: "\u6B63\u5982\u6240\u6709\u4F18\u79C0\u7684\u917F\u9152\u5E08\u6240\u77E5\uFF0C\u53EA\u6709\u7528\u6700\u597D\u7684\u539F\u6599\u624D\u80FD\u917F\u9020\u51FA\u6700\u597D\u7684\u5564\u9152\uFF01\u8FD9\u4E9B\u78E8\u574A\u5728\u5F53\u65F6\u662F\u7ECF\u6D4E\u7684\u652F\u67F1\u3002\u4EBA\u6C11\u6700\u559C\u6B22\u7684\u8D85\u7EA7\u82F1\u96C4\uFF01"
   - index: 17
-    englishWord: ' In the darkest of days our wind mills kept us safe on a whole
-      new level.  The resistance found a new way to communicate with each other through 
-      our heroes. '
+    englishWord: In the darkest of days our wind mills kept us safe on a whole new
+      level. The resistance found a new way to communicate with each other through
+      our heroes.
     germanWord: "In onze moeilijkste tijden hielden onze windmolens ons op een heel
       nieuw niveau veilig. Het verzet vond een nieuwe manier om met elkaar te communiceren
       \u2014 via onze helden."

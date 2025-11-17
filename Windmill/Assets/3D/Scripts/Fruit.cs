@@ -42,6 +42,10 @@ public class Fruit : MonoBehaviour
 
     void Slice()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("Fruit slicing");
+        }
         isSliced = true;
         bool isGoodSliced = CollectableUIManager.Instance.CollectItem(id);
         // Spawn halves

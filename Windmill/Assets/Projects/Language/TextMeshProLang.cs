@@ -7,6 +7,7 @@ public class TextMeshProLang : MonoBehaviour
     [Header("References")]
     public TextMeshProUGUI textMeshPro;
 
+[SerializeField]
     private int index = -1;
     private Coroutine waitForLangCoroutine;
 

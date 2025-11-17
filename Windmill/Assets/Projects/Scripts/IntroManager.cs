@@ -28,6 +28,7 @@ public class IntroManager : MonoBehaviourPun
 
     public string IntroKey;
     public string GameKey;
+    public GameObject canvasServer;
 
     void Start()
     {
@@ -35,6 +36,14 @@ public class IntroManager : MonoBehaviourPun
         //titleText.text = "Intro will be skipped in:";
         introPanel.SetActive(true);
         gamePanel.SetActive(false);
+        if (PhotonLauncher.Instance!= null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                canvasServer.SetActive(true);
+                GetComponent<CanvasGroup>().alpha = 0;
+            }
+        }
     }
 
     void Update()
