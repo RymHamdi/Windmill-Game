@@ -71,6 +71,10 @@ public class Note : MonoBehaviour
         else
         {
             WaterManager.Instance.RaiseWater(+0.1f, 0.5f);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Wood");
+            }
             EffectManager.Instance.PlayBadEffect();
         }
 

@@ -9877,7 +9877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 1477956517}
-  index: -1
+  index: 20
 --- !u!1 &1493651022
 GameObject:
   m_ObjectHideFlags: 0
@@ -16136,7 +16136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 3902335611846523279}
-  index: -1
+  index: 18
 --- !u!114 &9095519009299072577
 MonoBehaviour:
   m_ObjectHideFlags: 0

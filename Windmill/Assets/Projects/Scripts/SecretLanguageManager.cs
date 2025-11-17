@@ -344,7 +344,7 @@ public class SecretLanguageManager : MonoBehaviour
 
         if (currentRoundPropSync == null)
         {
-            
+
             return;
         }
         /* if (scrollRect.horizontalNormalizedPosition < 0)
@@ -369,6 +369,10 @@ public class SecretLanguageManager : MonoBehaviour
             Instantiate(goodSpriteFXPrefab, fxParent);
             //ToDo @Hakim you need to start woirking on the score
             ScoreManager.Instance.AddScore(10);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Items Collected");
+            }
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
         else if (rotationZ >= rightRotation - 15f && rotationZ <= rightRotation + 15f)
@@ -385,6 +389,10 @@ public class SecretLanguageManager : MonoBehaviour
         {
             //Todo @Rim You can Play Bad Effect
             Instantiate(badSpriteFXPrefab, fxParent);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Bad");
+            }
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Wrong, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
     }
@@ -435,7 +443,7 @@ public class SecretLanguageManager : MonoBehaviour
         currentUsedRoundPropSyncs.Add(currentRoundPropSync);*/
         if (fullUsedRoundPropSyncs.Count == 0)
         {
-           
+
             return;
         }
 
@@ -540,7 +548,7 @@ public class SecretLanguageManager : MonoBehaviour
                 closestAngle = angle;
             }
         }
-        
+
         return closestAngle;
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
   isEnglish: 1
-  currentLangState: 3
+  currentLangState: 0
   wordPairs:
   - index: 0
     englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the

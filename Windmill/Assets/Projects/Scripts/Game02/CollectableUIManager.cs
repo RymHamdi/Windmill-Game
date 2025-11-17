@@ -120,16 +120,24 @@ public class CollectableUIManager : MonoBehaviour
                 if (videoRoutine != null)
                 {
                     StopCoroutine(videoRoutine);
+                    videoRoutine = null;
                 }
 
-                // Start a new one
-                videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.7f));
+                videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.3f));
+
                 CollectedItems++;
                 ScoreManager.Instance.AddScore(10 * CollectedItems);
-
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("Cheers");
+                }
                 if (CollectedItems >= totalItems)
                 {
                     OnAllItemsCollected?.Invoke();
+                    if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.Play("Items Collected");
+                }
                     Debug.Log("All items collected! You win!");
                     if (!isFinished) isFinished = true;
                     StartCoroutine(LetsCollectAgain());
@@ -163,12 +171,15 @@ public class CollectableUIManager : MonoBehaviour
 
     IEnumerator ShowVideoObjectTemporarily(float duration)
     {
+        Debug.Log("Coroutine STARTED");
+
         if (videoPlayer != null)
         {
-            // Make sure it starts fresh
             videoPlayer.gameObject.SetActive(true);
+            Debug.Log("Video ON");
             yield return new WaitForSeconds(duration);
             videoPlayer.gameObject.SetActive(false);
+            Debug.Log("Video OFF");
             videoRoutine = null;
         }
     }
