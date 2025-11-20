@@ -10,9 +10,11 @@ public class FinalLeaderboard : MonoBehaviour
     private static readonly WaitForSeconds leaderboardDelay = new WaitForSeconds(2f);
 
     public GameObject canvasServer;
+    public GameObject Title;
 
     void Start()
     {
+        Title.SetActive(true);
         if (PhotonLauncher.Instance != null)
         {
             if (PhotonLauncher.Instance.isServer)
@@ -61,6 +63,7 @@ public class FinalLeaderboard : MonoBehaviour
         {
             ShowControlTrigger.Instance?.SendTrigger("ShowFinalLeaderboard");
         }
+        StartCoroutine(NextGameAfterDely());
     }
 
     IEnumerator ActivateModelWithDelay(PlayerLeaderBoardModel model, string playerName, int score, Sprite avatar)
@@ -68,6 +71,22 @@ public class FinalLeaderboard : MonoBehaviour
         yield return new WaitForSeconds(1f);
         model.gameObject.SetActive(true);
         model.Initialize(playerName, score, avatar);
+    }
+
+    public string nextSceneName;
+    IEnumerator NextGameAfterDely()
+    {
+        yield return new WaitForSeconds(15);
+        if (nextSceneName != "")
+        {
+            StartNextGame();
+        }
+    }
+
+    public void StartNextGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel(nextSceneName); // syncs load for all
     }
 
 }

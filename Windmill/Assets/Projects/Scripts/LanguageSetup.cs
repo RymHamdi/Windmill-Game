@@ -102,7 +102,7 @@ public class LanguageSetup : MonoBehaviour
     }
 }
 
-public enum LangState { English, Frensh, Netherland, Germand, Spanish, Chineese }
+public enum LangState { English, Frensh, Netherland, Germand, Spanish, Chineese, Italian }
 
 [System.Serializable]
 public class ButtonLang

@@ -288,7 +288,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7119630}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: a926a4cf8b0df62449d78d970703a730, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 3ec6973ebece02044913cfc580560fc4, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1118705367}
@@ -302,14 +302,12 @@ VideoPlayer:
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 0.82
   m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -329,11 +327,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoClips:
-  - {fileID: 32900000, guid: a926a4cf8b0df62449d78d970703a730, type: 3}
-  - {fileID: 32900000, guid: 769de69ab7da9694ea5c4bf986ab749f, type: 3}
-  - {fileID: 32900000, guid: 6e7b93c0b5c0f6b4a9ced6a65eb710d8, type: 3}
-  - {fileID: 32900000, guid: e1cc806eef7bc3044af75c1f6252ea45, type: 3}
-  - {fileID: 32900000, guid: b0392461c5d1d0a4bba180e60333fdd4, type: 3}
+  - {fileID: 32900000, guid: 3ec6973ebece02044913cfc580560fc4, type: 3}
+  - {fileID: 32900000, guid: eaff7836677c9bc4bafcadcd40e89bf1, type: 3}
+  - {fileID: 32900000, guid: d18552b66be52434fb6db059fe2a24ef, type: 3}
+  - {fileID: 32900000, guid: 609dd1375d3e6c3458a715a409a11379, type: 3}
+  - {fileID: 32900000, guid: b6353ee586ac5724dbfcd14df9669e89, type: 3}
   videoPlayer: {fileID: 7119632}
 --- !u!1 &11895287
 GameObject:
@@ -1685,6 +1683,7 @@ MonoBehaviour:
   IntroKey: IntroOne
   GameKey: GameOne
   canvasServer: {fileID: 1573503163}
+  introTitle: {fileID: 1096335253}
 --- !u!114 &121736917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6337,7 +6336,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605858430}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 72d8fe31728b3d342adc5e99b733aa40, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 044ef268c9c1ede40a3eb06f152437ec, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -6351,14 +6350,12 @@ VideoPlayer:
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 0.73
   m_AudioOutputMode: 0
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -12430,13 +12427,14 @@ GameObject:
   - component: {fileID: 1096335254}
   - component: {fileID: 1096335256}
   - component: {fileID: 1096335255}
+  - component: {fileID: 1096335257}
   m_Layer: 5
   m_Name: Text_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1096335254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12453,8 +12451,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000008523875, y: 33}
-  m_SizeDelta: {x: 723.604, y: 57.278}
+  m_AnchoredPosition: {x: 20.95, y: 33}
+  m_SizeDelta: {x: 1258.0015, y: 57.278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1096335255
 MonoBehaviour:
@@ -12541,7 +12539,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -29.986938, w: 0}
+  m_margin: {x: 0, y: 0, z: -2.161499, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12555,6 +12553,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096335253}
   m_CullTransparentMesh: 0
+--- !u!114 &1096335257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096335253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d011c020dc04edc4899d6dab06c790e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 1096335255}
+  index: 28
 --- !u!1 &1113132430
 GameObject:
   m_ObjectHideFlags: 0

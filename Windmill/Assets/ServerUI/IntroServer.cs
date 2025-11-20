@@ -30,12 +30,12 @@ public class IntroServer : MonoBehaviourPunCallbacks
         {
             introDuration -= Time.deltaTime;
             infoText.text = "Intro Time Left: " + Mathf.CeilToInt(introDuration).ToString();
-        if (introDuration <= 0f && !introFinished)
-        {
-            introFinished = true;
-            PhotonNetwork.LoadLevel("MainMenu");
+            if (introDuration <= 0f && !introFinished)
+            {
+                introFinished = true;
+                PhotonNetwork.LoadLevel("MainMenu");
+            }
         }
-        }
-        
+
     }
 }

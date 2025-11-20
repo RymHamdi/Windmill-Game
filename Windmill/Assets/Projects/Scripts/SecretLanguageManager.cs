@@ -165,6 +165,10 @@ public class SecretLanguageManager : MonoBehaviour
                     infoText.text = $"记住秘密信息：{i} 秒";
                     break;
 
+                case LangState.Italian:
+                    infoText.text = $"Memorizza il messaggio segreto: {i} secondi";
+                    break;
+
                 default:
                     infoText.text = $"Memorize the secret message: {i} seconds";
                     break;
@@ -226,6 +230,9 @@ public class SecretLanguageManager : MonoBehaviour
                 case LangState.Chineese:
                     infoText.text = $"在 {i} 秒内将刀片放在正确的位置";
                     break;
+                case LangState.Italian:
+                    infoText.text = $"Posiziona la lama nella posizione corretta tra: {i} secondi";
+                    break;
 
                 default:
                     infoText.text = $"Place the blade in the right position in: {i} seconds";
@@ -259,6 +266,9 @@ public class SecretLanguageManager : MonoBehaviour
 
             case LangState.Chineese:
                 infoText.text = "时间到了！";
+                break;
+            case LangState.Italian:
+                infoText.text = "Il tempo è scaduto!";
                 break;
 
             default:
@@ -314,6 +324,9 @@ public class SecretLanguageManager : MonoBehaviour
 
                 case LangState.Chineese:
                     infoText.text = "回合完成！";
+                    break;
+                case LangState.Italian:
+                    infoText.text = "Round completato!";
                     break;
 
                 default:

@@ -520,26 +520,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: 162cc0a58dfaff64ba625874b37f8b51, type: 3}
-    videoClip2: {fileID: 32900000, guid: 17d58fbc6c050cd418fc6e9f9abe054d, type: 3}
+    videoClip1: {fileID: 32900000, guid: 391caa80da9041348905db04d3dabc4a, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: f4517d24bdb68fa42afad5523d42548c, type: 3}
-    videoClip2: {fileID: 32900000, guid: e7771f57ce646cf49815b3f9cb351ed9, type: 3}
+    videoClip1: {fileID: 32900000, guid: 3a7182f8fe4aabc479ff5f042a719807, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: b7123de0a9ade5c4abf5753d9de64c70, type: 3}
-    videoClip2: {fileID: 32900000, guid: b1bcf2879a10e0848b03ccf1c0f25f4c, type: 3}
+    videoClip1: {fileID: 32900000, guid: cad2885cfd3d12840a96faedf159a970, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: d8ef01679cebec345b10dcb4c4214a1d, type: 3}
-    videoClip2: {fileID: 32900000, guid: c95c123ae5c28b04a82e9c96ca5dd725, type: 3}
+    videoClip1: {fileID: 32900000, guid: 4546192e596d53c43b5f90df165dcfaa, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 5f67ac8ebe7c79548a2c7d01e6b3facb, type: 3}
-    videoClip2: {fileID: 32900000, guid: fd27a196cb2b9d3478b8ac13ff95c2fc, type: 3}
+    videoClip1: {fileID: 32900000, guid: 33a9e70a2f90b4147841ecc4b86dd36f, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
-  videoPlayer2: {fileID: 159549043}
   infoText: {fileID: 1795197091}
-  videoTimeToSwitch1: 10
-  videoTimeToSwitch2: 16
+  videoTimeToSwitch1: 60
+  sceneName: Launcher
 --- !u!4 &943536328
 Transform:
   m_ObjectHideFlags: 0

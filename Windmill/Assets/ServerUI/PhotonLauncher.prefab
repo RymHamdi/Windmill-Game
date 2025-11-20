@@ -1443,7 +1443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: eventRoom
-  isServer: 1
+  isServer: 0
   ServerConfigManager: {fileID: 7106553557558557323}
   ClientConfigManager: {fileID: 2783950759628653989}
   contentParent: {fileID: 6592049410088199243}

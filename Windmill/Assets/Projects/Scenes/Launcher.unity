@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infoText: {fileID: 965087483}
   serverDisableVideoObject: {fileID: 121736911}
-  introDuration: 5
+  introDuration: 30
 --- !u!4 &1235383031
 Transform:
   m_ObjectHideFlags: 0
