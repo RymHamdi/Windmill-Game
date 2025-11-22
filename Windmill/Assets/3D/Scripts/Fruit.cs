@@ -40,7 +40,7 @@ public class Fruit : MonoBehaviour
         }
     }
 
-    void Slice()
+    public void Slice()
     {
         if (AudioManager.Instance != null)
         {

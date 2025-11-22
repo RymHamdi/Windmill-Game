@@ -10,6 +10,7 @@ public class CollectableUIItem : MonoBehaviour
 
     private void Start()
     {
+        
         collectedIcon.SetActive(collected);
         CollectableUIManager.Instance.OnResetItems += ResetItem;
         CollectableUIManager.Instance.OnCollectItem += SetCollected;

@@ -67,7 +67,7 @@ public class HitZone : MonoBehaviour
     public void CheckHit()
     {
         SacleUPANDDOWN();
-        Collider[] hits = Physics.OverlapSphere(transform.position, 0.8f);
+        Collider[] hits = Physics.OverlapBox(transform.position, new Vector3(0.8f, 1.2f, 1.5f));
         Note[] notes = Array.ConvertAll(hits, hit => hit.GetComponent<Note>());
         foreach (var hit in hits)
         {

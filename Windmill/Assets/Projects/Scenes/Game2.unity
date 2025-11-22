@@ -7298,6 +7298,7 @@ MonoBehaviour:
   minSliceVelocity: 0.1
   zOffset: 10
   trailParticles: {fileID: 0}
+  trailRenderer: {fileID: 729969133}
 --- !u!1 &733862687
 GameObject:
   m_ObjectHideFlags: 0
