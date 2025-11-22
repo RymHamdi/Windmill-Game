@@ -138,7 +138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 23.33025, y: -209.56}
+  m_AnchoredPosition: {x: 23.33025, y: -237}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6075864435868150649
@@ -311,6 +311,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2456944399906020938, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
     - target: {fileID: 4045763601007660250, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -364,16 +368,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3747226559849033500}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: DetuchSprite
+      value: 
+      objectReference: {fileID: 7684716667281092455, guid: d0e0baf4f71b1ea48a2989128619283b, type: 3}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonPrefab
       value: 
       objectReference: {fileID: 8864446914789949196, guid: f76dfe2617912ca449aa56cbdf2ce8ab, type: 3}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: EnglandSprite
+      value: 
+      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: openButtonImage
       value: 
       objectReference: {fileID: 5760843133640806917}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: childObjects.Array.size
@@ -382,15 +394,15 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[0].sprite
       value: 
-      objectReference: {fileID: -445328287032723131, guid: 2e3a1ad39d8dc8846a9bacbe8557c2bb, type: 3}
+      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[1].sprite
       value: 
-      objectReference: {fileID: -5671556397921870416, guid: 106da960ad88ff04b9ba42ebba925652, type: 3}
+      objectReference: {fileID: 7677905035433403721, guid: 4b42983a98113b04ea297ea4a3c2dd8b, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[2].sprite
       value: 
-      objectReference: {fileID: 6879121406133926810, guid: ca77b561b02bbd74096b22103e1940cc, type: 3}
+      objectReference: {fileID: 7684716667281092455, guid: d0e0baf4f71b1ea48a2989128619283b, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[3].sprite
       value: 
@@ -398,11 +410,15 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[4].sprite
       value: 
-      objectReference: {fileID: -2431385685500449502, guid: c9e73ebcd3ca0b84599eb1424d9a1199, type: 3}
+      objectReference: {fileID: 2284997179997396379, guid: a3b3d1f58fcacdb488dcf61b761888d9, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[5].sprite
       value: 
-      objectReference: {fileID: -4089597084793155589, guid: 23665c088e03f424ca5d80ebaf90c110, type: 3}
+      objectReference: {fileID: 2532073981782216884, guid: 920bdee1e7b20154bbdd2ab8b546d27f, type: 3}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: buttonLangs.Array.data[6].sprite
+      value: 
+      objectReference: {fileID: -4171653571250100432, guid: f4251c2dd6214f043a61ed0c4d83df51, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[1].langState
       value: 1
@@ -422,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[5].langState
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: buttonLangs.Array.data[6].langState
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

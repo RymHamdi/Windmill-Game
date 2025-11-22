@@ -49,7 +49,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
 
         PhotonNetwork.AutomaticallySyncScene = true;
-        gameVersion = "1.8";
+        gameVersion = "1.9";
     }
 
 
@@ -59,6 +59,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         Application.runInBackground = true;
         PhotonNetwork.SendRate = 30;
         PhotonNetwork.SerializationRate = 15;
+        Application.targetFrameRate = 60;
         
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -224,6 +225,7 @@ void OnApplicationPause(bool pause)
             new ExitGames.Client.Photon.Hashtable { { "GameRunning", true } }
         );
 
+        //PhotonNetwork.LoadLevel("VideoScene");
         PhotonNetwork.LoadLevel("VideoScene");
         //Disable the photon laucherCanvas UI if you are not the server
         photonView.RPC("RPC_StartGameAll", RpcTarget.All);

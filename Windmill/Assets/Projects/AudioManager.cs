@@ -45,6 +45,11 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string soundName, float pitch = 1f)
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+                return;
+        }
         if (soundLibrary == null)
         {
             Debug.LogError("❌ No SoundLibrary assigned to AudioManager!");

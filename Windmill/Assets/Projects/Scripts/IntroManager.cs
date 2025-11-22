@@ -29,9 +29,11 @@ public class IntroManager : MonoBehaviourPun
     public string IntroKey;
     public string GameKey;
     public GameObject canvasServer;
+    public GameObject introTitle;
 
     void Start()
     {
+        introTitle.SetActive(true);
         timer = introDuration;
         //titleText.text = "Intro will be skipped in:";
         introPanel.SetActive(true);

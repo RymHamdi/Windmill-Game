@@ -32,13 +32,13 @@ public class Leaderboard : MonoBehaviour
                 int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
                 int score = photonPlayer.CustomProperties.TryGetValue(ScoreKey, out object scoreObj) ? (int)scoreObj : 0;
 
-            players.Add(new PlayerLearderBoardStruct
-            {
-                CharacterID = characterId,
-                Score = score
-            });
+                players.Add(new PlayerLearderBoardStruct
+                {
+                    CharacterID = characterId,
+                    Score = score
+                });
             }
-            
+
         }
 
 
@@ -50,11 +50,15 @@ public class Leaderboard : MonoBehaviour
         {
             if (index >= playerModels.Count)
                 break;
-
-            WindmillCharacter windmillCharacter = GameManager.Instance.GetCharacterById(leaderBoardModel.CharacterID);
-            PlayerLeaderBoardModel model = playerModels[index];
-            StartCoroutine(ActivateModelWithDelay(model, windmillCharacter.characterName, leaderBoardModel.Score, windmillCharacter.icon));
+            if (GameManager.Instance != null)
+            {
+                WindmillCharacter windmillCharacter = GameManager.Instance.GetCharacterById(leaderBoardModel.CharacterID);
+                PlayerLeaderBoardModel model = playerModels[index];
+                StartCoroutine(ActivateModelWithDelay(model, windmillCharacter.characterName, leaderBoardModel.Score, windmillCharacter.icon));
+                
+            }
             index++;
+
         }
         if (PhotonNetwork.IsMasterClient && nextSceneName != "")
         {
@@ -83,7 +87,6 @@ public class Leaderboard : MonoBehaviour
         {
             StartNextGame();
         }
-
     }
 
     public void StartNextGame()

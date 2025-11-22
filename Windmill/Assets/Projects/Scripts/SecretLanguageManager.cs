@@ -165,6 +165,10 @@ public class SecretLanguageManager : MonoBehaviour
                     infoText.text = $"记住秘密信息：{i} 秒";
                     break;
 
+                case LangState.Italian:
+                    infoText.text = $"Memorizza il messaggio segreto: {i} secondi";
+                    break;
+
                 default:
                     infoText.text = $"Memorize the secret message: {i} seconds";
                     break;
@@ -226,6 +230,9 @@ public class SecretLanguageManager : MonoBehaviour
                 case LangState.Chineese:
                     infoText.text = $"在 {i} 秒内将刀片放在正确的位置";
                     break;
+                case LangState.Italian:
+                    infoText.text = $"Posiziona la lama nella posizione corretta tra: {i} secondi";
+                    break;
 
                 default:
                     infoText.text = $"Place the blade in the right position in: {i} seconds";
@@ -259,6 +266,9 @@ public class SecretLanguageManager : MonoBehaviour
 
             case LangState.Chineese:
                 infoText.text = "时间到了！";
+                break;
+            case LangState.Italian:
+                infoText.text = "Il tempo è scaduto!";
                 break;
 
             default:
@@ -315,6 +325,9 @@ public class SecretLanguageManager : MonoBehaviour
                 case LangState.Chineese:
                     infoText.text = "回合完成！";
                     break;
+                case LangState.Italian:
+                    infoText.text = "Round completato!";
+                    break;
 
                 default:
                     infoText.text = "Round Completed!";
@@ -344,7 +357,7 @@ public class SecretLanguageManager : MonoBehaviour
 
         if (currentRoundPropSync == null)
         {
-            
+
             return;
         }
         /* if (scrollRect.horizontalNormalizedPosition < 0)
@@ -369,6 +382,10 @@ public class SecretLanguageManager : MonoBehaviour
             Instantiate(goodSpriteFXPrefab, fxParent);
             //ToDo @Hakim you need to start woirking on the score
             ScoreManager.Instance.AddScore(10);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Items Collected");
+            }
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Right, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
         else if (rotationZ >= rightRotation - 15f && rotationZ <= rightRotation + 15f)
@@ -385,6 +402,10 @@ public class SecretLanguageManager : MonoBehaviour
         {
             //Todo @Rim You can Play Bad Effect
             Instantiate(badSpriteFXPrefab, fxParent);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Bad");
+            }
             newFormModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Wrong, currentRoundPropSync.randomSecretLanguageRoundProps[0].rightRotation);
         }
     }
@@ -435,7 +456,7 @@ public class SecretLanguageManager : MonoBehaviour
         currentUsedRoundPropSyncs.Add(currentRoundPropSync);*/
         if (fullUsedRoundPropSyncs.Count == 0)
         {
-           
+
             return;
         }
 
@@ -540,7 +561,7 @@ public class SecretLanguageManager : MonoBehaviour
                 closestAngle = angle;
             }
         }
-        
+
         return closestAngle;
     }
 }

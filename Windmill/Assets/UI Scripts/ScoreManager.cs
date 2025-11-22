@@ -149,6 +149,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         if (BingoEffect != null)
         {
             // Reset if already active
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.Play("Items Collected");
+            }
             CancelInvoke(nameof(DisableBingoEffect));
             BingoEffect.SetActive(false);
             BingoEffect.SetActive(true);

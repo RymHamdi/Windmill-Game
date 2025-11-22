@@ -48,6 +48,9 @@ public class Language : MonoBehaviour
             case LangState.Chineese:
             word = languageData.wordPairs.Find(x => x.index == index).Chinese;
                 break;
+            case LangState.Italian:
+            word = languageData.wordPairs.Find(x => x.index == index).Italian;
+            break;
             default:
                 break;
         }

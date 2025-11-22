@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnglishDeutchObject
   m_EditorClassIdentifier: 
   isEnglish: 1
-  currentLangState: 3
+  currentLangState: 0
   wordPairs:
   - index: 0
     englishWord: "Dating from 1845, De Hoop served as a vital grain mill for the
@@ -336,3 +336,67 @@ MonoBehaviour:
     Italian: Pronto per il prossimo round?
     French: "Pr\xEAt pour le prochain tour ?"
     Chinese: "\u51C6\u5907\u597D\u4E0B\u4E00\u8F6E\u4E86\u5417\uFF1F"
+  - index: 25
+    englishWord: 'Wing Beat:'
+    germanWord: Wiekslag
+    Allmand: "Fl\xFCgelschlag"
+    Spanish: Aleteo
+    Italian: "Battito d\u2019ali"
+    French: "Battement d\u2019aile"
+    Chinese: "\u7FC5\u8180\u632F\u52A8 :"
+  - index: 26
+    englishWord: 'Height:'
+    germanWord: 'Hoogte:'
+    Allmand: "H\xF6he:"
+    Spanish: 'Altura:'
+    Italian: 'Altezza:'
+    French: 'Hauteur:'
+    Chinese: "\u9AD8\u5EA6\uFF1A"
+  - index: 27
+    englishWord: 'Design:'
+    germanWord: 'Design:'
+    Allmand: 'Design:'
+    Spanish: "Dise\xF1o:"
+    Italian: 'Design:'
+    French: 'Design:'
+    Chinese: "\u8BBE\u8BA1\uFF1A"
+  - index: 28
+    englishWord: "Storm\u2019s coming!"
+    germanWord: Er komt een storm aan!
+    Allmand: Ein Sturm kommt!
+    Spanish: Se acerca una tormenta!
+    Italian: Sta arrivando una tempesta!
+    French: "La temp\xEAte arrive!"
+    Chinese: "\u66B4\u98CE\u96E8\u8981\u6765\u4E86\uFF01"
+  - index: 29
+    englishWord: Another round?
+    germanWord: Nog een rondje?
+    Allmand: Noch eine Runde?
+    Spanish: "\xBFOtra ronda?"
+    Italian: Un altro giro?
+    French: "Une autre tourn\xE9e ?"
+    Chinese: "\u518D\u6765\u4E00\u8F6E\uFF1F"
+  - index: 30
+    englishWord: Secret Language
+    germanWord: Geheime Taal
+    Allmand: Geheime Sprache
+    Spanish: Lenguaje Secreto
+    Italian: Linguaggio Segreto
+    French: "Langue Secr\xE8te"
+    Chinese: "\u79D8\u5BC6\u7684\u8BED\u8A00"
+  - index: 31
+    englishWord: Blade's Cloth
+    germanWord: Het kleed van het blad
+    Allmand: Das Tuch der Klinge
+    Spanish: "El pa\xF1o de la hoja"
+    Italian: Il drappo della lama
+    French: Le tissu de la lame
+    Chinese: "\u5200\u5203\u4E4B\u5E03"
+  - index: 32
+    englishWord: Games Winner!
+    germanWord: Games Winnaar!
+    Allmand: Gewinner Der Spiele!
+    Spanish: Ganador De Los Juegos!
+    Italian: Vincitore Dei Giochi
+    French: Gagnant Des Jeux!
+    Chinese: "\u6E38\u620F\u83B7\u80DC\u8005!"

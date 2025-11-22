@@ -535,10 +535,9 @@ MonoBehaviour:
     videoClip2: {fileID: 32900000, guid: 393822aa859a8414c8718627caa1d29b, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
-  videoPlayer2: {fileID: 159549043}
   infoText: {fileID: 1795197091}
-  videoTimeToSwitch1: 10
-  videoTimeToSwitch2: 16
+  videoTimeToSwitch1: 60
+  sceneName: Launcher
 --- !u!4 &943536328
 Transform:
   m_ObjectHideFlags: 0
