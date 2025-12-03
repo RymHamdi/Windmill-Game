@@ -56,7 +56,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7735362327302914558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +264,18 @@ PrefabInstance:
       value: 46.660522
       objectReference: {fileID: 0}
     - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -297,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -92
+      value: -74.68
       objectReference: {fileID: 0}
     - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -311,10 +323,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1590136981442628823, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2456944399906020938, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
+      objectReference: {fileID: 21300000, guid: 480828f9c1501c04fb86f55258e1f448, type: 3}
     - target: {fileID: 4045763601007660250, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -370,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: DetuchSprite
       value: 
-      objectReference: {fileID: 7684716667281092455, guid: d0e0baf4f71b1ea48a2989128619283b, type: 3}
+      objectReference: {fileID: 21300000, guid: 80f52246e7d7eb342a6487fcb57e4649, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonPrefab
       value: 
@@ -378,7 +394,7 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: EnglandSprite
       value: 
-      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
+      objectReference: {fileID: 21300000, guid: 480828f9c1501c04fb86f55258e1f448, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: openButtonImage
       value: 
@@ -394,31 +410,31 @@ PrefabInstance:
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[0].sprite
       value: 
-      objectReference: {fileID: -2543243258518547574, guid: 9b4a77b321dc2714d858419458691793, type: 3}
+      objectReference: {fileID: 21300000, guid: 480828f9c1501c04fb86f55258e1f448, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[1].sprite
       value: 
-      objectReference: {fileID: 7677905035433403721, guid: 4b42983a98113b04ea297ea4a3c2dd8b, type: 3}
+      objectReference: {fileID: 21300000, guid: 5f733b69088b62642b47a5549d5cd5af, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[2].sprite
       value: 
-      objectReference: {fileID: 7684716667281092455, guid: d0e0baf4f71b1ea48a2989128619283b, type: 3}
+      objectReference: {fileID: 21300000, guid: 80f52246e7d7eb342a6487fcb57e4649, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[3].sprite
       value: 
-      objectReference: {fileID: 553494094619736176, guid: 9cf53a76f9d02d6409423ccd98a48af7, type: 3}
+      objectReference: {fileID: 21300000, guid: daf1b043de1e66242b9105bd14c3fac3, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[4].sprite
       value: 
-      objectReference: {fileID: 2284997179997396379, guid: a3b3d1f58fcacdb488dcf61b761888d9, type: 3}
+      objectReference: {fileID: 21300000, guid: c6ab2f153ff112646b3f81ae68e674c1, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[5].sprite
       value: 
-      objectReference: {fileID: 2532073981782216884, guid: 920bdee1e7b20154bbdd2ab8b546d27f, type: 3}
+      objectReference: {fileID: 21300000, guid: aef304027fa8c984a9d96187c1c3b633, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[6].sprite
       value: 
-      objectReference: {fileID: -4171653571250100432, guid: f4251c2dd6214f043a61ed0c4d83df51, type: 3}
+      objectReference: {fileID: 21300000, guid: 36cc8557dde21f6409a44455747dbccf, type: 3}
     - target: {fileID: 8478733601194240376, guid: 9a4df539934306945a323eb2f78df0ae, type: 3}
       propertyPath: buttonLangs.Array.data[1].langState
       value: 1

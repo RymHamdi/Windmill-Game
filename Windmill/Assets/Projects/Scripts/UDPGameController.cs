@@ -5,11 +5,12 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System;
+using TMPro;
 
 public class UDPGameController : MonoBehaviour
 {
     [Header("UI References")]
-    public InputField portInputField;
+    public TMP_InputField portInputField;
     public Button saveButton;
 
     [Header("Settings")]
@@ -26,6 +27,14 @@ public class UDPGameController : MonoBehaviour
 
     void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (!PhotonLauncher.Instance.isServer)
+            {
+                this.enabled = false;
+                return;
+            }
+        }
         LoadPort();
         InitializeUI();
         StartUDPListener();

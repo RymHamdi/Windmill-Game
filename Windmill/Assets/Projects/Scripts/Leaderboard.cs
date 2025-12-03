@@ -100,7 +100,7 @@ public class Leaderboard : MonoBehaviour
     {
         yield return leaderboardDelay; // Use cached WaitForSeconds
         model.gameObject.SetActive(true);
-        model.Initialize(playerName, score, avatar);
+        model.Initialize(playerName, score, avatar, Vector3.zero);
     }
 }
 

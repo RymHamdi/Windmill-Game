@@ -110,7 +110,7 @@ public class CollectableUIManager : MonoBehaviour
         if (isGoodSlice)
         {
             // GOOD SLICE
-            
+
             // 1. Cancel any pending bad penalty
             if (pendingPenaltyCoroutine != null)
             {
@@ -123,13 +123,13 @@ public class CollectableUIManager : MonoBehaviour
 
             // 3. Apply good effects
             ApplyGoodEffects();
-            
+
             return true;
         }
         else
         {
             // BAD SLICE (Wrong ID or already collected or not in list)
-            
+
             // 1. Check if we are within the grace period of a good slice
             if (Time.time - lastGoodSliceTime <= 0.2f)
             {
@@ -142,7 +142,7 @@ public class CollectableUIManager : MonoBehaviour
             {
                 pendingPenaltyCoroutine = StartCoroutine(PendingPenaltyRoutine());
             }
-            
+
             return false;
         }
     }
@@ -177,11 +177,19 @@ public class CollectableUIManager : MonoBehaviour
             {
                 AudioManager.Instance.Play("Good");
             }
-            ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectallItems");
+            if (PhotonLauncher.Instance != null)
+            {
+                if (PhotonLauncher.Instance.isServer)
+                {
+                    //ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectallItems");
+                }
+            }
+            
         }
         else
         {
-            ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectNewItem");
+            
+            //ShowControlTrigger.Instance?.SendTrigger("GameTwoCollectNewItem");
         }
     }
 

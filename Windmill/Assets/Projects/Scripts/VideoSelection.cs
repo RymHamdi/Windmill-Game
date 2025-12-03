@@ -11,6 +11,14 @@ public class VideoSelection : MonoBehaviour
 
     void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                videoPlayer.Stop();
+                return;
+            }
+        }
         int playerLocalSelection = PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("CharacterId", out object selection) ? (int)selection : 0;
         videoPlayer.clip = videoClips[playerLocalSelection];
         videoPlayer.Play();

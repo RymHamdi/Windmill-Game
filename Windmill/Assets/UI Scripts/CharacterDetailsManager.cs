@@ -53,7 +53,14 @@ public class CharacterDetailsManager : MonoBehaviour
         buttons[index].image.sprite = selectedSprite;
         LobbyManager.Instance.localPlayerindex = index;
         LobbyManager.Instance.UpdateLocalPlayerCharacter();
-        ShowControlTrigger.Instance?.SendTrigger("UpdateCharacterSelection");
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                ShowControlTrigger.Instance?.SendTrigger("UpdateCharacterSelection");
+            }
+        }
+
        isFirstTime = false;
     }
 

@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         InitializePool();
+        Application.targetFrameRate = 60;
     }
 
     private void InitializePool()
@@ -77,5 +78,14 @@ public class AudioManager : MonoBehaviour
     {
         foreach (var s in audioSources)
             s.Stop();
+    }
+
+    void Update()
+    {
+       /* if (!Screen.fullScreen)
+        {
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            Screen.fullScreen = true;
+        }*/
     }
 }

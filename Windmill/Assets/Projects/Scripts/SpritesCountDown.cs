@@ -36,8 +36,13 @@ public class SpritesCountDown : MonoBehaviour
         {
             ShowControlTrigger.Instance?.SendTrigger("ShowCountdown");
         }
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("CountdownTick");
+        }
         foreach (var sprite in countdownSprites)
         {
+
             sprite.gameObject.SetActive(true);
             CanvasGroup canvasGroup = sprite.GetComponent<CanvasGroup>();
             // Make a smooth dowenn of fade in using canvas group and scale up as popup effect

@@ -15,6 +15,8 @@ public class PlayFabLogin : MonoBehaviour
 
     bool checkStateCompleted;
 
+    public bool isServer;
+
     public GameStateConfigManager gameStateConfigManager;
 
     void Awake()
@@ -35,7 +37,7 @@ public class PlayFabLogin : MonoBehaviour
     {
         //gameState.lastGameState = "End";
         checkStateCompleted = true;
-        LoginToPlayFab();
+        //LoginToPlayFab();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -67,10 +69,26 @@ public class PlayFabLogin : MonoBehaviour
     // ✅ Login with a custom ID
     void LoginToPlayFab()
     {
+        // Choose CustomId: use `uniqueId` when running as server, otherwise device unique id
+        string customIdToUse = SystemInfo.deviceUniqueIdentifier;
+        if (isServer)
+        {
+            if (!string.IsNullOrEmpty(uniqueId))
+            {
+                customIdToUse = uniqueId;
+            }
+            else
+            {
+                Debug.LogWarning("isServer is true but uniqueId is empty. Falling back to deviceUniqueIdentifier.");
+            }
+        }
+
+        Debug.Log($"Logging in to PlayFab with CustomId: {customIdToUse} (isServer={isServer})");
+
         var request = new LoginWithCustomIDRequest
         {
             TitleId = PlayFabSettings.TitleId, // Set in PlayFabSettings scriptable object
-            CustomId = SystemInfo.deviceUniqueIdentifier, // or any unique string
+            CustomId = customIdToUse, // chosen unique id
             CreateAccount = true
         };
 

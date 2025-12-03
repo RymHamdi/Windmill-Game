@@ -542,8 +542,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isConnected: 0
-  uniqueId: 001
+  uniqueId: Server2
   playFabId: 
+  isServer: 1
   gameStateConfigManager:
     gameStateConfigs: []
 --- !u!4 &1904315162

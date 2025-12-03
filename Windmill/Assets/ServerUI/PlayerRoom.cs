@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerRoom : MonoBehaviour
 {
-    public Text playerID;
+    public TMP_Text playerID;
     public Dropdown roleDropdown;
     public Dropdown videoDropdown;
 
@@ -69,7 +70,7 @@ public class PlayerRoom : MonoBehaviour
             _data.onFlash?.Invoke(data.playerId);
         });
         LoadPlayerPrefData();
-        SavePlayerPrefData();
+        //SavePlayerPrefData();
     }
 
     public void SavePlayerPrefData()

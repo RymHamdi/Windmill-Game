@@ -5,88 +5,138 @@ using Photon.Pun;
 
 public class FinalLeaderboard : MonoBehaviour
 {
-    public List<PlayerLeaderBoardModel> playerModels;
-
-    private static readonly WaitForSeconds leaderboardDelay = new WaitForSeconds(2f);
-
     public GameObject canvasServer;
     public GameObject Title;
+
+    public Transform winnersParent;              // Parent contenant les gagnants (layout dynamique)
+    public GameObject winnerModelPrefab;         // Prefab UI pour afficher un gagnant
+    public GameObject celebrationPrefab;         // Prefab pour célébration (confettis, VFX…)
+
+    public string nextSceneName;
 
     void Start()
     {
         Title.SetActive(true);
-        if (PhotonLauncher.Instance != null)
+
+        if (PhotonLauncher.Instance != null && PhotonLauncher.Instance.isServer)
         {
-            if (PhotonLauncher.Instance.isServer)
-            {
-                canvasServer.SetActive(true);
-            }
+            canvasServer.SetActive(true);
         }
-        var players = new List<PlayerLearderBoardStruct>();
-        // Example: Assuming you have Photon installed and using Photon.Realtime.Player
-        foreach (var photonPlayer in Photon.Pun.PhotonNetwork.PlayerList)
+
+        // --- Récupération des scores ---
+        List<PlayerLearderBoardStruct> players = new List<PlayerLearderBoardStruct>();
+
+        foreach (var photonPlayer in PhotonNetwork.PlayerList)
         {
             if (!photonPlayer.IsMasterClient)
             {
                 int characterId = photonPlayer.CustomProperties.TryGetValue("CharacterId", out object characterIdObj) ? (int)characterIdObj : 0;
-            int score1 = photonPlayer.CustomProperties.TryGetValue("Score1", out object scoreObj1) ? (int)scoreObj1 : 0;
-            int score2 = photonPlayer.CustomProperties.TryGetValue("Score2", out object scoreObj2) ? (int)scoreObj2 : 0;
-            int score3 = photonPlayer.CustomProperties.TryGetValue("Score3", out object scoreObj3) ? (int)scoreObj3 : 0;
-            int score = score1 + score2 + score3;
+                int score1 = photonPlayer.CustomProperties.TryGetValue("Score1", out object s1) ? (int)s1 : 0;
+                int score2 = photonPlayer.CustomProperties.TryGetValue("Score2", out object s2) ? (int)s2 : 0;
+                int score3 = photonPlayer.CustomProperties.TryGetValue("Score3", out object s3) ? (int)s3 : 0;
 
-            players.Add(new PlayerLearderBoardStruct
-            {
-                CharacterID = characterId,
-                Score = score
-            });
+                players.Add(new PlayerLearderBoardStruct
+                {
+                    CharacterID = characterId,
+                    Score = score1 + score2 + score3
+                });
             }
-            
         }
 
-
-        // Sort players by score descending
+       if (players.Count != 0)
+       {
+             // --- On trie du plus grand au plus petit ---
         players.Sort((a, b) => b.Score.CompareTo(a.Score));
 
-        int index = 0;
-        foreach (var leaderBoardModel in players)
-        {
-            if (index >= playerModels.Count)
-                break;
+        // Score du gagnant
+        int bestScore = players[0].Score;
 
-            WindmillCharacter windmillCharacter = GameManager.Instance.GetCharacterById(leaderBoardModel.CharacterID);
-            PlayerLeaderBoardModel model = playerModels[index];
-            StartCoroutine(ActivateModelWithDelay(model, windmillCharacter.characterName, leaderBoardModel.Score, windmillCharacter.icon));
-            index++;
-        }
+        // --- Récupérer tous les gagnants (ex æquo inclus) ---
+        List<PlayerLearderBoardStruct> winners = players.FindAll(p => p.Score == bestScore);
 
+        // --- Affichage dynamique des gagnants ---
+        DisplayWinners(winners);
+       }
+        
+
+   
+
+        // --- Envoi du trigger serveur ---
         if (PhotonNetwork.IsMasterClient)
         {
             ShowControlTrigger.Instance?.SendTrigger("ShowFinalLeaderboard");
         }
+
         StartCoroutine(NextGameAfterDely());
     }
 
-    IEnumerator ActivateModelWithDelay(PlayerLeaderBoardModel model, string playerName, int score, Sprite avatar)
+    void DisplayWinners(List<PlayerLearderBoardStruct> winners)
     {
-        yield return new WaitForSeconds(1f);
-        model.gameObject.SetActive(true);
-        model.Initialize(playerName, score, avatar);
+        // Nettoyer l’ancien contenu
+        foreach (Transform child in winnersParent)
+            Destroy(child.gameObject);
+
+        int count = winners.Count;
+
+        // --- Ajustement dynamique de la grille selon le nombre de gagnants ---
+        var grid = winnersParent.GetComponent<UnityEngine.UI.GridLayoutGroup>();
+        if (grid != null)
+        {
+            if (count == 1)
+            {
+                // Un seul gagnant → centré et plus grand
+                grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 1;
+                grid.cellSize = new Vector2(396, 396); // Très grand gagnant
+            }
+            else if (count == 2)
+            {
+                grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 2;
+                grid.cellSize = new Vector2(396, 396);
+            }
+            else if (count == 3)
+            {
+                grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 2; // triangle (2 au dessus, 1 en dessous)
+                grid.cellSize = new Vector2(396, 396);
+            }
+        }
+
+        // --- Affichage UI des gagnants ---
+        foreach (var winner in winners)
+        {
+            WindmillCharacter character = GameManager.Instance.GetCharacterById(winner.CharacterID);
+
+            GameObject modelGO = Instantiate(winnerModelPrefab, winnersParent);
+            PlayerLeaderBoardModel model = modelGO.GetComponent<PlayerLeaderBoardModel>();
+            if (count > 1)
+            {
+                model.Initialize(character.characterName, winner.Score, character.icon, Vector3.zero);
+            }
+            else
+            {
+                model.Initialize(character.characterName, winner.Score, character.icon, new Vector3(1.5f, 1.5f, 1.5f));
+            }
+        }
+
+        // --- Instancier un effet de célébration ---
+        if (celebrationPrefab != null)
+        {
+            Instantiate(celebrationPrefab, transform);
+        }
     }
 
-    public string nextSceneName;
     IEnumerator NextGameAfterDely()
     {
         yield return new WaitForSeconds(15);
-        if (nextSceneName != "")
-        {
+        if (!string.IsNullOrEmpty(nextSceneName))
             StartNextGame();
-        }
     }
 
     public void StartNextGame()
     {
         if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.LoadLevel(nextSceneName); // syncs load for all
+            PhotonNetwork.LoadLevel(nextSceneName);
     }
-
 }

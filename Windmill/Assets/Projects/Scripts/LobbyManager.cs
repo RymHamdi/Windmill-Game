@@ -48,6 +48,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             if (PhotonLauncher.Instance.isServer)
             {
                 TexteServer.SetActive(true);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    ShowControlTrigger.Instance.SendTrigger("MainMenu");
+                }
                 return;
             }
         }
@@ -70,7 +74,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             photonView.RPC("RPC_UpdatePanel", RpcTarget.All);
         }
 
-        if (Time.time >= waitTime + 5  && PhotonNetwork.IsMasterClient && !isGameStarted)
+        if (Time.time >= waitTime + 5 && PhotonNetwork.IsMasterClient && !isGameStarted)
         {
             isGameStarted = true;
             StartGame();
@@ -146,10 +150,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
 
-        
+
 
     }
-    
+
     [PunRPC]
     private void RPC_UpdatePanel()
     {
@@ -163,6 +167,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         CharacterPanels.SetActive(false);
         RoomPanel.SetActive(true);
     }
-    
+
 
 }

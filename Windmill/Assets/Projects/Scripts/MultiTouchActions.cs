@@ -20,7 +20,14 @@ public class MultiTouchActions : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            if (gameObject != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogError("MultiTouchActions: gameObject is null during Awake. Cannot destroy.");
+            }
             return;
         }
         Instance = this;
@@ -30,42 +37,69 @@ public class MultiTouchActions : MonoBehaviour
 
     void OnEnable()
     {
-        input.Gameplay.Enable();
+        if (input != null && !Equals(input.Gameplay, null))
+            input.Gameplay.Enable();
     }
 
     void OnDisable()
     {
-        input.Gameplay.Disable();
+        if (input != null && !Equals(input.Gameplay, null))
+            input.Gameplay.Disable();
     }
 
     void Update()
     {
+        if (input == null || !Equals(input.Gameplay, null) || !input.Gameplay.enabled)
+            return;
+
+        // Multi-touch
         if (Touchscreen.current != null)
         {
             foreach (var touch in Touchscreen.current.touches)
             {
-                if (touch.press.isPressed)
+                if (touch == null)
+                    continue;
+                try
                 {
-                    Vector2 pos = touch.position.ReadValue();
-                    OnMultiTouchPress?.Invoke(pos, touch.touchId.ReadValue());
+                    var press = touch.press;
+                    if (press != null && press.isPressed)
+                    {
+                        Vector2 pos = touch.position.ReadValue();
+                        int id = 0;
+                        try { id = touch.touchId.ReadValue(); } catch { id = 0; }
+                        OnMultiTouchPress?.Invoke(pos, id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("MultiTouchActions: touch read error - " + ex.Message);
                 }
             }
         }
-        // Works with mouse or single touch
-        if (input.Gameplay.TouchPress.ReadValue<float>() > 0)
+
+        // Single touch / mouse
+        try
         {
+            var touchPressAction = input.Gameplay.TouchPress;
+            var touchPosAction = input.Gameplay.TouchPosition;
+            if (touchPressAction != null && touchPosAction != null)
+            {
+                float pressVal = 0f;
+                try { pressVal = touchPressAction.ReadValue<float>(); } catch { pressVal = 0f; }
 
-            Vector2 pos = input.Gameplay.TouchPosition.ReadValue<Vector2>();
-            OnTouchPress?.Invoke(pos);
+                Vector2 pos = Vector2.zero;
+                try { pos = touchPosAction.ReadValue<Vector2>(); } catch { pos = Vector2.zero; }
 
+                if (pressVal > 0f)
+                    OnTouchPress?.Invoke(pos);
+                else
+                    OnTouchRelease?.Invoke(pos);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Vector2 pos = input.Gameplay.TouchPosition.ReadValue<Vector2>();
-            OnTouchRelease?.Invoke(pos);
+            Debug.LogWarning("MultiTouchActions: single touch read error - " + ex.Message);
         }
-
-        // For multiple touches (needs direct Touchscreen access)
-
     }
+
 }

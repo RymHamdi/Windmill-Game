@@ -37,3 +37,15 @@ MonoBehaviour:
   - name: Items Collected
     clip: {fileID: 8300000, guid: 6971c06f2cd84a84986642ab99b056e7, type: 3}
     volume: 1
+  - name: CountdownTick
+    clip: {fileID: 8300000, guid: a32d4a8455ce28a4fa6d6659575676fd, type: 3}
+    volume: 1
+  - name: TimeAlert
+    clip: {fileID: 8300000, guid: d1eec80f96cec7349be9c4ff61e236ca, type: 3}
+    volume: 0.5
+  - name: CountdownTick
+    clip: {fileID: 8300000, guid: a32d4a8455ce28a4fa6d6659575676fd, type: 3}
+    volume: 0.5
+  - name: Bing
+    clip: {fileID: 8300000, guid: 93cb4365f7829374ba7e86d5efc8c091, type: 3}
+    volume: 1

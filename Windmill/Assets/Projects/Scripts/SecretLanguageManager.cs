@@ -73,8 +73,8 @@ public class SecretLanguageManager : MonoBehaviour
             rt.pivot = new Vector2(0.5f, 0.5f);*/
 
             totalModelsNeeded = 3;
-            saveTime = 8;
-            timeToResolve = 5;
+            saveTime = 5;
+            timeToResolve = 4;
             currentBladesController = bladesControllers[0];
             currentBladesController.gameObject.SetActive(true);
         }
@@ -84,8 +84,8 @@ public class SecretLanguageManager : MonoBehaviour
             rt.anchorMax = new Vector2(0f, 0.5f);
             rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 5;
-            saveTime = 15;
-            timeToResolve = 5;
+            saveTime = 8;
+            timeToResolve = 4;
             currentBladesController = bladesControllers[1];
             currentBladesController.gameObject.SetActive(true);
         }
@@ -95,8 +95,8 @@ public class SecretLanguageManager : MonoBehaviour
             rt.anchorMax = new Vector2(0f, 0.5f);
             rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 7;
-            saveTime = 25;
-            timeToResolve = 5;
+            saveTime = 13;
+            timeToResolve = 4;
             currentBladesController = bladesControllers[2];
             currentBladesController.gameObject.SetActive(true);
         }
@@ -336,7 +336,7 @@ public class SecretLanguageManager : MonoBehaviour
 
 
 
-            StartCoroutine(NextRoundAfterDelay(5));
+            StartCoroutine(NextRoundAfterDelay(1.0f));
         }
         else
         {

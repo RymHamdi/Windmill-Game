@@ -151,14 +151,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             // Reset if already active
             if (AudioManager.Instance != null)
             {
-                AudioManager.Instance.Play("Items Collected");
+                AudioManager.Instance.Play("Bing");
             }
             CancelInvoke(nameof(DisableBingoEffect));
             BingoEffect.SetActive(false);
             BingoEffect.SetActive(true);
             StartCoroutine(PlayScoreTexteffect());
             Invoke(nameof(DisableBingoEffect), BingoEffectDuration);
-            ShowControlTrigger.Instance?.SendTrigger("BingoEffectGameOne");
+            //ShowControlTrigger.Instance?.SendTrigger("BingoEffectGameOne");
         }
     }
 

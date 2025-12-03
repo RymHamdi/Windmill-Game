@@ -106,6 +106,10 @@ public class Timer : MonoBehaviourPun
         {
             ShowControlTrigger.Instance?.SendTrigger("StartTimeAlert");
         }
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("TimeAlert");
+        }
         if (alertImage == null) return;
 
         alertImage.gameObject.SetActive(true);

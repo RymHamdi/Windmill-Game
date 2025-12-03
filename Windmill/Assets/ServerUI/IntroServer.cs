@@ -20,6 +20,10 @@ public class IntroServer : MonoBehaviourPunCallbacks
             serverDisableVideoObject.SetActive(false);
             infoText.text = "Into Start";
         }
+        if (ShowControlTrigger.Instance != null && PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance.SendTrigger("Launcher");
+        }
     }
 
     void Update()

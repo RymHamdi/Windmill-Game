@@ -26,6 +26,13 @@ public class BladeMouseRotator : MonoBehaviour
 
     void Start()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                return;
+            }
+        }
         MultiTouchActions.Instance.OnTouchPress += GetMousePosition;
         MultiTouchActions.Instance.OnTouchRelease += OnRelease;
         canInteract = false;
@@ -153,6 +160,13 @@ public class BladeMouseRotator : MonoBehaviour
 
     void OnDisable()
     {
+        if (PhotonLauncher.Instance != null)
+        {
+            if (PhotonLauncher.Instance.isServer)
+            {
+                return;
+            }
+        }
         if (MultiTouchActions.Instance != null)
         {
             MultiTouchActions.Instance.OnTouchPress -= GetMousePosition;

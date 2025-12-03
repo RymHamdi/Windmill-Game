@@ -367,7 +367,7 @@ VideoPlayer:
   m_RenderMode: 1
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 2
+  m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -378,10 +378,10 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 1
-  m_WaitForFirstFrame: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 0
+  m_Looping: 0
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!1 &688639306
@@ -520,20 +520,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: 391caa80da9041348905db04d3dabc4a, type: 3}
+    videoClip1: {fileID: 32900000, guid: ab258949be3558f4eac6984383befb6c, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: 3a7182f8fe4aabc479ff5f042a719807, type: 3}
+    videoClip1: {fileID: 32900000, guid: 7f74036c91db12741be05e217d2cd085, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: cad2885cfd3d12840a96faedf159a970, type: 3}
+    videoClip1: {fileID: 32900000, guid: 59822b6b0a9bd2e43914b6288288c686, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: 4546192e596d53c43b5f90df165dcfaa, type: 3}
+    videoClip1: {fileID: 32900000, guid: bea9011d91331ee40b2d9f2178fcf9d4, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 33a9e70a2f90b4147841ecc4b86dd36f, type: 3}
+    videoClip1: {fileID: 32900000, guid: 4aaff6f9fa526634082c7a1110f51028, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
   infoText: {fileID: 1795197091}
-  videoTimeToSwitch1: 60
+  videoTimeToSwitch1: 60.04
   sceneName: Launcher
+  eventTriggerstart: StartVideoIntro
+  eventTriggerEnd: EndVideoIntro
 --- !u!4 &943536328
 Transform:
   m_ObjectHideFlags: 0

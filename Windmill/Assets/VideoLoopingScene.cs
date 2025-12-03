@@ -15,11 +15,14 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
     public Text infoText;
     private bool video1Started;
 
-    public int videoTimeToSwitch1 = 4; // seconds
+    public float videoTimeToSwitch1 = 60.4f; // seconds
 
     // REAL second timers (separate for each video)
     float timerVideo1 = 0f;
     public string sceneName;
+
+    public string eventTriggerstart;
+    public string eventTriggerEnd;
 
     void OnEnable()
     {
@@ -40,6 +43,10 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
             video1Started = true;
 
             infoText.text = "Server: Playing Video 1";
+            if (ShowControlTrigger.Instance != null)
+            {
+                ShowControlTrigger.Instance.SendTrigger(eventTriggerstart);
+            }
         }
     }
 
@@ -59,6 +66,10 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
                 videoTimeToSwitch1 -= 1;
                 timerVideo1 = 0f;
             }
+            if (videoTimeToSwitch1 <= 0.04f)
+            {
+                videoTimeToSwitch1 -= Time.deltaTime;
+            }
 
             infoText.text = $"Server: Playing Video 1 - switching Scene in {videoTimeToSwitch1} seconds";
 
@@ -66,9 +77,14 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
             {
                 video1Started = false;
                 infoText.text = "";
+                if (ShowControlTrigger.Instance != null)
+                {
+                    ShowControlTrigger.Instance.SendTrigger(eventTriggerEnd);
+                }
                 if (sceneName != "")
                 {
                     PhotonNetwork.LoadLevel(sceneName);
+
                 }
                 else
                 {
@@ -144,7 +160,7 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
             return;
 
         videoPlayer1.clip = videoLoopDataToPlay.videoClip1;
-        videoPlayer1.isLooping = true;
+        //videoPlayer1.isLooping = true;
         videoPlayer1.Play();
     }
 

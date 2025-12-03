@@ -371,6 +371,10 @@ PrefabInstance:
       propertyPath: localPlayerIndicator
       value: 
       objectReference: {fileID: 299647623}
+    - target: {fileID: 3885011592533786873, guid: ffab487d83643844980736e7daaac192, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3979231483953382478, guid: ffab487d83643844980736e7daaac192, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1713,6 +1717,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 880037511987736262, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 938100953739847545, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_SizeDelta.x
       value: 87.08
@@ -2678,7 +2686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3146271754327076094, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 3146271754327076094, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3300,6 +3308,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4252449273806632702, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4305034052749171875, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -3918,7 +3930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876092693664773035, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 5876092693664773035, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4698,7 +4710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7566711976789893891, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.7954865
+      value: 3.7954712
       objectReference: {fileID: 0}
     - target: {fileID: 7566711976789893891, guid: 5e2615f3f79b2414ebb49cb21db15637, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5566,6 +5578,10 @@ PrefabInstance:
     - target: {fileID: 4869473747588660019, guid: abfc4bb17bfa5da4dabce0dfe3258894, type: 3}
       propertyPath: m_Name
       value: LangCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7383455527137472825, guid: abfc4bb17bfa5da4dabce0dfe3258894, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8933800858437124248, guid: abfc4bb17bfa5da4dabce0dfe3258894, type: 3}
       propertyPath: m_AnchoredPosition.x
