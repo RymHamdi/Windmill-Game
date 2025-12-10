@@ -18,7 +18,7 @@ public class PlayerRoomManager : MonoBehaviour
         LobbyManager.Instance.CheckPlayersInRoom();
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("PlayerRoom");
+            ShowControlTrigger.Instance?.SendTrigger("SYS_PLAYERROOM");
         }
 
     }

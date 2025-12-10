@@ -7760,7 +7760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1463256539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10563,6 +10563,7 @@ MonoBehaviour:
   ScoreKey: Score1
   NextButton: {fileID: 2101992395}
   nextSceneName: 
+  fadeCanvas: {fileID: 0}
 --- !u!114 &1888445063
 MonoBehaviour:
   m_ObjectHideFlags: 0

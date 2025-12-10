@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class RunGameThree : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject explainer;
+
     void Start()
     {
-        StartCoroutine(SecretLanguageManager.Instance.RunAfterDelay(2f));
+        explainer.SetActive(true);
+        Invoke("CloseExplainer", 6);
+        StartCoroutine(SecretLanguageManager.Instance.RunAfterDelay(6f));
+    }
+
+    private void CloseExplainer()
+    {
+        explainer.SetActive(false);
     }
 }

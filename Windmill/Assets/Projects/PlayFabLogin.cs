@@ -50,10 +50,15 @@ public class PlayFabLogin : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("ServerConfig");
+                Invoke("LoadAfterwhile", 2);
             }
 
         }
+    }
+
+    private void LoadAfterwhile()
+    {
+        SceneManager.LoadScene("ServerConfig");
     }
 
     void OnEnable()

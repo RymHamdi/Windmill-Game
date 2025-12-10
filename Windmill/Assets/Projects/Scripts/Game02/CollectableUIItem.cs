@@ -7,6 +7,7 @@ public class CollectableUIItem : MonoBehaviour
     public bool collected = false;
     public GameObject collectedIcon;
     public GameObject iconToscale;
+    public CanvasGroup canvasGroup;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class CollectableUIItem : MonoBehaviour
         {
             if (!isAnimating)
             {
+                canvasGroup.alpha = 1;
                 needTokill = false;
                 isAnimating = true;
                 iconToscale.transform.DOScale(new Vector3(1.3f, 1.3f, 13f), 1f)
@@ -52,6 +54,11 @@ public class CollectableUIItem : MonoBehaviour
                 iconToscale.transform.localScale = Vector3.one;
                 needTokill = true;
                 isAnimating = false;
+                if (!collected)
+                {
+                    canvasGroup.alpha = 0.8f;
+                }
+
             }
 
         }
@@ -77,6 +84,7 @@ public class CollectableUIItem : MonoBehaviour
     {
         collected = false;
         collectedIcon.SetActive(false);
+        canvasGroup.alpha = 0.8f;
     }
 
     void OnDisable()

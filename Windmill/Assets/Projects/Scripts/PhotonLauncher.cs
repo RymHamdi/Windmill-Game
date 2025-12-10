@@ -226,7 +226,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     // -------------------------
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.LogError("[PhotonLauncher] Disconnected: " + cause);
+        // Debug.LogError("[PhotonLauncher] Disconnected: " + cause);
 
         // stop heartbeat
         StopCoroutineSafe(HeartbeatLoop());
@@ -243,55 +243,66 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         float delay = 1f;
         int attempt = 0;
         const float maxDelay = 30f;
-
-        while (!PhotonNetwork.IsConnected)
+        if (isServerRoutine)
         {
-            attempt++;
-            Debug.Log($"[PhotonLauncher] Reconnect attempt #{attempt}, delay {delay}s");
-
-            try
+            while (!PhotonNetwork.IsConnected)
             {
+                attempt++;
+                Debug.Log($"[PhotonLauncher] Reconnect attempt #{attempt}, delay {delay}s");
+
+                try
+                {
+                    if (isServerRoutine)
+                    {
+                        // prefer ReconnectAndRejoin (will try to rejoin previous room & keep actor number)
+                        PhotonNetwork.ReconnectAndRejoin();
+                        StartCoroutine(CheckGameState());
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning("[PhotonLauncher] Reconnect call failed: " + ex.Message);
+                }
+
                 if (isServerRoutine)
                 {
-                    // prefer ReconnectAndRejoin (will try to rejoin previous room & keep actor number)
-                    PhotonNetwork.ReconnectAndRejoin();
-                    StartCoroutine(CheckGameState());
+                    // Wait and check
+                    float waited = 0f;
+                    while (waited < delay)
+                    {
+                        if (PhotonNetwork.IsConnected)
+                            break;
+                        waited += 0.5f;
+                        yield return new WaitForSeconds(0.5f);
+                    }
+
+                    if (PhotonNetwork.IsConnected)
+                        break;
+
+                    // exponential backoff (capped)
+                    delay = Mathf.Min(delay * 2f, maxDelay);
+                    if (PhotonNetwork.IsConnected)
+                        Debug.Log("[PhotonLauncher] Reconnected successfully!");
+                    else
+                        Debug.LogError("[PhotonLauncher] Reconnect loop ended (connection not reestablished).");
+
+                    reconnecting = false;
+                    yield break;
                 }
-                else
-                {
-                    // clients can try simple reconnect
-                    PhotonNetwork.Reconnect();
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogWarning("[PhotonLauncher] Reconnect call failed: " + ex.Message);
             }
 
-            // Wait and check
-            float waited = 0f;
-            while (waited < delay)
-            {
-                if (PhotonNetwork.IsConnected)
-                    break;
-                waited += 0.5f;
-                yield return new WaitForSeconds(0.5f);
-            }
-
-            if (PhotonNetwork.IsConnected)
-                break;
-
-            // exponential backoff (capped)
-            delay = Mathf.Min(delay * 2f, maxDelay);
+        }
+        else
+        {
+            // clients can try simple reconnect
+            yield return new WaitForSeconds(1);
+            //SceneManager.LoadScene(0);
+            //DestroyImmediate(gameObject);
+            //PhotonNetwork.Reconnect();
         }
 
-        if (PhotonNetwork.IsConnected)
-            Debug.Log("[PhotonLauncher] Reconnected successfully!");
-        else
-            Debug.LogError("[PhotonLauncher] Reconnect loop ended (connection not reestablished).");
 
-        reconnecting = false;
-        yield break;
     }
 
     // Utility to stop coroutine safely by starting a new enumerator to stop it by name
@@ -307,13 +318,13 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         {
             //Read game property from photon
             bool isRunning = (bool)PhotonNetwork.CurrentRoom.CustomProperties["GameRunning"];
-           
+
             if (StartGameButton != null) StartGameButton.gameObject.SetActive(!isRunning);
             if (EndGameButton != null) EndGameButton.gameObject.SetActive(isRunning);
-            
+
             playerPanel.SetActive(false);
 
-            
+
         }
     }
 
@@ -486,6 +497,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.InRoom)
             return;
         PhotonNetwork.LoadLevel("VideoScene");
+        //PhotonNetwork.LoadLevel("MainMenu");
         photonView.RPC("RPC_StartGameAll", RpcTarget.All);
         playerPanel.SetActive(false);
 
@@ -540,11 +552,13 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
             // Wait until fully disconnected
             while (PhotonNetwork.IsConnected || PhotonNetwork.IsConnectedAndReady)
                 yield return null;
+                
 
             // Load ServerConfig scene
-            AsyncOperation loadOp = SceneManager.LoadSceneAsync("ServerConfig");
+            AsyncOperation loadOp = SceneManager.LoadSceneAsync(0);
             while (!loadOp.isDone)
                 yield return null;
+                DestroyImmediate(gameObject);
 
             // small wait
             yield return null;
@@ -555,11 +569,12 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
             // Reconnect
             yield return new WaitForSeconds(0.2f);
-            Connect();
+            //Connect();
         }
         else
         {
             // server just loads scene
+            Debug.Log("check this");
             SceneManager.LoadSceneAsync("ServerConfig");
         }
     }

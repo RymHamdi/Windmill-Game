@@ -40,6 +40,8 @@ public class SecretLanguageManager : MonoBehaviour
     public bool IsCloth = true;
     public Action<bool> OnClothChange;
 
+    public FadeCanvas fadeCanvas;
+
 
     private void Awake()
     {
@@ -103,6 +105,7 @@ public class SecretLanguageManager : MonoBehaviour
         else
         {
             Debug.Log("All rounds completed!");
+            fadeCanvas.FadeIn();
             StartCoroutine(ShowLeaderboardAfterDelay(1));
             //ToDo Show Leaderboard
             // Handle end of game logic here
@@ -126,7 +129,10 @@ public class SecretLanguageManager : MonoBehaviour
     public GameObject leaderboard;
     IEnumerator ShowLeaderboardAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(delay/2);
+        
+        yield return new WaitForSeconds(delay/2);
+        fadeCanvas.FadeOut();
         leaderboard.SetActive(true);
     }
 
@@ -134,7 +140,7 @@ public class SecretLanguageManager : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("GameThreeStartMemorize");
+            ShowControlTrigger.Instance?.SendTrigger("G3_MEMORIZE");
         }
         for (int i = (int)delay; i > 0; i--)
         {
@@ -201,7 +207,7 @@ public class SecretLanguageManager : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("GameThreePlaceBlade");
+            ShowControlTrigger.Instance?.SendTrigger("G3_PLACE");
         }
         for (int i = (int)timeToResolve; i >= 0; i--)
         {
@@ -297,7 +303,7 @@ public class SecretLanguageManager : MonoBehaviour
             //Todo @Rim fix text
             if (PhotonNetwork.IsMasterClient)
             {
-                ShowControlTrigger.Instance?.SendTrigger("GameThreeRoundCompleted");
+                ShowControlTrigger.Instance?.SendTrigger("G3_ROUND_DONE");
             }
 
             switch (Language.Instance.languageData.currentLangState)

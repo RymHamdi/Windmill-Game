@@ -51,22 +51,22 @@ public class MasterDisconnectAll : MonoBehaviourPunCallbacks, IOnEventCallback
             new RaiseEventOptions { Receivers = ReceiverGroup.All },
             SendOptions.SendReliable
         );*/
-        PhotonNetwork.LoadLevel("Launcher");
+        //PhotonNetwork.LoadLevel("Launcher");
     }
 
     public void OnEvent(EventData photonEvent)
     {
-        if (photonEvent.Code == KickEventCode)
+        /*if (photonEvent.Code == KickEventCode)
         {
             Debug.Log("[Client] Received kick event, disconnecting...");
             PhotonNetwork.Disconnect();
-        }
+        }*/
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("[Client] Disconnected. Returning to first scene.");
-        SceneManager.LoadScene(firstSceneName);
+        //SceneManager.LoadScene(firstSceneName);
     }
 
     private void OnEnable() => PhotonNetwork.AddCallbackTarget(this);

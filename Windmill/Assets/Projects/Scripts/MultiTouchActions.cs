@@ -37,19 +37,19 @@ public class MultiTouchActions : MonoBehaviour
 
     void OnEnable()
     {
-        if (input != null && !Equals(input.Gameplay, null))
+        if (input != null)
             input.Gameplay.Enable();
     }
 
     void OnDisable()
     {
-        if (input != null && !Equals(input.Gameplay, null))
+        if (input != null)
             input.Gameplay.Disable();
     }
 
     void Update()
     {
-        if (input == null || !Equals(input.Gameplay, null) || !input.Gameplay.enabled)
+        if (input == null  || !input.Gameplay.enabled)
             return;
 
         // Multi-touch
@@ -98,7 +98,7 @@ public class MultiTouchActions : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("MultiTouchActions: single touch read error - " + ex.Message);
+           // Debug.LogWarning("MultiTouchActions: single touch read error - " + ex.Message);
         }
     }
 

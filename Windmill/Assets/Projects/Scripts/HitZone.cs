@@ -33,7 +33,7 @@ public class HitZone : MonoBehaviour
         {
             if (hitInfo.collider == GetComponent<Collider>())
             {
-                CheckHit();
+                //CheckHit();
             }
 
         }
@@ -47,7 +47,7 @@ public class HitZone : MonoBehaviour
             // Only accept trigger colliders
             if (hitInfo.collider.isTrigger && hitInfo.collider.gameObject == gameObject)
             {
-                CheckHit();
+                //CheckHit();
             }
             else
             {
@@ -56,46 +56,77 @@ public class HitZone : MonoBehaviour
         }
     }
 
+    private bool _isPressing;
+    private bool _pressStarted;
+    private bool _hasHitDuringPress;
+
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (_isPressing)
         {
-            CheckHit();
+            if (!_pressStarted)
+            {
+                _pressStarted = true;
+                _hasHitDuringPress = false; // reset
+                OnPressStart();
+            }
+
+            // continuous hit detection WHILE holding
+            ContinuousHitCheck();
+        }
+        else
+        {
+            if (_pressStarted)
+            {
+                _pressStarted = false;
+                OnPressEnd();
+            }
         }
     }
 
-    public void CheckHit()
+    public void CheckHit(bool isPressing)
     {
-        SacleUPANDDOWN();
-        Collider[] hits = Physics.OverlapBox(transform.position, new Vector3(0.8f, 1.2f, 1.5f));
-        Note[] notes = Array.ConvertAll(hits, hit => hit.GetComponent<Note>());
-        foreach (var hit in hits)
+        _isPressing = isPressing;
+    }
+
+    private void OnPressStart()
+    {
+        // scale only once
+        ScaleUpAndDown();
+    }
+
+    private void OnPressEnd()
+    {
+        if (!_hasHitDuringPress)
         {
-            Note note = hit.GetComponent<Note>();
-            if (note != null)
-            {
-                Debug.Log("Hit " + key);
-                if (goodEffect != null)
-                    goodEffect.SetActive(true);
-                Invoke("DisableGoodEffect", 0.2f);
-
-
-                note.Hit();
-                return;
-            }
-        }
-      
             Debug.Log("Miss " + key);
             if (missEffect != null)
                 missEffect.SetActive(true);
-            Invoke("DisableMissEffect", 0.2f);
-        
-       
-
+            Invoke(nameof(DisableMissEffect), 0.2f);
+        }
     }
 
+    private void ContinuousHitCheck()
+    {
+        Collider[] hits = Physics.OverlapBox(transform.position, new Vector3(0.4f, 1.0f, 0.9f));
 
-    void SacleUPANDDOWN()
+        foreach (var h in hits)
+        {
+            Note note = h.GetComponent<Note>();
+            if (note != null)
+            {
+                _hasHitDuringPress = true;
+
+                Debug.Log("Hit " + key);
+                if (goodEffect != null) goodEffect.SetActive(true);
+                Invoke(nameof(DisableGoodEffect), 0.2f);
+
+                note.Hit();
+            }
+        }
+    }
+
+    private void ScaleUpAndDown()
     {
         keyImage.transform.localScale = originScale * 1.2f;
         keyImage.transform.DOScale(originScale, 0.1f).SetEase(Ease.OutBack);

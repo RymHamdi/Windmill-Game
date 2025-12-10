@@ -34,7 +34,7 @@ public class SpritesCountDown : MonoBehaviour
         yield return new WaitForSeconds(1f); // Optional delay before starting
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("ShowCountdown");
+            ShowControlTrigger.Instance?.SendTrigger("G1_COUNTDOWN");
         }
         if (AudioManager.Instance != null)
         {

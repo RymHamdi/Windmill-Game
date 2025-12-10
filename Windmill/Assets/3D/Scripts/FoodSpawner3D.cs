@@ -94,6 +94,7 @@ public class FoodSpawner3D : MonoBehaviour
         var mover = fruit.AddComponent<FruitFloatMover>();
         mover.floatSpeed = 0.8f; // slow upward speed
         mover.spinSpeed = Random.Range(10f, 25f); // gentle spin
+        mover.startForce = 3;
 
         // Auto destroy
         Destroy(fruit, destroyAfter * 100);
@@ -120,7 +121,7 @@ public class FruitFloatMover : MonoBehaviour
     private float circleAngle;
     private float circleHeight;
     public Rigidbody rb;
-    public float startForce = 5f;
+    public float startForce = 1f;
 
 
     void Start()
@@ -135,6 +136,7 @@ public class FruitFloatMover : MonoBehaviour
             transform.up = up;
         }
 		rb.AddForce(transform.up * startForce , ForceMode.Impulse);
+        Invoke("ReFactorMass", 1);
     }
 
     void Update()
@@ -142,5 +144,10 @@ public class FruitFloatMover : MonoBehaviour
 
         // Spin gently around a random axis
         transform.Rotate(spinAxis, spinSpeed * Time.deltaTime, Space.Self);
+    }
+
+    void ReFactorMass()
+    {
+        rb.mass = 0.1f;
     }
 }

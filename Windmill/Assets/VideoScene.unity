@@ -520,22 +520,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: ab258949be3558f4eac6984383befb6c, type: 3}
+    videoClip1: {fileID: 32900000, guid: 2d65ead642400d6478fc9e9228cb615e, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: 7f74036c91db12741be05e217d2cd085, type: 3}
+    videoClip1: {fileID: 32900000, guid: cd5a0dbb7c02a214ba899001548dd245, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: 59822b6b0a9bd2e43914b6288288c686, type: 3}
+    videoClip1: {fileID: 32900000, guid: 882d17013c1fbfe4a998e629355dba70, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: bea9011d91331ee40b2d9f2178fcf9d4, type: 3}
+    videoClip1: {fileID: 32900000, guid: f86bc2dbcf31eed4690dada60a962f85, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 4aaff6f9fa526634082c7a1110f51028, type: 3}
+    videoClip1: {fileID: 32900000, guid: 612496869d4ed8843a7dd2b65280d4c8, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
   infoText: {fileID: 1795197091}
   videoTimeToSwitch1: 60.04
   sceneName: Launcher
-  eventTriggerstart: StartVideoIntro
-  eventTriggerEnd: EndVideoIntro
+  eventTriggerstart: SYS_INTRO_START
+  eventTriggerEnd: SYS_Intro_END
 --- !u!4 &943536328
 Transform:
   m_ObjectHideFlags: 0

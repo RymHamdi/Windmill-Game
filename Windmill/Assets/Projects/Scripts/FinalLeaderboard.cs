@@ -43,32 +43,57 @@ public class FinalLeaderboard : MonoBehaviour
             }
         }
 
-       if (players.Count != 0)
-       {
-             // --- On trie du plus grand au plus petit ---
-        players.Sort((a, b) => b.Score.CompareTo(a.Score));
+        if (players.Count != 0)
+        {
+            // --- On trie du plus grand au plus petit ---
+            players.Sort((a, b) => b.Score.CompareTo(a.Score));
 
-        // Score du gagnant
-        int bestScore = players[0].Score;
+            // Score du gagnant
+            int bestScore = players[0].Score;
 
-        // --- Récupérer tous les gagnants (ex æquo inclus) ---
-        List<PlayerLearderBoardStruct> winners = players.FindAll(p => p.Score == bestScore);
+            // --- Récupérer tous les gagnants (ex æquo inclus) ---
+            List<PlayerLearderBoardStruct> winners = players.FindAll(p => p.Score == bestScore);
 
-        // --- Affichage dynamique des gagnants ---
-        DisplayWinners(winners);
-       }
-        
+            // --- Affichage dynamique des gagnants ---
+            DisplayWinners(winners);
+            // --- Envoi du trigger serveur ---
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ShowControlTrigger.Instance?.SendTrigger("LD_FINAL");
+                foreach (var item in winners)
+                {
+                    switch (item.CharacterID)
+                    {
+                        case 0:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_YELLOW");
+                            break;
+                        case 1:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_GREEN");
+                            break;
+                        case 2:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_RED");
+                            break;
+                        case 3:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_BLUE");
+                            break;
+                        case 4:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_PINK");
+                            break;
+                            default:
+                            ShowControlTrigger.Instance?.SendTrigger("LD_FINAL_YELLOW");
+                            break;
+                    }
+                }
 
-   
-
-        // --- Envoi du trigger serveur ---
+                //StartCoroutine(NextGameAfterDely());
+            }
+        }
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("ShowFinalLeaderboard");
+            StartCoroutine(NextGameAfterDely());
         }
-
-        StartCoroutine(NextGameAfterDely());
     }
+
 
     void DisplayWinners(List<PlayerLearderBoardStruct> winners)
     {
@@ -100,6 +125,22 @@ public class FinalLeaderboard : MonoBehaviour
                 grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
                 grid.constraintCount = 2; // triangle (2 au dessus, 1 en dessous)
                 grid.cellSize = new Vector2(396, 396);
+                winnersParent.position = new Vector3(winnersParent.position.x, winnersParent.transform.position.y + 200, winnersParent.position.z);
+            }
+
+            else if (count == 4)
+            {
+                grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 2; // triangle (2 au dessus, 1 en dessous)
+                grid.cellSize = new Vector2(396, 396);
+                winnersParent.position = new Vector3(winnersParent.position.x, winnersParent.transform.position.y + 200, winnersParent.position.z);
+            }
+            else if (count == 5)
+            {
+                grid.constraint = UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;
+                grid.constraintCount = 2; // triangle (2 au dessus, 1 en dessous)
+                grid.cellSize = new Vector2(396, 396);
+                winnersParent.position = new Vector3(winnersParent.position.x, winnersParent.transform.position.y + 400, winnersParent.position.z);
             }
         }
 

@@ -4255,9 +4255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa8d9761bc579342aee16e6e612de1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameVersion: 2.1
-  roomName: eventRoom
-  isServer: 1
+  gameVersion: 2.3
+  roomName: eventRoom2
+  isServer: 0
   ServerConfigManager: {fileID: 7106553557558557323}
   ClientConfigManager: {fileID: 2783950759628653989}
   contentParent: {fileID: 6592049410088199243}
@@ -4271,7 +4271,7 @@ MonoBehaviour:
   imageToFlash: {fileID: 3732249431738925256}
   playerPanel: {fileID: 8630877540408615348}
   maxPlayers: 6
-  playerTtlMs: 60000
+  playerTtlMs: 0
   heartbeatInterval: 5
   heartbeatEventCode: 99
   playerRooms: []

@@ -22,7 +22,7 @@ public class IntroServer : MonoBehaviourPunCallbacks
         }
         if (ShowControlTrigger.Instance != null && PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance.SendTrigger("Launcher");
+            ShowControlTrigger.Instance.SendTrigger("SYS_LAUNCHER");
         }
     }
 

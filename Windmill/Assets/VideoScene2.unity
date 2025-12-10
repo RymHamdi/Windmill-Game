@@ -520,22 +520,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: 1190ec54926d7984c97c072f48974029, type: 3}
+    videoClip1: {fileID: 32900000, guid: 58f4276f96d983843945c5f40290240f, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: 86674168dc21136419833a5df4efe7d6, type: 3}
+    videoClip1: {fileID: 32900000, guid: d1c26c487663cfd4689ceabddbd44d36, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: ae6887b45bda1c842a731090fe2ee7e7, type: 3}
+    videoClip1: {fileID: 32900000, guid: 18682e28d293bd045b52129017cc98e2, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: 07d21642768166e42a8a0db881938b38, type: 3}
+    videoClip1: {fileID: 32900000, guid: 4251238c545fdd440b369575b0678502, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 034575d77a6d16f45937cd9d7cd38597, type: 3}
+    videoClip1: {fileID: 32900000, guid: 498d645ed9f674749a2432e3b68cd3a9, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
   infoText: {fileID: 1795197091}
   videoTimeToSwitch1: 60.04
   sceneName: 
-  eventTriggerstart: StartOutroVideo
-  eventTriggerEnd: EndOutroVideo
+  eventTriggerstart: SYS_OUTRO_START
+  eventTriggerEnd: SYS_OUTRO_END
 --- !u!4 &943536328
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -147,6 +148,9 @@ public class CollectableUIManager : MonoBehaviour
         }
     }
 
+    public GameObject GoodJobEffect;
+    public Transform content;
+
     private void ApplyGoodEffects()
     {
         if (videoRoutine != null)
@@ -155,16 +159,19 @@ public class CollectableUIManager : MonoBehaviour
             videoRoutine = null;
         }
 
-        videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.3f));
+        videoRoutine = StartCoroutine(ShowVideoObjectTemporarily(2.8f));
 
         CollectedItems++;
         ScoreManager.Instance.AddScore(10 * CollectedItems);
+        
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.Play("Cheers");
         }
         if (CollectedItems >= totalItems)
         {
+            GameObject GoodJobEffects = Instantiate(GoodJobEffect, content);
+            Destroy(GoodJobEffects,2);
             OnAllItemsCollected?.Invoke();
             if (AudioManager.Instance != null)
             {

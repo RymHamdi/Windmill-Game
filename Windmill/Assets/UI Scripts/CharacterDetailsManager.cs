@@ -3,19 +3,21 @@ using UnityEngine.UI;
 
 public class CharacterDetailsManager : MonoBehaviour
 {
-    public GameObject[] detailPanels; 
+    public GameObject[] detailPanels;
     private int currentIndex = -1;
 
     public GameObject P1;
     public GameObject P2;
 
-    public Button[] buttons;          
+    public Button[] buttons;
     public Sprite normalSprite;
     public Sprite selectedSprite;
     public GameObject SelectCharacterText;
+    private bool firstTimeToShow;
 
     void Start()
     {
+        firstTimeToShow = false;
         // Hide all panels first
         for (int i = 0; i < detailPanels.Length; i++)
         {
@@ -23,13 +25,30 @@ public class CharacterDetailsManager : MonoBehaviour
         }
         ResetAllButtons();
         // Show the first one by default
-        if (detailPanels.Length > 0)
+
+        int index = LobbyManager.Instance.GetLocalPlayerIndex();
+        if (index >= 0 && index < 5)
         {
-            detailPanels[0].SetActive(true);
-            buttons[0].image.sprite = selectedSprite;
-            currentIndex = 0;
+            currentIndex = index;
+            if (detailPanels.Length > 0)
+            {
+                detailPanels[currentIndex].SetActive(true);
+                buttons[currentIndex].image.sprite = selectedSprite;
+                
+            }
+            ShowDetails(currentIndex);
         }
-        ShowDetails(0);
+        else
+        {
+            if (detailPanels.Length > 0)
+            {
+                detailPanels[0].SetActive(true);
+                buttons[0].image.sprite = selectedSprite;
+                currentIndex = 0;
+            }
+            ShowDetails(0);
+        }
+
         SelectCharacterText.SetActive(true);
     }
 
@@ -45,14 +64,24 @@ public class CharacterDetailsManager : MonoBehaviour
         {
             AudioManager.Instance.Play("Select Hero");
         }
-        
+
         // Show the clicked one
         detailPanels[index].SetActive(true);
         currentIndex = index;
         ResetAllButtons();
-        buttons[index].image.sprite = selectedSprite;
-        LobbyManager.Instance.localPlayerindex = index;
-        LobbyManager.Instance.UpdateLocalPlayerCharacter();
+        
+        if (firstTimeToShow)
+        {
+            //LobbyManager.Instance.localPlayerindex = index;
+            bool isSelected =  LobbyManager.Instance.UpdateLocalPlayerCharacter(index);
+            if (isSelected)
+            {
+                ResetAllButtons();
+                buttons[index].image.sprite = selectedSprite;
+            }
+            
+        }
+        
         if (PhotonLauncher.Instance != null)
         {
             if (PhotonLauncher.Instance.isServer)
@@ -61,7 +90,8 @@ public class CharacterDetailsManager : MonoBehaviour
             }
         }
 
-       isFirstTime = false;
+        isFirstTime = false;
+        firstTimeToShow = true;
     }
 
     public void NextPanel()

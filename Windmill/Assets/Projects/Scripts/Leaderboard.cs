@@ -44,6 +44,10 @@ public class Leaderboard : MonoBehaviour
 
         // Sort players by score descending
         players.Sort((a, b) => b.Score.CompareTo(a.Score));
+        int bestScore = players[0].Score;
+
+        // --- Récupérer tous les gagnants (ex æquo inclus) ---
+        List<PlayerLearderBoardStruct> winners = players.FindAll(p => p.Score == bestScore);
 
         int index = 0;
         foreach (var leaderBoardModel in players)
@@ -62,7 +66,31 @@ public class Leaderboard : MonoBehaviour
         }
         if (PhotonNetwork.IsMasterClient && nextSceneName != "")
         {
-            ShowControlTrigger.Instance?.SendTrigger("ShowLeaderboard");
+            ShowControlTrigger.Instance?.SendTrigger("LD_SHOW");
+            foreach (var item in winners)
+            {
+                switch (item.CharacterID)
+                {
+                    case 0:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW");
+                    break;
+                    case 1:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_GREEN");
+                    break;
+                    case 2:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_RED");
+                    break;
+                    case 3:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_BLUE");
+                    break;
+                    case 4:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_PINK");
+                    break;
+                    default:
+                    ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW");
+                    break;
+                }
+            }
         }
         StartCoroutine(NextGameAfterDely());
     }
@@ -79,10 +107,12 @@ public class Leaderboard : MonoBehaviour
             NextButton.SetActive(false);
         }*/
     }
-
+    public FadeCanvas fadeCanvas;
     IEnumerator NextGameAfterDely()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(9.5f);
+        fadeCanvas.FadeIn();
+        yield return new WaitForSeconds(0.5f);
         if (nextSceneName != "")
         {
             StartNextGame();

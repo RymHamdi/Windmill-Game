@@ -20,6 +20,7 @@ public class Timer : MonoBehaviourPun
 
     public GameObject ObjectToHide;
     public GameObject ObjectToShow;
+    public FadeCanvas fadeCanvas;
 
     void Start()
     {
@@ -69,12 +70,13 @@ public class Timer : MonoBehaviourPun
 
     private void TimerEnded()
     {
+        fadeCanvas.FadeIn();
         Debug.Log("Timer Ended!");
         StopAlert();
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("EndTimeAlert");
-            Invoke("ShowHidePanelAfterDely", 0.5f);
+            ShowControlTrigger.Instance?.SendTrigger("ALERT_END");
+            Invoke("ShowHidePanelAfterDely", 0.8f);
         }
     }
 
@@ -93,6 +95,7 @@ public class Timer : MonoBehaviourPun
     [PunRPC]
     public void ShowHidePanel()
     {
+        fadeCanvas.FadeOut();
         if (ObjectToHide != null)
             ObjectToHide.SetActive(false);
 
@@ -104,7 +107,7 @@ public class Timer : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            ShowControlTrigger.Instance?.SendTrigger("StartTimeAlert");
+            ShowControlTrigger.Instance?.SendTrigger("ALERT_10S");
         }
         if (AudioManager.Instance != null)
         {

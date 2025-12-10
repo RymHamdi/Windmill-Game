@@ -30,6 +30,12 @@ public class IntroManager : MonoBehaviourPun
     public string GameKey;
     public GameObject canvasServer;
     public GameObject introTitle;
+    public FadeCanvas fadeCanvas;
+
+    void OnEnable()
+    {
+        
+    }
 
     void Start()
     {
@@ -46,6 +52,7 @@ public class IntroManager : MonoBehaviourPun
                 GetComponent<CanvasGroup>().alpha = 0;
             }
         }
+        fadeCanvas.FadeOut();
     }
 
     void Update()
@@ -94,8 +101,20 @@ public class IntroManager : MonoBehaviourPun
         }
         else
         {
-            Invoke("OnSkipButton", 0.5f);
+            FadeIn();
+            Invoke("FadeOut", 0.9f);
+            Invoke("OnSkipButton", 1);
         }
+    }
+
+    private void FadeIn()
+    {
+        fadeCanvas.FadeIn();
+    }
+
+    private void FadeOut()
+    {
+        fadeCanvas.FadeOut();
     }
 
     public void OnSkipButton()
