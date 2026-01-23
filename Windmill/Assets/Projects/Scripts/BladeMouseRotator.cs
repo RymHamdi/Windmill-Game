@@ -21,6 +21,7 @@ public class BladeMouseRotator : MonoBehaviour
     public Color normalButtonColor = Color.white;
 
     private bool canInteract;
+    public Transform clothes;
 
 
 
@@ -91,6 +92,7 @@ public class BladeMouseRotator : MonoBehaviour
     {
         // HandleMouseRotation();
         //DebugRotationValues();
+        clothes.transform.rotation = transform.rotation;
     }
 
 
@@ -149,7 +151,7 @@ public class BladeMouseRotator : MonoBehaviour
         if (!canInteract) return;
         DisableRotation();
         float canonicalAngle = SecretLanguageManager.Instance.GetCanonicalBladeAngle(transform.eulerAngles.z);
-       SecretLanguageManager.Instance.ValidateBlade(canonicalAngle);
+        SecretLanguageManager.Instance.ValidateBlade(canonicalAngle);
     }
 
     public float GetCurrentRotation()

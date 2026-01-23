@@ -82,10 +82,10 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        if (!Screen.fullScreen)
+        /*if (!Screen.fullScreen)
         {
             Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
             Screen.fullScreen = true;
-        }
+        }*/
     }
 }

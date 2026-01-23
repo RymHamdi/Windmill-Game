@@ -4257,7 +4257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameVersion: 2.3
   roomName: eventRoom2
-  isServer: 0
+  isServer: 1
   ServerConfigManager: {fileID: 7106553557558557323}
   ClientConfigManager: {fileID: 2783950759628653989}
   contentParent: {fileID: 6592049410088199243}

@@ -72,6 +72,7 @@ public class FoodSpawner3D : MonoBehaviour
         }
 
         if (prefab == null) return;
+        
 
         // Spawn at the bottom of the spawn area
         Vector3 spawnPos = new Vector3(
@@ -81,7 +82,7 @@ public class FoodSpawner3D : MonoBehaviour
         );
          Quaternion rotationQuaternion = Quaternion.Euler(spawnPos);
         GameObject fruit = Instantiate(prefab, spawnPos, rotationQuaternion);
-
+        Destroy(fruit,4);
         // Random scale
         float scale = Random.Range(scaleRange.x, scaleRange.y);
         fruit.transform.localScale = new Vector3(scale, scale, scale);

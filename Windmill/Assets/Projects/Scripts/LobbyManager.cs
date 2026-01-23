@@ -74,7 +74,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //startButton.SetActive(PhotonNetwork.IsMasterClient);
 
         // No just after the wait time update player prop with UpdateLocalPlayerCharacter
-        if (Time.time >= waitTime - 1 && !hasUpdated && PhotonNetwork.IsMasterClient)
+        if (Time.time >= waitTime - 2 && !hasUpdated && PhotonNetwork.IsMasterClient)
         {
             StartCoroutine(AutoAssignPlayer());
             hasUpdated = true;
@@ -270,7 +270,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                         }
                     }
                 }
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(0.35f);
 
             }
             photonView.RPC("RPC_UpdatePanel", RpcTarget.All);

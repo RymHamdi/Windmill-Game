@@ -119,78 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &159549041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 159549042}
-  - component: {fileID: 159549043}
-  m_Layer: 5
-  m_Name: Video Player2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &159549042
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159549041}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 688639310}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!328 &159549043
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159549041}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 0}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 961739752}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 1
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 1
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +240,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &224602408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 544.36005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 942.103
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955997498290490168, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189604382396232365, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: m_Name
+      value: Cleanup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6522423440803230888, guid: f4129948e7efae041a429a724c898f69, type: 3}
+      propertyPath: 'videoPlayers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 550031130}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4129948e7efae041a429a724c898f69, type: 3}
 --- !u!1 &550031128
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +468,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 550031129}
-  - {fileID: 159549042}
   - {fileID: 1795197090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -520,19 +508,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoLoopDatas:
   - videoName: Video1
-    videoClip1: {fileID: 32900000, guid: 58f4276f96d983843945c5f40290240f, type: 3}
   - videoName: Video2
-    videoClip1: {fileID: 32900000, guid: d1c26c487663cfd4689ceabddbd44d36, type: 3}
   - videoName: Video3
-    videoClip1: {fileID: 32900000, guid: 18682e28d293bd045b52129017cc98e2, type: 3}
   - videoName: Video4
-    videoClip1: {fileID: 32900000, guid: 4251238c545fdd440b369575b0678502, type: 3}
   - videoName: Video5
-    videoClip1: {fileID: 32900000, guid: 498d645ed9f674749a2432e3b68cd3a9, type: 3}
   serverDisableVideoObject: {fileID: 550031128}
   videoPlayer1: {fileID: 550031130}
   infoText: {fileID: 1795197091}
   videoTimeToSwitch1: 60.04
+  videoType: 1
   sceneName: 
   eventTriggerstart: SYS_OUTRO_START
   eventTriggerEnd: SYS_OUTRO_END
@@ -877,3 +861,4 @@ SceneRoots:
   - {fileID: 943536328}
   - {fileID: 688639310}
   - {fileID: 1054317560}
+  - {fileID: 224602408}

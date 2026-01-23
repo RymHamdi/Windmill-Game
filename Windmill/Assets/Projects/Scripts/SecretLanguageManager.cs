@@ -550,7 +550,7 @@ public class SecretLanguageManager : MonoBehaviour
         StartRound(1);
     }
 
-    public List<float> newAngles = new List<float> { 5, 42, 72, 102, 130 };
+    public List<float> newAngles = new List<float> { 0, 45, 90, 135 };
 
     public float GetClosestCanonicalAngle(float canonicalAngle)
     {

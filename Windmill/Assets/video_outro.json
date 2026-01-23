@@ -1,0 +1,24 @@
+{
+    "videos": [
+        {
+            "key": "Video1",
+            "path": "Videos_/Outro/walkout_molenkamer_v115camera01.mp4"
+        },
+        {
+            "key": "Video2",
+            "path": "Videos _/Outro/walkout_molenkamer_v115camera02.mp4"
+        },
+        {
+            "key": "Video3",
+            "path": "Videos_/Outro/walkout_molenkamer_v115camera03.mp4"
+        },
+        {
+            "key": "Video4",
+            "path": "Videos_/Outro/walkout_molenkamer_v115camera04.mp4"
+        },
+        {
+            "key": "Video5",
+            "path": "Videos_/Outro/walkout_molenkamer_v115camera05.mp4"
+        }
+    ]
+}

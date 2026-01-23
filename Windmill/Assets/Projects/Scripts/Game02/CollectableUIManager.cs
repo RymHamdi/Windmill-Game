@@ -218,9 +218,9 @@ public class CollectableUIManager : MonoBehaviour
             }
             Globaleffect.Instance.PlayEffect(EffestType.Bad);
         }
-        CollectedItems = 0;
-        ScoreManager.Instance.ResetScore();
-        OnResetItems?.Invoke();
+        //CollectedItems = 0;
+        //ScoreManager.Instance.ResetScore();
+        //OnResetItems?.Invoke();
     }
 
     private Coroutine videoRoutine;

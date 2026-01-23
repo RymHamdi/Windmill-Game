@@ -37,9 +37,10 @@ public class CollectableUIItem : MonoBehaviour
             if (!isAnimating)
             {
                 canvasGroup.alpha = 1;
+                iconToscale.transform.localScale = new Vector3(1.2f,1.2f,1.2f);
                 needTokill = false;
                 isAnimating = true;
-                iconToscale.transform.DOScale(new Vector3(1.3f, 1.3f, 13f), 1f)
+                iconToscale.transform.DOScale(new Vector3(1.5f, 1.5f, 15f), 1f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine)
             .SetId(iconToscale.transform).OnComplete(() => isAnimating = false);
@@ -56,6 +57,7 @@ public class CollectableUIItem : MonoBehaviour
                 isAnimating = false;
                 if (!collected)
                 {
+                    iconToscale.transform.localScale = new Vector3(1,1,1);
                     canvasGroup.alpha = 0.8f;
                 }
 
@@ -74,6 +76,7 @@ public class CollectableUIItem : MonoBehaviour
         if (collectId == id)
         {
             collected = true;
+            iconToscale.transform.localScale = new Vector3(1,1,1);
             collectedIcon.SetActive(true);
             return true;
         }
@@ -85,6 +88,7 @@ public class CollectableUIItem : MonoBehaviour
         collected = false;
         collectedIcon.SetActive(false);
         canvasGroup.alpha = 0.8f;
+        iconToscale.transform.localScale = new Vector3(1,1,1);
     }
 
     void OnDisable()

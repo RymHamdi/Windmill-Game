@@ -6,6 +6,7 @@ public class GameTwoController : MonoBehaviour
    public GameObject Spawner;
    public GameObject TouchBlade;
    public GameObject Timer;
+   public GameObject GlobalEffect;
 
    private void ActivateTimeLine()
     {
@@ -18,6 +19,7 @@ public class GameTwoController : MonoBehaviour
         Spawner.SetActive(true);
         TouchBlade.SetActive(true);
         Timer.SetActive(true);
+        GlobalEffect.SetActive(true);
         
     }
 
