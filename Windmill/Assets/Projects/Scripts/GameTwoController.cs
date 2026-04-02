@@ -26,6 +26,6 @@ public class GameTwoController : MonoBehaviour
     void OnEnable()
     {
         Invoke("ActivateTimeLine", 0.5f);
-        Invoke("ActivateOtherObject", 5);
+        Invoke("ActivateOtherObject", 18);
     }
 }

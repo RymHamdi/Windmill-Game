@@ -74,21 +74,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //startButton.SetActive(PhotonNetwork.IsMasterClient);
 
         // No just after the wait time update player prop with UpdateLocalPlayerCharacter
-        if (Time.time >= waitTime - 2 && !hasUpdated && PhotonNetwork.IsMasterClient)
+        Debug.Log($"Time.time: {Time.time}, waitTime: {waitTime}, hasUpdated: {hasUpdated}, isFadeIn: {isFadeIn}, isGameStarted: {isGameStarted}");
+        if (Time.time >= waitTime - 6 && !hasUpdated && PhotonNetwork.IsMasterClient)
         {
             StartCoroutine(AutoAssignPlayer());
             hasUpdated = true;
 
         }
 
-        if (Time.time >= waitTime + 4.5f && PhotonNetwork.IsMasterClient && !isFadeIn)
+        if (Time.time >= waitTime - 0.5f && PhotonNetwork.IsMasterClient && !isFadeIn)
         {
             isFadeIn = true;
             fadIn.FadeIn();
 
         }
 
-        if (Time.time >= waitTime + 5 && PhotonNetwork.IsMasterClient && !isGameStarted)
+        if (Time.time >= waitTime  && PhotonNetwork.IsMasterClient && !isGameStarted)
         {
             isGameStarted = true;
             StartGame();
@@ -244,7 +245,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            foreach (Player p in PhotonNetwork.PlayerList)
+            /*foreach (Player p in PhotonNetwork.PlayerList)
             {
                 // Skip master client
                 if (p.IsMasterClient)
@@ -270,9 +271,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                         }
                     }
                 }
-                yield return new WaitForSeconds(0.35f);
+                
 
-            }
+            }*/
+            yield return new WaitForSeconds(0.1f);
             photonView.RPC("RPC_UpdatePanel", RpcTarget.All);
         }
 

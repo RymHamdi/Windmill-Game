@@ -19,6 +19,9 @@ public class VideoSelection : MonoBehaviour
                 return;
             }
         }
+        // let check why is get 0
+        
+        Debug.LogError($"Local Player Custom Properties: {PhotonNetwork.LocalPlayer.CustomProperties}");
         int playerLocalSelection = PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("CharacterId", out object selection) ? (int)selection : 0;
         videoPlayer.clip = videoClips[playerLocalSelection];
         videoPlayer.Play();

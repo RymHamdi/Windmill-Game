@@ -38,7 +38,7 @@ public class BladesController : MonoBehaviour
         foreach (var slot in bladeSlots)
         {
             var img = slot.bladeImage;
-            bool active = img != null && img.gameObject != null && img.gameObject.activeSelf;
+            bool active = img != null && img.gameObject != null && img.transform.parent.gameObject.activeSelf;
             if (!active && slot.formModellUI != null)
                 return slot.formModellUI;
         }
@@ -54,7 +54,7 @@ public class BladesController : MonoBehaviour
         for (int i = 0; i < bladeSlots.Count; i++)
         {
             var img = bladeSlots[i].bladeImage;
-            if (img != null && img.gameObject != null && img.gameObject.activeSelf)
+            if (img != null && img.gameObject != null && img.transform.parent.gameObject.activeSelf)
                 count++;
         }
         return count;

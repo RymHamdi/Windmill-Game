@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using Photon.Realtime;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -35,7 +36,8 @@ public class Leaderboard : MonoBehaviour
                 players.Add(new PlayerLearderBoardStruct
                 {
                     CharacterID = characterId,
-                    Score = score
+                    Score = score,
+                    player = photonPlayer
                 });
             }
 
@@ -138,4 +140,6 @@ public struct PlayerLearderBoardStruct
 {
     public int Score;
     public int CharacterID;
+
+    public Player player;
 }

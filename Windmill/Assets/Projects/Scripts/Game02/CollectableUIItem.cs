@@ -37,10 +37,10 @@ public class CollectableUIItem : MonoBehaviour
             if (!isAnimating)
             {
                 canvasGroup.alpha = 1;
-                iconToscale.transform.localScale = new Vector3(1.2f,1.2f,1.2f);
+                iconToscale.transform.localScale = new Vector3(1.4f,1.4f,1.4f);
                 needTokill = false;
                 isAnimating = true;
-                iconToscale.transform.DOScale(new Vector3(1.5f, 1.5f, 15f), 1f)
+                iconToscale.transform.DOScale(new Vector3(1.8f, 1.8f, 1.8f), 1f)
             .SetLoops(-1, LoopType.Yoyo)
             .SetEase(Ease.InOutSine)
             .SetId(iconToscale.transform).OnComplete(() => isAnimating = false);

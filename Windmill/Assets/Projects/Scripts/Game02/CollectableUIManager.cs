@@ -200,6 +200,11 @@ public class CollectableUIManager : MonoBehaviour
         }
     }
 
+    public void CallLetsCollectAgain()
+    {
+        StartCoroutine(LetsCollectAgain());
+    }
+
     private IEnumerator PendingPenaltyRoutine()
     {
         yield return new WaitForSeconds(0.2f);

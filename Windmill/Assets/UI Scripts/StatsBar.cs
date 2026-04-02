@@ -8,6 +8,8 @@ public class StatsBar : MonoBehaviour
     public float delay = 0.3f;        // time between each "light on"
     public float fadeDuration = 0.5f; // fade in duration
 
+    public int Value;
+
     void OnEnable()
     {
         // Reset bulbs + auras to invisible
@@ -30,7 +32,7 @@ public class StatsBar : MonoBehaviour
 
     IEnumerator LightUpSequence()
     {
-        for (int i = 0; i < statImages.Length; i++)
+        for (int i = 0; i < Value; i++)
         {
             // Fade in bulb
             statImages[i].CrossFadeAlpha(1f, fadeDuration, false);

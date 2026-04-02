@@ -26,9 +26,10 @@ public class SecretLanguageManager : MonoBehaviour
     public float timeToResolve;
 
     public Image currentBladeImage;
-    public Image ClothChild;
-    public GameObject ToggleBtn;
+    //public Image ClothChild;
+    //public GameObject ToggleBtn;
     public TextMeshProUGUI infoText;
+    public TextMeshProUGUI infoSecondsText;
     //public ScrollRect scrollRect;
 
     public float currentDividerangle = 180;
@@ -61,8 +62,8 @@ public class SecretLanguageManager : MonoBehaviour
 
     public void StartRound(int roundIndex)
     {
-        currentBladeImage.enabled = false;
-        ClothChild.gameObject.SetActive(false);
+        //currentBladeImage.enabled = false;
+        //ClothChild.gameObject.SetActive(false);
         //ToggleBtn.gameObject.SetActive(false);
         currentRoundIndex = roundIndex;
         int totalModelsNeeded = 0;
@@ -85,7 +86,7 @@ public class SecretLanguageManager : MonoBehaviour
             /*rt.anchorMin = new Vector2(0f, 0.5f);
             rt.anchorMax = new Vector2(0f, 0.5f);
             rt.pivot = new Vector2(0f, 0.5f);*/
-            totalModelsNeeded = 5;
+            totalModelsNeeded = 4;
             saveTime = 8;
             timeToResolve = 4;
             currentBladesController = bladesControllers[1];
@@ -96,7 +97,7 @@ public class SecretLanguageManager : MonoBehaviour
             /*rt.anchorMin = new Vector2(0f, 0.5f);
             rt.anchorMax = new Vector2(0f, 0.5f);
             rt.pivot = new Vector2(0f, 0.5f);*/
-            totalModelsNeeded = 7;
+            totalModelsNeeded = 5;
             saveTime = 13;
             timeToResolve = 4;
             currentBladesController = bladesControllers[2];
@@ -114,7 +115,7 @@ public class SecretLanguageManager : MonoBehaviour
         modelIndex = 0;
         for (int i = 0; i < totalModelsNeeded; i++)
         {
-            PrepareFormModellUI(1, i);
+            StartCoroutine(PrepareFormModellUI(1, i));
         }
         //scrollRect.horizontalNormalizedPosition = 0;
         currentRoundPropSync = null;
@@ -134,6 +135,7 @@ public class SecretLanguageManager : MonoBehaviour
         yield return new WaitForSeconds(delay/2);
         fadeCanvas.FadeOut();
         leaderboard.SetActive(true);
+        
     }
 
     IEnumerator StartPlayinngRoundAfterDelay(float delay)
@@ -148,44 +150,53 @@ public class SecretLanguageManager : MonoBehaviour
             switch (Language.Instance.languageData.currentLangState)
             {
                 case LangState.English:
-                    infoText.text = $"Memorize the secret message: {i} seconds";
+                    infoText.text = $"Memorize the secret message!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Frensh:
-                    infoText.text = $"Mémorisez le message secret : {i} secondes";
+                    infoText.text = $"Mémorisez le message secret!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Netherland:
-                    infoText.text = $"Onthoud het geheime bericht: {i} seconden";
+                    infoText.text = $"Onthoud het geheime bericht!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Germand:
-                    infoText.text = $"Merken Sie sich die geheime Nachricht: {i} Sekunden";
+                    infoText.text = $"Merken Sie sich die geheime Nachricht!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Spanish:
-                    infoText.text = $"Memoriza el mensaje secreto: {i} segundos";
+                    infoText.text = $"Memoriza el mensaje secreto!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Chineese:
-                    infoText.text = $"记住秘密信息：{i} 秒";
+                    infoText.text = $"记住秘密信息!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Italian:
-                    infoText.text = $"Memorizza il messaggio segreto: {i} secondi";
+                    infoText.text = $"Memorizza il messaggio segreto!";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 default:
-                    infoText.text = $"Memorize the secret message: {i} seconds";
+                    infoText.text = $"Memorize the secret message!";
+                    infoSecondsText.text = $"{i}";
                     break;
             }
 
             yield return new WaitForSeconds(1f);
         }
         infoText.text = "";
-        currentBladeImage.enabled = true;
-        ClothChild.gameObject.SetActive(true);
-        ToggleBtn.gameObject.SetActive(true);
+        infoSecondsText.text = "";
+        //currentBladeImage.enabled = true;
+        //ClothChild.gameObject.SetActive(true);
+        //ToggleBtn.gameObject.SetActive(true);
         StartPlayerRound(true);
     }
 
@@ -198,7 +209,7 @@ public class SecretLanguageManager : MonoBehaviour
         StartCoroutine(RunCrono());
         //scrollRect.horizontal = false;
         currentRoundPropSync = currentUsedRoundPropSyncs[modelIndex];
-        currentBladeImage.sprite = currentRoundPropSync.bigIconSprite;
+        //currentBladeImage.sprite = currentRoundPropSync.bigIconSprite;
         bladeMouseRotator.EnableRotation();
         bladeMouseRotator.ResetRotation();
     }
@@ -214,34 +225,42 @@ public class SecretLanguageManager : MonoBehaviour
             switch (Language.Instance.languageData.currentLangState)
             {
                 case LangState.English:
-                    infoText.text = $"Place the blade in the right position in: {i} seconds";
+                    infoText.text = $"Place the blade in the right position";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Frensh:
-                    infoText.text = $"Placez la lame dans la bonne position dans : {i} secondes";
+                    infoText.text = $"Placez la lame dans la bonne position";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Netherland:
-                    infoText.text = $"Plaats het blad in de juiste positie over: {i} seconden";
+                    infoText.text = $"Plaats het blad in de juiste positie";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Germand:
-                    infoText.text = $"Bringen Sie die Klinge in die richtige Position in: {i} Sekunden";
+                    infoText.text = $"Bringen Sie die Klinge in die richtige Position";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Spanish:
-                    infoText.text = $"Coloca la hoja en la posición correcta en: {i} segundos";
+                    infoText.text = $"Coloca la hoja en la posición correcta";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 case LangState.Chineese:
-                    infoText.text = $"在 {i} 秒内将刀片放在正确的位置";
+                    infoText.text = $"将刀片放在正确的位置";
+                    infoSecondsText.text = $"{i}";
                     break;
                 case LangState.Italian:
-                    infoText.text = $"Posiziona la lama nella posizione corretta tra: {i} secondi";
+                    infoText.text = $"Posiziona la lama nella posizione corretta";
+                    infoSecondsText.text = $"{i}";
                     break;
 
                 default:
-                    infoText.text = $"Place the blade in the right position in: {i} seconds";
+                    infoText.text = $"Place the blade in the right position";
+                    infoSecondsText.text = $"{i}";
                     break;
             }
 
@@ -281,6 +300,7 @@ public class SecretLanguageManager : MonoBehaviour
                 infoText.text = "Time is over!";
                 break;
         }
+        infoSecondsText.text = "";
 
 
         bladeMouseRotator.DisableRotation();
@@ -339,6 +359,7 @@ public class SecretLanguageManager : MonoBehaviour
                     infoText.text = "Round Completed!";
                     break;
             }
+            infoSecondsText.text = "";
 
 
 
@@ -436,8 +457,8 @@ public class SecretLanguageManager : MonoBehaviour
         isroundCompleted = false;
         yield return new WaitForSeconds(delay);
         //scrollRect.horizontal = true;
-        currentBladeImage.enabled = false;
-        ClothChild.gameObject.SetActive(false);
+        //currentBladeImage.enabled = false;
+        //ClothChild.gameObject.SetActive(false);
         //ToggleBtn.gameObject.SetActive(false);
         currentUsedRoundPropSyncs.Clear();
         //ClearFormModellUI();
@@ -473,10 +494,10 @@ public class SecretLanguageManager : MonoBehaviour
 
                 break;
             case 2:
-                currentUsedRoundPropSyncs = fullUsedRoundPropSyncs.GetRange(3, 5);
+                currentUsedRoundPropSyncs = fullUsedRoundPropSyncs.GetRange(3, 4);
                 break;
             case 3:
-                currentUsedRoundPropSyncs = fullUsedRoundPropSyncs.GetRange(8, 7);
+                currentUsedRoundPropSyncs = fullUsedRoundPropSyncs.GetRange(7, 5);
                 break;
             default:
                 Debug.LogWarning("Invalid round index.");
@@ -485,16 +506,13 @@ public class SecretLanguageManager : MonoBehaviour
         currentRoundPropSync = currentUsedRoundPropSyncs[index];
     }
 
-    private void PrepareFormModellUI(int roundIndex, int index)
+    private IEnumerator PrepareFormModellUI(int roundIndex, int index)
     {
 
         SelectRandomSecretLanguageRoundPropSync(roundIndex, index);
-        if (currentRoundPropSync == null || currentBladesController == null)
+        if (currentRoundPropSync != null && currentBladesController != null)
         {
-            return;
-        }
-
-        // Instantiate new UI elements based on the selected round props
+            // Instantiate new UI elements based on the selected round props
         foreach (var prop in currentRoundPropSync.randomSecretLanguageRoundProps)
         {
             //FormModellUI newFormModellUI = Instantiate(formModellPrefab, formUiParent);
@@ -503,8 +521,12 @@ public class SecretLanguageManager : MonoBehaviour
             if (formModellUI != null)
             {
                 formModellUI.InitModellUI(currentRoundPropSync.iconSprite, FormModellState.Normal, prop.rightRotation);
+                yield return new WaitForSeconds(0.5f);
             }
         }
+        }
+
+        
 
     }
 

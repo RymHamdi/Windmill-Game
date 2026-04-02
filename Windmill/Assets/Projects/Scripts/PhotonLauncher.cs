@@ -40,12 +40,16 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     public GameObject gameObjectToDisableOnStart;
     public GameObject imageToFlash;
     public GameObject playerPanel;
+    public Button startButton;
+
 
     [Header("Runtime settings")]
     public int maxPlayers = 6;
     public int playerTtlMs = 60000; // 60 seconds: allows short reconnects without removing player
     public float heartbeatInterval = 5f; // seconds — sends a short event to keep connection alive
     public byte heartbeatEventCode = 99;
+
+    public List<string> PlayerColorIds;
 
     // reconnect/backoff
     private bool reconnecting = false;
@@ -132,6 +136,8 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
             PhotonNetwork.NickName = Mathf.Clamp(PlayFabLogin.Instance.playFabId.Length, 1, 32) > 0
                 ? PlayFabLogin.Instance.playFabId.Substring(0, Math.Min(8, PlayFabLogin.Instance.playFabId.Length))
                 : "001" + UnityEngine.Random.Range(1000, 9999).ToString();
+                //PhotonNetwork.NickName = "001" + UnityEngine.Random.Range(1000, 9999).ToString();
+
         else if (!string.IsNullOrEmpty(localPlayerNickName))
             PhotonNetwork.NickName = localPlayerNickName;
         else
@@ -174,6 +180,11 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         }
     }
 
+    void Update()
+    {
+        startButton.interactable = PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.PlayerCount > 1;
+    }
+
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.LogWarning("[PhotonLauncher] CreateRoomFailed: " + message);
@@ -191,6 +202,15 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         if (isServer && !PhotonNetwork.LocalPlayer.IsMasterClient)
         {
             PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+            // Create UI entries for existing players
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                if (p.IsLocal == false)
+                {
+                    CreatePlayerRoom(p);
+                }
+                
+            }
         }
 
         // Start heartbeat when in room
@@ -236,7 +256,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         // start reconnect attempts
         if (!reconnecting)
         {
-            if (isServer)
+            if (isServer && !isForcedend)
             {
                 StartCoroutine(ServerReconnectRoutine());
             }
@@ -601,6 +621,25 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("VideoScene");
         //PhotonNetwork.LoadLevel("VideoScene2");
         photonView.RPC("RPC_StartGameAll", RpcTarget.All);
+        //Get Player List without the master Client
+        List<Player> nonMasterPlayers = new List<Player>();
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (!PhotonNetwork.PlayerList[i].IsMasterClient)
+            {
+                nonMasterPlayers.Add(PhotonNetwork.PlayerList[i]);
+            }
+            
+        }
+        for(int i =0; i< nonMasterPlayers.Count; i++)
+        {
+            if (!nonMasterPlayers[i].IsMasterClient)
+            {
+                //photonView.RPC("AssignColorId", RpcTarget.AllBuffered, nonMasterPlayers[i].NickName, i);
+            }
+            
+
+        }
         playerPanel.SetActive(false);
 
         if (StartGameButton != null) StartGameButton.gameObject.SetActive(false);
@@ -613,6 +652,20 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         if (!isServer)
         {
             StartCoroutine(StartGameRoutine());
+        }
+    }
+
+    [PunRPC]
+    void AssignColorId(string playerId, int colorId)
+    {
+        if (PhotonNetwork.LocalPlayer.NickName == playerId)
+        {
+            //Update Custom propertie of ColorID of the player
+            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
+            {
+                { "CharacterId", colorId }
+            };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
     }
 
@@ -653,6 +706,9 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         // Clients: fully disconnect then reload ServerConfig scene and reconnect
         if (!isServer)
         {
+            yield return new WaitForSeconds(1);
+            PhotonNetwork.LeaveRoom();
+            yield return new WaitForSeconds(1);
             PhotonNetwork.Disconnect();
 
             // Wait until fully disconnected
@@ -681,8 +737,24 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         else
         {
             // server just loads scene
-            Debug.Log("check this");
-            SceneManager.LoadSceneAsync("ServerConfig");
+            //Debug.Log("check this");
+            //SceneManager.LoadSceneAsync("ServerConfig");
+            isForcedend = true;
+            yield return new WaitForSeconds(1.5f);
+            PhotonNetwork.Disconnect();
+
+            // Wait until fully disconnected
+            while (PhotonNetwork.IsConnected || PhotonNetwork.IsConnectedAndReady)
+                yield return null;
+                DestroyImmediate(gameObject);
+
+            // Load ServerConfig scene
+            AsyncOperation loadOp = SceneManager.LoadSceneAsync(0);
+            
+            /*while (!loadOp.isDone)
+                yield return null;*/
+                
+            
         }
     }
 }

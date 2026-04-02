@@ -74,6 +74,11 @@ public class LanguageSetup : MonoBehaviour
         }
     }
 
+    public void UpdateImageVisibility(bool isVisible)
+    {
+        openButtonImage.enabled = isVisible;
+    }
+
     private void OnLangUpdated(LangState langState)
     {
         //Find the correct image

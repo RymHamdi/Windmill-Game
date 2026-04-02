@@ -29,7 +29,7 @@ public class FormModellUI : MonoBehaviour
         {
             iconImage.sprite = iconSprite;
             iconImage.transform.parent.gameObject.SetActive(true);
-            iconImage.gameObject.SetActive(true);
+            //iconImage.gameObject.SetActive(true);
             iconImage.transform.parent.localEulerAngles = new Vector3(0, 0, rotation);
         }
     }
@@ -39,7 +39,7 @@ public class FormModellUI : MonoBehaviour
         countourImage.color = normalColor;
         iconImage.sprite = null;
         iconImage.transform.parent.gameObject.SetActive(false);
-        iconImage.gameObject.SetActive(false);
+        //iconImage.gameObject.SetActive(false);
 
     }
 

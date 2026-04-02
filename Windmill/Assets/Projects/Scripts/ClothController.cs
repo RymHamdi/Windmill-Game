@@ -23,6 +23,6 @@ public class ClothController : MonoBehaviour
 
     private void OnClothAlter(bool obj)
     {
-        ClothImage.enabled = obj;
+        //ClothImage.enabled = obj;
     }
 }

@@ -67,8 +67,8 @@ public class SecretLanguageRoundSyncManager : MonoBehaviourPunCallbacks, IOnEven
         }
 
         currentSequence.AddRange(Sequence);
-        totalNeeded = totalNeeded + 2;
-        if (totalNeeded <= 7)
+        totalNeeded = totalNeeded + 1;
+        if (totalNeeded <= 5)
         {
             GenerateAndSyncSequence(totalNeeded);
         }

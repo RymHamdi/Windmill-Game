@@ -26,7 +26,7 @@ public class PlayerLeaderBoardModel : MonoBehaviour
 
     public void Initialize(string playerName, int score, Sprite avatar, Vector3 bigScale)
     {
-        playerNameText.text = "Hero: " + playerName;
+        playerNameText.text =  playerName;
         scoreText.text = "Score: " + score.ToString();
         playerAvtar.sprite = avatar;
         this.bigScale = bigScale;
@@ -54,9 +54,13 @@ public class PlayerLeaderBoardModel : MonoBehaviour
         }
         else
         {
-            // let bigg it to bigsccale and stay on big scale with nice animation
             transform
-            .DOScale(bigScale, scaleDuration).SetEase(Ease.OutBack);
+                .DOScale(originalScale * scaleUp, scaleDuration)
+                .SetEase(Ease.OutBack)
+                .OnComplete(() =>
+                {
+                    transform.DOScale(originalScale, scaleDownDuration).SetEase(Ease.InBack);
+                });
         }
 
     }

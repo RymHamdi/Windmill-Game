@@ -50,7 +50,15 @@ public class PlayFabLogin : MonoBehaviour
             }
             else
             {
-                Invoke("LoadAfterwhile", 2);
+                if (isServer)
+                {
+                    Invoke("LoadAfterwhile", 2f);
+                }
+                else
+                {
+                    Invoke("LoadAfterwhile", 3.5f);
+                }
+                
             }
 
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using System;
+using DG.Tweening;
 
 public class IntroManager : MonoBehaviourPun
 {
@@ -31,20 +32,13 @@ public class IntroManager : MonoBehaviourPun
     public GameObject canvasServer;
     public GameObject introTitle;
     public FadeCanvas fadeCanvas;
-
-    void OnEnable()
-    {
-        
-    }
+   
 
     void Start()
     {
-        introTitle.SetActive(true);
-        timer = introDuration;
-        //titleText.text = "Intro will be skipped in:";
-        introPanel.SetActive(true);
-        gamePanel.SetActive(false);
-        if (PhotonLauncher.Instance!= null)
+        isRunning = false;
+
+        if (PhotonLauncher.Instance != null)
         {
             if (PhotonLauncher.Instance.isServer)
             {
@@ -53,6 +47,33 @@ public class IntroManager : MonoBehaviourPun
             }
         }
         fadeCanvas.FadeOut();
+        Invoke("Init", 0.3f);
+    }
+
+    public bool requireShowGameIndex = true;
+
+    private void Init()
+    {
+        if (requireShowGameIndex)
+        {
+            StartCoroutine(GameInDexParent.instance.EnableCanvas(() =>
+        {
+            isRunning = true;
+            panelOfIntro.SetActive(true);
+        }));
+        }
+        else
+        {
+            isRunning = true;
+            panelOfIntro.SetActive(true);
+        }
+        
+        introTitle.SetActive(true);
+        timer = introDuration;
+        //titleText.text = "Intro will be skipped in:";
+        introPanel.SetActive(true);
+        gamePanel.SetActive(false);
+        
     }
 
     void Update()
@@ -101,10 +122,34 @@ public class IntroManager : MonoBehaviourPun
         }
         else
         {
-            FadeIn();
-            Invoke("FadeOut", 0.9f);
-            Invoke("OnSkipButton", 1);
+            Invoke("ShowYourTurn", 0.1f);
+
         }
+    }
+
+    public CanvasGroup yourTurnCanvasGroup;
+
+    private void ShowYourTurn()
+    {
+        yourTurnCanvasGroup.gameObject.SetActive(true);
+        yourTurnCanvasGroup.DOFade(1, 0.5f).OnComplete(() =>
+        {
+            panelOfIntro.SetActive(false);
+            Invoke("HideYourTurn", 2f);
+        });
+    }
+
+    public GameObject panelOfIntro;
+    public void HideYourTurn()
+    {
+        yourTurnCanvasGroup.DOFade(0, 0.25f).OnComplete(() =>
+        {
+
+            yourTurnCanvasGroup.gameObject.SetActive(false);
+            //FadeIn();
+            //Invoke("FadeOut", 0.9f);
+            Invoke("OnSkipButton", 0.3f);
+        });
     }
 
     private void FadeIn()
@@ -114,6 +159,7 @@ public class IntroManager : MonoBehaviourPun
 
     private void FadeOut()
     {
+        
         fadeCanvas.FadeOut();
     }
 

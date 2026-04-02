@@ -67,9 +67,21 @@ public class Timer : MonoBehaviourPun
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-
+    public FoodSpawner3D foodSpawner;
     private void TimerEnded()
     {
+        if (foodSpawner != null)
+        {
+            foodSpawner.enabled = false;
+        //Get all fruits in scene and destroy them
+        Fruit[] fruitsInScene = FindObjectsByType<Fruit>(FindObjectsSortMode.None);
+        foreach (Fruit fruit in fruitsInScene)
+        {
+            Destroy(fruit.gameObject);
+        }
+        }
+        
+        
         fadeCanvas.FadeIn();
         Debug.Log("Timer Ended!");
         StopAlert();

@@ -5,6 +5,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
 using Unity.VisualScripting;
+using System.Collections;
 
 public class VideoLoopingScene : MonoBehaviourPunCallbacks
 {
@@ -83,7 +84,7 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
             if (videoTimeToSwitch1 <= 0)
             {
-                
+
                 infoText.text = "";
 
                 if (ShowControlTrigger.Instance != null)
@@ -138,7 +139,7 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
                             video1Started = false;
                             PhotonLauncher.Instance.EndGame();
                         }
-                        
+
                     }
                 }
             }
@@ -168,6 +169,12 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
         {
             configPath = Path.Combine(
                Application.dataPath, "../video_outro.json"
+           );
+        }
+        else if (videoType == VideoType.Launcher)
+        {
+            configPath = Path.Combine(
+               Application.dataPath, "../video_launcher.json"
            );
         }
         Debug.Log($"Loading video config from: {configPath}");
@@ -202,6 +209,29 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
             ? PlayerPrefs.GetString(key)
             : "Video1";
 
+            switch (assignedVideo)
+            {
+                case "Video1":
+                AssignID(0);
+                break;
+                case "Video2":
+                    AssignID(1);
+                    break;
+                case "Video3":
+                    AssignID(2);
+                    break;
+                case "Video4":
+                    AssignID(3);
+                    break;
+                case "Video5":
+                    AssignID(4);
+                    break;
+                default:
+                    
+                    assignedVideo = "Video1";
+                    break;
+            }
+
         Debug.Log($"Video assigned from prefs: {assignedVideo}");
 
         bool found = false;
@@ -234,6 +264,16 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
     }
 
+    private void AssignID(int localPlayerindex)
+    {
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
+        {
+            { "CharacterId", localPlayerindex }
+        };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            Debug.LogError($"Assigned CharacterId {localPlayerindex} to player {PhotonNetwork.LocalPlayer.NickName}");
+    }
+
     // ================= PLAY VIDEO =================
 
     private void PlayVideo1()
@@ -257,9 +297,11 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
         videoPlayer1.source = VideoSource.Url;
         videoPlayer1.url = fullPath;
+        videoPlayer1.Prepare();
 
         // Subscribe to video end event
-        videoPlayer1.loopPointReached += OnVideoEnd;
+        //videoPlayer1.loopPointReached += OnVideoEnd;
+        StartCoroutine(WaitForVideoEnd(videoPlayer1));
 
         videoPlayer1.Play();
         //Let's update the  custop propertie for this player that he start playing a video(any video just we want to know that he played a video)
@@ -281,6 +323,22 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
                 { "playedVideo", false }
             };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    }
+
+    IEnumerator WaitForVideoEnd(VideoPlayer vp)
+    {
+        // Wait until video is prepared (length available)
+        yield return new WaitUntil(() => vp.isPrepared);
+
+        double triggerTime = vp.length - 2.0; // 2 seconds before real end
+
+        // Wait until video reaches trigger time
+        while (vp.time < triggerTime)
+        {
+            yield return null;
+        }
+
+        OnVideoEnd(vp);
     }
 
     void OnDisable()
@@ -315,5 +373,6 @@ public class VideoConfigWrapper
 public enum VideoType
 {
     Intro,
-    Outro
+    Outro,
+    Launcher
 }

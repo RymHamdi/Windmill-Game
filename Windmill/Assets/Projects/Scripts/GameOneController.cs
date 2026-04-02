@@ -22,6 +22,6 @@ public class GameOneController : MonoBehaviour
     void OnEnable()
     {
         Invoke("ActivateTimeLine", 0.5f);
-        Invoke("ActivateOtherObject", 6);
+        Invoke("ActivateOtherObject", 10);
     }
 }

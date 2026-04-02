@@ -37,7 +37,7 @@ public class IntroServer : MonoBehaviourPunCallbacks
             if (introDuration <= 0f && !introFinished)
             {
                 introFinished = true;
-                PhotonNetwork.LoadLevel("MainMenu");
+                //PhotonNetwork.LoadLevel("MainMenu");
             }
         }
 
