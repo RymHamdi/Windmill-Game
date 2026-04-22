@@ -86,27 +86,27 @@ public class LeaderboardVideo : MonoBehaviourPun
     IEnumerator NextGameAfterDely(int id)
     {
         yield return new WaitForSeconds(0.5f);
-        ShowControlTrigger.Instance?.SendTrigger("LD_SHOW");
+        ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_GENERAL");
 
         switch (id)
         {
             case 0:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW_GENERAL");
                 break;
             case 1:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_GREEN");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_GREEN_GENERAL");
                 break;
             case 2:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_RED");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_RED_GENERAL");
                 break;
             case 3:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_BLUE");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_BLUE_GENERAL");
                 break;
             case 4:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_PINK");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_PINK_GENERAL");
                 break;
             default:
-                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW");
+                ShowControlTrigger.Instance?.SendTrigger("LD_SHOW_YELLOW_GENERAL");
                 break;
         }
         yield return new WaitForSeconds(11f);

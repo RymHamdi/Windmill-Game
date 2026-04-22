@@ -1,21 +1,16 @@
-using UnityEngine;
-using Photon.Realtime;
-using Photon.Pun;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine.UI;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
-/// Robust Photon launcher that supports:
-/// - Server mode (isServer = true) that tries to remain MasterClient and never sleeps
-/// - Client mode that reconnects automatically and doesn't quit on master change
-/// - Heartbeat to avoid idle timeouts
-/// - Prevent system sleep on Windows
-/// - Exponential backoff reconnect
-/// 
-/// NOTE: Attach a PhotonView to the same GameObject (no need to manually set ViewID).
+/// Photon bootstrap for both the event server build and the player builds.
+/// It keeps one persistent launcher alive during a round and rebuilds it cleanly
+/// when the app intentionally returns to the login/config scenes.
 /// </summary>
 public class PhotonLauncher : MonoBehaviourPunCallbacks
 {
@@ -42,40 +37,41 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     public GameObject playerPanel;
     public Button startButton;
 
-
     [Header("Runtime settings")]
     public int maxPlayers = 6;
-    public int playerTtlMs = 60000; // 60 seconds: allows short reconnects without removing player
-    public float heartbeatInterval = 5f; // seconds — sends a short event to keep connection alive
+    public int playerTtlMs = 60000; // allows temporary reconnects during a round
+    public int emptyRoomTtlMs = 0; // destroy empty rooms immediately between rounds
+    public float heartbeatInterval = 5f;
     public byte heartbeatEventCode = 99;
 
     public List<string> PlayerColorIds;
 
-    // reconnect/backoff
-    private bool reconnecting = false;
-    private bool joinedRoom = false;
+    private bool reconnecting;
+    private bool joinedRoom;
+    private bool isForcedend;
+    private Coroutine heartbeatCoroutine;
 
-    // player UI list
     public List<PlayerRoom> playerRooms = new List<PlayerRoom>();
     private string localPlayerNickName;
+    private string lastRestartToken;
 
     void Awake()
     {
-        // Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Photon behavior
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.GameVersion = gameVersion;
+
+        // This object is created locally from a prefab, so it needs a stable view id for RPCs.
         photonView.ViewID = 999;
 
-        // Performance / keepalive tuning
         Application.runInBackground = true;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         PhotonNetwork.SendRate = 30;
@@ -83,20 +79,35 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         Application.targetFrameRate = 60;
 
 #if UNITY_STANDALONE
-        SystemSleepBlocker.BlockSleep(true); // prevents Windows from sleeping / turning off display
+        SystemSleepBlocker.BlockSleep(true);
 #endif
     }
 
     void Start()
     {
-        // Show the UI depending on role
         if (ServerConfigManager != null) ServerConfigManager.SetActive(isServer);
         if (ClientConfigManager != null) ClientConfigManager.SetActive(!isServer);
 
-        // Photon keep alive setting (if available in your PUN version)
-        try { PhotonNetwork.KeepAliveInBackground = 86400000; } catch { /* ignore if missing */ }
+        try
+        {
+            PhotonNetwork.KeepAliveInBackground = 86400000;
+        }
+        catch
+        {
+            // Older PUN versions do not expose this property.
+        }
 
         Connect();
+    }
+
+    private void OnDestroy()
+    {
+        StopHeartbeatLoop();
+
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     void OnApplicationFocus(bool hasFocus)
@@ -109,19 +120,28 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         Application.runInBackground = true;
     }
 
-    // -------------------------
-    // CONNECTION
-    // -------------------------
     public void Connect()
     {
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.InRoom)
         {
-            if (!PhotonNetwork.InRoom)
-            {
-                PhotonNetwork.JoinRandomRoom();
-            }
+            joinedRoom = true;
             return;
         }
+
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            JoinConfiguredRoom();
+            return;
+        }
+
+        ClientState state = PhotonNetwork.NetworkClientState;
+        if (state != ClientState.Disconnected && state != ClientState.PeerCreated)
+        {
+            Debug.Log($"[PhotonLauncher] Connect skipped while Photon is in state: {state}");
+            return;
+        }
+
+        ConfigureIdentity();
 
         Debug.Log("[PhotonLauncher] ConnectUsingSettings()");
         PhotonNetwork.ConnectUsingSettings();
@@ -131,106 +151,139 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     {
         Debug.Log("[PhotonLauncher] Connected to Master");
 
-        // Choose a nickname
-        if (PlayFabLogin.Instance != null)
-            PhotonNetwork.NickName = Mathf.Clamp(PlayFabLogin.Instance.playFabId.Length, 1, 32) > 0
-                ? PlayFabLogin.Instance.playFabId.Substring(0, Math.Min(8, PlayFabLogin.Instance.playFabId.Length))
-                : "001" + UnityEngine.Random.Range(1000, 9999).ToString();
-                //PhotonNetwork.NickName = "001" + UnityEngine.Random.Range(1000, 9999).ToString();
-
-        else if (!string.IsNullOrEmpty(localPlayerNickName))
-            PhotonNetwork.NickName = localPlayerNickName;
-        else
-        {
-            PhotonNetwork.NickName = "001" + UnityEngine.Random.Range(1000, 9999).ToString();
-            localPlayerNickName = PhotonNetwork.NickName;
-        }
+        ConfigureIdentity();
 
         Debug.Log("[PhotonLauncher] NickName: " + PhotonNetwork.NickName);
-
-        PhotonNetwork.JoinLobby();
+        JoinConfiguredRoom();
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("[PhotonLauncher] Joined Lobby — joining/creating room");
-        PhotonNetwork.JoinRandomRoom();
+        // Fallback only. The main flow joins the fixed room directly from master.
+        Debug.Log("[PhotonLauncher] Joined Lobby - joining configured room");
+        JoinConfiguredRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         Debug.LogWarning("[PhotonLauncher] JoinRandomFailed: " + message);
-
-        RoomOptions roomOptions = new RoomOptions
-        {
-            MaxPlayers = (byte)maxPlayers,
-            PublishUserId = true,
-            PlayerTtl = playerTtlMs
-        };
-
-        // If server build: create the room, otherwise wait + retry
-        if (isServer)
-        {
-            PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
-        }
-        else
-        {
-            if (statusText != null) statusText.text = "Waiting for server to start...";
-            Invoke(nameof(Connect), 2f);
-        }
-    }
-
-    void Update()
-    {
-        startButton.interactable = PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.PlayerCount > 1;
+        RetryJoinConfiguredRoom();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         Debug.LogWarning("[PhotonLauncher] CreateRoomFailed: " + message);
-        // Try to join random room again (rare race condition)
-        PhotonNetwork.JoinRandomRoom();
+        RetryJoinConfiguredRoom();
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.LogWarning($"[PhotonLauncher] JoinRoomFailed ({GetConfiguredRoomName()}): {message}");
+        RetryJoinConfiguredRoom();
+    }
+
+    void Update()
+    {
+        if (startButton != null)
+        {
+            startButton.interactable = PhotonNetwork.IsMasterClient
+                && PhotonNetwork.CurrentRoom != null
+                && PhotonNetwork.CurrentRoom.PlayerCount > 1;
+        }
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log("[PhotonLauncher] Joined Room: " + PhotonNetwork.CurrentRoom.Name);
-        joinedRoom = true;
-        if (statusText != null) statusText.text = "Joined Room: " + PhotonNetwork.CurrentRoom.Name;
 
-        // If server, ensure we are master
+        joinedRoom = true;
+        reconnecting = false;
+        CancelInvoke(nameof(Connect));
+
+        if (statusText != null)
+        {
+            statusText.text = "Joined Room: " + PhotonNetwork.CurrentRoom.Name;
+        }
+
+        lastRestartToken = PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("RestartToken", out object restartTokenObj)
+            ? restartTokenObj?.ToString()
+            : null;
+
         if (isServer && !PhotonNetwork.LocalPlayer.IsMasterClient)
         {
             PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-            // Create UI entries for existing players
-            foreach (Player p in PhotonNetwork.PlayerList)
+        }
+
+        if (isServer)
+        {
+            foreach (Player player in PhotonNetwork.PlayerList)
             {
-                if (p.IsLocal == false)
+                if (!player.IsLocal)
                 {
-                    CreatePlayerRoom(p);
+                    CreatePlayerRoom(player);
                 }
-                
             }
         }
 
-        // Start heartbeat when in room
-        StartCoroutine(HeartbeatLoop());
-
-        // Load local player saved data (UI)
+        StartHeartbeatLoop();
         LoadLocalPlayerData();
     }
 
-    // -------------------------
-    // HEARTBEAT (keep connection alive with Photon)
-    // -------------------------
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        base.OnRoomPropertiesUpdate(changedProps);
+
+        if (!changedProps.TryGetValue("RestartToken", out object restartTokenObj))
+        {
+            return;
+        }
+
+        string restartToken = restartTokenObj?.ToString();
+        if (string.IsNullOrWhiteSpace(restartToken) || restartToken == lastRestartToken)
+        {
+            return;
+        }
+
+        lastRestartToken = restartToken;
+        Debug.Log($"[PhotonLauncher] Restart token received: {restartToken}");
+        BeginForcedRestart();
+    }
+
+    public override void OnLeftRoom()
+    {
+        joinedRoom = false;
+        StopHeartbeatLoop();
+    }
+
+    private void StartHeartbeatLoop()
+    {
+        StopHeartbeatLoop();
+        heartbeatCoroutine = StartCoroutine(HeartbeatLoop());
+    }
+
+    private void StopHeartbeatLoop()
+    {
+        if (heartbeatCoroutine == null)
+        {
+            return;
+        }
+
+        StopCoroutine(heartbeatCoroutine);
+        heartbeatCoroutine = null;
+    }
+
     private IEnumerator HeartbeatLoop()
     {
         while (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             try
             {
-                // send a very small unreliable event so Photon doesn't idle-timeout the connection
-                PhotonNetwork.RaiseEvent(heartbeatEventCode, null, new RaiseEventOptions { Receivers = ReceiverGroup.MasterClient }, new ExitGames.Client.Photon.SendOptions { Reliability = false });
+                PhotonNetwork.RaiseEvent(
+                    heartbeatEventCode,
+                    null,
+                    new RaiseEventOptions { Receivers = ReceiverGroup.MasterClient },
+                    new ExitGames.Client.Photon.SendOptions { Reliability = false }
+                );
             }
             catch (Exception ex)
             {
@@ -239,36 +292,23 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
             yield return new WaitForSeconds(heartbeatInterval);
         }
+
+        heartbeatCoroutine = null;
     }
 
-    // -------------------------
-    // DISCONNECT / RECONNECT
-    // -------------------------
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarning($"[PhotonLauncher] Disconnected: {cause}");
 
-        // stop heartbeat
-        StopCoroutineSafe(HeartbeatLoop());
-        
+        StopHeartbeatLoop();
         joinedRoom = false;
 
-        // start reconnect attempts
-        if (!reconnecting)
+        if (reconnecting || isForcedend)
         {
-            if (isServer && !isForcedend)
-            {
-                StartCoroutine(ServerReconnectRoutine());
-            }
-            else
-            {
-                if (!isForcedend)
-                {
-                    StartCoroutine(ClientReconnectRoutine());
-                }
-                
-            }
+            return;
         }
+
+        StartCoroutine(isServer ? ServerReconnectRoutine() : ClientReconnectRoutine());
     }
 
     private IEnumerator ServerReconnectRoutine()
@@ -286,66 +326,39 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         {
             attempt++;
             Debug.Log($"[PhotonLauncher] === SERVER RECONNECT ATTEMPT #{attempt} ===");
-            
-            // First, ensure we're fully disconnected
-            if (PhotonNetwork.IsConnected)
-            {
-                Debug.Log("[PhotonLauncher] Disconnecting first...");
-                PhotonNetwork.Disconnect();
-                yield return new WaitForSeconds(1f);
-            }
-
-            Debug.Log($"[PhotonLauncher] Attempting to connect... (will wait {delay}s)");
             if (statusText != null) statusText.text = $"Reconnecting... (attempt {attempt})";
 
-            try
-            {
-                // Try to connect to Photon
-                PhotonNetwork.ConnectUsingSettings();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[PhotonLauncher] ConnectUsingSettings failed: {ex.Message}");
-            }
+            TryRecoverConnection();
 
-            // Wait for the delay period, checking connection status
             float waited = 0f;
             while (waited < delay)
             {
-                // Check if we're connected AND in room
                 if (PhotonNetwork.IsConnected && joinedRoom)
                 {
-                    Debug.Log("[PhotonLauncher] ✓ SERVER RECONNECTED SUCCESSFULLY!");
+                    Debug.Log("[PhotonLauncher] Server reconnected successfully");
                     if (statusText != null) statusText.text = "Server reconnected!";
-                    
-                    // Restart heartbeat
-                    StartCoroutine(HeartbeatLoop());
-                    
-                    // Check game state
                     StartCoroutine(CheckGameState());
-                    
                     reconnecting = false;
                     yield break;
                 }
-                
+
+                TryRecoverConnection();
                 waited += 0.5f;
                 yield return new WaitForSeconds(0.5f);
             }
 
-            // Not connected yet - increase delay with exponential backoff
             if (!PhotonNetwork.IsConnected)
             {
                 Debug.LogWarning($"[PhotonLauncher] Still not connected after {delay}s");
             }
             else if (!joinedRoom)
             {
-                Debug.LogWarning($"[PhotonLauncher] Connected but not in room yet");
+                Debug.LogWarning("[PhotonLauncher] Connected but not in room yet");
             }
-            
+
             delay = Mathf.Min(delay * 1.5f, maxDelay);
         }
 
-        Debug.Log("[PhotonLauncher] ✓ Reconnection complete!");
         reconnecting = false;
     }
 
@@ -364,131 +377,104 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         {
             attempt++;
             Debug.Log($"[PhotonLauncher] === CLIENT RECONNECT ATTEMPT #{attempt} ===");
-            
-            // First, ensure we're fully disconnected
-            if (PhotonNetwork.IsConnected)
-            {
-                Debug.Log("[PhotonLauncher] Disconnecting first...");
-                PhotonNetwork.Disconnect();
-                yield return new WaitForSeconds(1f);
-            }
-
-            Debug.Log($"[PhotonLauncher] Attempting to connect... (will wait {delay}s)");
             if (statusText != null) statusText.text = $"Reconnecting... (attempt {attempt})";
 
-            try
-            {
-                // Try to connect to Photon
-                PhotonNetwork.ConnectUsingSettings();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[PhotonLauncher] ConnectUsingSettings failed: {ex.Message}");
-            }
+            TryRecoverConnection();
 
-            // Wait for the delay period, checking connection status
             float waited = 0f;
             while (waited < delay)
             {
-                // Check if we're connected AND in room
                 if (PhotonNetwork.IsConnected && joinedRoom)
                 {
-                    Debug.Log("[PhotonLauncher] ✓ CLIENT RECONNECTED SUCCESSFULLY!");
+                    Debug.Log("[PhotonLauncher] Client reconnected successfully");
                     if (statusText != null) statusText.text = "Reconnected!";
-                    
-                    // Restart heartbeat
-                    StartCoroutine(HeartbeatLoop());
-                    
-                    // Reload local player data
                     LoadLocalPlayerData();
-                    
                     reconnecting = false;
                     yield break;
                 }
-                
+
+                TryRecoverConnection();
                 waited += 0.5f;
                 yield return new WaitForSeconds(0.5f);
             }
 
-            // Not connected yet - increase delay with exponential backoff
             if (!PhotonNetwork.IsConnected)
             {
                 Debug.LogWarning($"[PhotonLauncher] Still not connected after {delay}s");
             }
             else if (!joinedRoom)
             {
-                Debug.LogWarning($"[PhotonLauncher] Connected but not in room yet");
+                Debug.LogWarning("[PhotonLauncher] Connected but not in room yet");
             }
-            
+
             delay = Mathf.Min(delay * 1.5f, maxDelay);
         }
 
-        Debug.Log("[PhotonLauncher] ✓ Client reconnection complete!");
         reconnecting = false;
-    }
-
-    // Utility to stop coroutine safely by starting a new enumerator to stop it by name
-    private void StopCoroutineSafe(IEnumerator enumerator)
-    {
-        try { StopCoroutine(enumerator); } catch { /* ignore */ }
     }
 
     IEnumerator CheckGameState()
     {
-        yield return new WaitForSeconds(1);
-        if (PhotonNetwork.InRoom)
+        yield return new WaitForSeconds(1f);
+
+        if (!PhotonNetwork.InRoom || PhotonNetwork.CurrentRoom == null)
         {
-            //Read game property from photon
-            bool isRunning = (bool)PhotonNetwork.CurrentRoom.CustomProperties["GameRunning"];
-
-            if (StartGameButton != null) StartGameButton.gameObject.SetActive(!isRunning);
-            if (EndGameButton != null) EndGameButton.gameObject.SetActive(isRunning);
-
-            playerPanel.SetActive(false);
-
-
+            yield break;
         }
+
+        bool isRunning = PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("GameRunning", out object gameRunningObj)
+            && gameRunningObj is bool running
+            && running;
+
+        if (StartGameButton != null) StartGameButton.gameObject.SetActive(!isRunning);
+        if (EndGameButton != null) EndGameButton.gameObject.SetActive(isRunning);
+        if (playerPanel != null) playerPanel.SetActive(false);
     }
 
-    // -------------------------
-    // MASTER SWITCH — do NOT force clients to quit
-    // -------------------------
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
+        //let check before the switch master if the game is runing true
+        bool isRunning = PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("GameRunning", out object gameRunningObj)            && gameRunningObj is bool running
+            && running;
+        if (isForcedend)
+        {
+            Debug.Log("[PhotonLauncher] Ignoring master switch because forced restart is in progress.");
+            return;
+        }
+        if (!isRunning)
+        {
+            return;
+        }
+
         Debug.Log("[PhotonLauncher] MasterClient switched to: " + (newMasterClient != null ? newMasterClient.NickName : "null"));
 
-        // If this machine is the server build, try to reclaim master if possible
-        if (isServer)
+        if (!isServer)
         {
-            // If server isn't master anymore, attempt to set master back to local player
-            if (!PhotonNetwork.LocalPlayer.IsMasterClient)
-            {
-                Debug.Log("[PhotonLauncher] Server reclaiming master...");
-                try
-                {
-                    PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogWarning("[PhotonLauncher] Failed to SetMasterClient(): " + ex.Message);
-                }
-            }
-        }
-        else
-        {
-            // clients remain running — do not quit
             Debug.Log("[PhotonLauncher] Client: master changed; staying alive.");
+            return;
+        }
+
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            return;
+        }
+
+        Debug.Log("[PhotonLauncher] Server reclaiming master...");
+
+        try
+        {
+            PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning("[PhotonLauncher] Failed to SetMasterClient(): " + ex.Message);
         }
     }
 
-    // -------------------------
-    // PLAYER / UI management — adapted from your original code
-    // -------------------------
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("[PhotonLauncher] Player Entered: " + newPlayer.NickName);
 
-        // Only create UI on the MasterClient (server)
         if (PhotonNetwork.IsMasterClient)
         {
             CreatePlayerRoom(newPlayer);
@@ -507,6 +493,11 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
     public void LoadLocalPlayerData()
     {
+        if (PhotonNetwork.LocalPlayer == null)
+        {
+            return;
+        }
+
         if (InfoRoleText != null)
         {
             InfoRoleText.text = "Device ID: " + PlayerPrefs.GetString($"{PhotonNetwork.LocalPlayer.NickName}_role", "No Role");
@@ -523,11 +514,13 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         if (playerRooms.Exists(x => x.playerID.text == player.NickName))
             return;
 
-        if (playerRoomEntryPrefab == null || contentParent == null) return;
+        if (playerRoomEntryPrefab == null || contentParent == null)
+            return;
 
         GameObject entryObj = Instantiate(playerRoomEntryPrefab, contentParent);
         PlayerRoom room = entryObj.GetComponent<PlayerRoom>();
-        if (room == null) return;
+        if (room == null)
+            return;
 
         PlayerRoomData data = new PlayerRoomData
         {
@@ -536,7 +529,6 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
             video = "",
             roleOptions = new List<string> { "Device1", "Device2", "Device3", "Device4", "Device5" },
             videoOptions = new List<string> { "Video1", "Video2", "Video3", "Video4", "Video5" },
-
             onAssign = OnAssignPlayer,
             onRemove = OnRemovePlayer,
             onFlash = OnFlashPlayer
@@ -544,7 +536,6 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
 
         room.Initialize(data);
         room.LoadPlayerPrefData();
-
         playerRooms.Add(room);
     }
 
@@ -576,16 +567,18 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_RemovePlayer(string playerId)
     {
-        if (PhotonNetwork.LocalPlayer.NickName == playerId)
-        {
-            // Delete all player pref data for role and device
-            PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+        if (PhotonNetwork.LocalPlayer.NickName != playerId)
+            return;
 
-            // Keep original behavior: quit app for removed device (if you want different behavior, change here)
-            PhotonNetwork.LeaveRoom();
-            Application.Quit();
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom(false);
         }
+
+        Application.Quit();
     }
 
     private void OnFlashPlayer(string playerId)
@@ -597,31 +590,36 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     void RPC_FlashDevice(string playerId)
     {
         if (PhotonNetwork.LocalPlayer.NickName == playerId)
+        {
             StartCoroutine(FlashScreen());
+        }
     }
 
     private IEnumerator FlashScreen()
     {
-        if (imageToFlash == null) yield break;
+        if (imageToFlash == null)
+            yield break;
+
         imageToFlash.SetActive(true);
         yield return new WaitForSeconds(2f);
         imageToFlash.SetActive(false);
     }
 
-    // === GAME FLOW ===
     public void StartGame()
     {
-        if (!PhotonNetwork.IsMasterClient) return;
+        if (!PhotonNetwork.IsMasterClient || PhotonNetwork.CurrentRoom == null)
+            return;
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(
             new ExitGames.Client.Photon.Hashtable { { "GameRunning", true } }
         );
+
         if (!PhotonNetwork.InRoom)
             return;
+
         PhotonNetwork.LoadLevel("VideoScene");
-        //PhotonNetwork.LoadLevel("VideoScene2");
         photonView.RPC("RPC_StartGameAll", RpcTarget.All);
-        //Get Player List without the master Client
+
         List<Player> nonMasterPlayers = new List<Player>();
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
@@ -629,19 +627,17 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
             {
                 nonMasterPlayers.Add(PhotonNetwork.PlayerList[i]);
             }
-            
         }
-        for(int i =0; i< nonMasterPlayers.Count; i++)
+
+        for (int i = 0; i < nonMasterPlayers.Count; i++)
         {
             if (!nonMasterPlayers[i].IsMasterClient)
             {
-                //photonView.RPC("AssignColorId", RpcTarget.AllBuffered, nonMasterPlayers[i].NickName, i);
+                // photonView.RPC("AssignColorId", RpcTarget.AllBuffered, nonMasterPlayers[i].NickName, i);
             }
-            
-
         }
-        playerPanel.SetActive(false);
 
+        if (playerPanel != null) playerPanel.SetActive(false);
         if (StartGameButton != null) StartGameButton.gameObject.SetActive(false);
         if (EndGameButton != null) EndGameButton.gameObject.SetActive(true);
     }
@@ -658,15 +654,14 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
     [PunRPC]
     void AssignColorId(string playerId, int colorId)
     {
-        if (PhotonNetwork.LocalPlayer.NickName == playerId)
+        if (PhotonNetwork.LocalPlayer.NickName != playerId)
+            return;
+
+        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
         {
-            //Update Custom propertie of ColorID of the player
-            ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable
-            {
-                { "CharacterId", colorId }
-            };
-            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        }
+            { "CharacterId", colorId }
+        };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 
     private IEnumerator StartGameRoutine()
@@ -675,86 +670,217 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         if (gameObjectToDisableOnStart != null) gameObjectToDisableOnStart.SetActive(false);
     }
 
+    
+
     public void EndGame()
     {
-        if (!isServer) return;
+        if (!isServer || PhotonNetwork.CurrentRoom == null)
+            return;
+
+        string restartToken = DateTime.UtcNow.Ticks.ToString();
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(
-            new ExitGames.Client.Photon.Hashtable { { "GameRunning", false } }
+            new ExitGames.Client.Photon.Hashtable
+            {
+                { "GameRunning", false },
+                { "RestartToken", restartToken }
+            }
         );
 
-        photonView.RPC("RPC_RestartAll", RpcTarget.All);
+        lastRestartToken = restartToken;
+        StartCoroutine(EndGameRoutine());
+
         if (playerPanel != null) playerPanel.SetActive(true);
         if (StartGameButton != null) StartGameButton.gameObject.SetActive(true);
         if (EndGameButton != null) EndGameButton.gameObject.SetActive(false);
     }
 
-    private bool isForcedend;
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        photonView.RPC("RPC_RestartAll", RpcTarget.All);
+        yield return new WaitForSeconds(0.8f);
+        BeginForcedRestart();
+    }
 
     [PunRPC]
     void RPC_RestartAll()
     {
+        Debug.Log("[PhotonLauncher] RPC_RestartAll received");
+        BeginForcedRestart();
+    }
+
+    private void BeginForcedRestart()
+    {
+        if (isForcedend)
+        {
+            return;
+        }
+
         isForcedend = true;
         StartCoroutine(RestartConnectionRoutine());
-
     }
 
     private IEnumerator RestartConnectionRoutine()
     {
         Debug.Log("[PhotonLauncher] Restarting connection...");
 
-        // Clients: fully disconnect then reload ServerConfig scene and reconnect
-        if (!isServer)
+        StopHeartbeatLoop();
+        CancelInvoke(nameof(Connect));
+
+        if (PhotonNetwork.InRoom)
         {
-            yield return new WaitForSeconds(1);
-            PhotonNetwork.LeaveRoom();
-            yield return new WaitForSeconds(1);
+            Debug.Log("[PhotonLauncher] Leaving current room...");
+
+            if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom != null)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
+            }
+
+            PhotonNetwork.LeaveRoom(false);
+
+            float leaveDeadline = Time.realtimeSinceStartup + 8f;
+            while (PhotonNetwork.InRoom && Time.realtimeSinceStartup < leaveDeadline)
+            {
+                yield return null;
+            }
+
+            if (PhotonNetwork.InRoom)
+            {
+                Debug.LogWarning("[PhotonLauncher] LeaveRoom timed out, forcing disconnect.");
+            }
+        }
+
+        ClientState state = PhotonNetwork.NetworkClientState;
+        if (PhotonNetwork.IsConnected || (state != ClientState.Disconnected && state != ClientState.PeerCreated))
+        {
+            Debug.Log($"[PhotonLauncher] Disconnecting from Photon. Current state: {state}");
             PhotonNetwork.Disconnect();
 
-            // Wait until fully disconnected
-            while (PhotonNetwork.IsConnected || PhotonNetwork.IsConnectedAndReady)
+            float disconnectDeadline = Time.realtimeSinceStartup + 10f;
+            while ((PhotonNetwork.IsConnected || PhotonNetwork.NetworkClientState != ClientState.Disconnected)
+                && Time.realtimeSinceStartup < disconnectDeadline)
+            {
                 yield return null;
-                
+            }
 
-            // Load ServerConfig scene
-            AsyncOperation loadOp = SceneManager.LoadSceneAsync(0);
-            isForcedend = false;
-            while (!loadOp.isDone)
-                yield return null;
-                DestroyImmediate(gameObject);
+            if (PhotonNetwork.IsConnected || PhotonNetwork.NetworkClientState != ClientState.Disconnected)
+            {
+                Debug.LogWarning($"[PhotonLauncher] Disconnect timed out. Final state before scene reload: {PhotonNetwork.NetworkClientState}");
+            }
+        }
 
-            // small wait
-            yield return null;
+        reconnecting = false;
+        joinedRoom = false;
+        isForcedend = false;
 
-            // Re-enable UI only for clients
-            if (!isServer && gameObjectToDisableOnStart != null)
-                gameObjectToDisableOnStart.SetActive(true);
+        SceneManager.LoadScene(0);
+        Destroy(gameObject);
+    }
 
-            // Reconnect
-            yield return new WaitForSeconds(0.2f);
-            //Connect();
+    private void ConfigureIdentity()
+    {
+        string userId = ResolveStableUserId();
+
+        if (PhotonNetwork.AuthValues == null)
+        {
+            PhotonNetwork.AuthValues = new AuthenticationValues();
+        }
+
+        PhotonNetwork.AuthValues.UserId = userId;
+        PhotonNetwork.NickName = userId.Substring(0, Math.Min(8, userId.Length));
+        localPlayerNickName = PhotonNetwork.NickName;
+    }
+
+    private string ResolveStableUserId()
+    {
+        if (PlayFabLogin.Instance != null && !string.IsNullOrWhiteSpace(PlayFabLogin.Instance.playFabId))
+        {
+            return PlayFabLogin.Instance.playFabId.Trim();
+        }
+
+        if (!string.IsNullOrWhiteSpace(localPlayerNickName))
+        {
+            return localPlayerNickName.Trim();
+        }
+
+        string fallbackId = SystemInfo.deviceUniqueIdentifier;
+        if (string.IsNullOrWhiteSpace(fallbackId))
+        {
+            fallbackId = "001" + UnityEngine.Random.Range(1000, 9999);
+        }
+
+        return fallbackId.Trim();
+    }
+
+    private string GetConfiguredRoomName()
+    {
+        return string.IsNullOrWhiteSpace(roomName) ? "eventRoom" : roomName.Trim();
+    }
+
+    private RoomOptions BuildRoomOptions()
+    {
+        return new RoomOptions
+        {
+            MaxPlayers = (byte)maxPlayers,
+            PublishUserId = true,
+            PlayerTtl = playerTtlMs,
+            EmptyRoomTtl = emptyRoomTtlMs,
+            CleanupCacheOnLeave = true
+        };
+    }
+
+    private void JoinConfiguredRoom()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            joinedRoom = true;
+            return;
+        }
+
+        string targetRoom = GetConfiguredRoomName();
+        Debug.Log($"[PhotonLauncher] Joining configured room '{targetRoom}' (isServer={isServer})");
+
+        if (isServer)
+        {
+            PhotonNetwork.JoinOrCreateRoom(targetRoom, BuildRoomOptions(), TypedLobby.Default);
         }
         else
         {
-            // server just loads scene
-            //Debug.Log("check this");
-            //SceneManager.LoadSceneAsync("ServerConfig");
-            isForcedend = true;
-            yield return new WaitForSeconds(1.5f);
-            PhotonNetwork.Disconnect();
+            PhotonNetwork.JoinRoom(targetRoom);
+        }
+    }
 
-            // Wait until fully disconnected
-            while (PhotonNetwork.IsConnected || PhotonNetwork.IsConnectedAndReady)
-                yield return null;
-                DestroyImmediate(gameObject);
+    private void RetryJoinConfiguredRoom()
+    {
+        if (statusText != null)
+        {
+            statusText.text = isServer ? "Recovering server room..." : "Waiting for server to start...";
+        }
 
-            // Load ServerConfig scene
-            AsyncOperation loadOp = SceneManager.LoadSceneAsync(0);
-            
-            /*while (!loadOp.isDone)
-                yield return null;*/
-                
-            
+        CancelInvoke(nameof(Connect));
+        Invoke(nameof(Connect), 2f);
+    }
+
+    private void TryRecoverConnection()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            joinedRoom = true;
+            return;
+        }
+
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            JoinConfiguredRoom();
+            return;
+        }
+
+        ClientState state = PhotonNetwork.NetworkClientState;
+        if (state == ClientState.Disconnected || state == ClientState.PeerCreated)
+        {
+            Connect();
         }
     }
 }

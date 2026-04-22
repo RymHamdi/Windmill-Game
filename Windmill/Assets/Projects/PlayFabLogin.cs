@@ -44,6 +44,8 @@ public class PlayFabLogin : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
+            CancelInvoke(nameof(LoadAfterwhile));
+
             if (!isConnected)
             {
                 LoginToPlayFab();
@@ -52,11 +54,11 @@ public class PlayFabLogin : MonoBehaviour
             {
                 if (isServer)
                 {
-                    Invoke("LoadAfterwhile", 2f);
+                    Invoke("LoadAfterwhile", 1f);
                 }
                 else
                 {
-                    Invoke("LoadAfterwhile", 3.5f);
+                    Invoke("LoadAfterwhile", 1f);
                 }
                 
             }
@@ -83,7 +85,7 @@ public class PlayFabLogin : MonoBehaviour
     void LoginToPlayFab()
     {
         // Choose CustomId: use `uniqueId` when running as server, otherwise device unique id
-        string customIdToUse = SystemInfo.deviceUniqueIdentifier;
+        string customIdToUse = SystemInfo.deviceUniqueIdentifier; // Add random suffix to avoid collisions in testing
         if (isServer)
         {
             if (!string.IsNullOrEmpty(uniqueId))
