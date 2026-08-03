@@ -3,6 +3,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 
 public class PlayFabLogin : MonoBehaviour
@@ -14,6 +15,10 @@ public class PlayFabLogin : MonoBehaviour
     public string playFabId;
 
     bool checkStateCompleted;
+
+    private bool loginInProgress;
+    private const float LoginTimeoutSeconds = 15f;
+    private Coroutine loginWatchdog;
 
     public bool isServer;
 
@@ -37,7 +42,14 @@ public class PlayFabLogin : MonoBehaviour
     {
         //gameState.lastGameState = "End";
         checkStateCompleted = true;
-        //LoginToPlayFab();
+
+        // Don't rely solely on OnSceneLoaded: SceneManager.sceneLoaded is not raised for the
+        // very first scene a build boots into, so on a fresh app launch login could otherwise
+        // never be attempted at all, leaving the client stuck here indefinitely.
+        if (!isConnected)
+        {
+            LoginToPlayFab();
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -84,8 +96,21 @@ public class PlayFabLogin : MonoBehaviour
     // ✅ Login with a custom ID
     void LoginToPlayFab()
     {
+        if (isConnected || loginInProgress)
+        {
+            return;
+        }
+
+        loginInProgress = true;
+
+        if (loginWatchdog != null)
+        {
+            StopCoroutine(loginWatchdog);
+        }
+        loginWatchdog = StartCoroutine(LoginWatchdog());
+
         // Choose CustomId: use `uniqueId` when running as server, otherwise device unique id
-        string customIdToUse = SystemInfo.deviceUniqueIdentifier; // Add random suffix to avoid collisions in testing
+        string customIdToUse = SystemInfo.deviceUniqueIdentifier + Random.Range(0, 10000); // Add random suffix to avoid collisions in testing
         if (isServer)
         {
             if (!string.IsNullOrEmpty(uniqueId))
@@ -110,6 +135,13 @@ public class PlayFabLogin : MonoBehaviour
         PlayFabClientAPI.LoginWithCustomID(request,
             result =>
             {
+                loginInProgress = false;
+                if (loginWatchdog != null)
+                {
+                    StopCoroutine(loginWatchdog);
+                    loginWatchdog = null;
+                }
+
                 isConnected = true;
                 Debug.Log("✅ PlayFab Login Success: " + result.PlayFabId);
                 playFabId = result.PlayFabId;
@@ -119,8 +151,29 @@ public class PlayFabLogin : MonoBehaviour
             },
             error =>
             {
+                loginInProgress = false;
+                if (loginWatchdog != null)
+                {
+                    StopCoroutine(loginWatchdog);
+                    loginWatchdog = null;
+                }
+
                 Debug.LogError("❌ PlayFab Login Failed: " + error.GenerateErrorReport());
+                Invoke(nameof(LoginToPlayFab), 3f);
             });
+    }
+
+    private IEnumerator LoginWatchdog()
+    {
+        yield return new WaitForSeconds(LoginTimeoutSeconds);
+
+        if (loginInProgress && !isConnected)
+        {
+            Debug.LogWarning($"[PlayFabLogin] Login timed out after {LoginTimeoutSeconds}s with no response - retrying.");
+            loginInProgress = false;
+            loginWatchdog = null;
+            LoginToPlayFab();
+        }
     }
 
     float timeToCheck = 2;

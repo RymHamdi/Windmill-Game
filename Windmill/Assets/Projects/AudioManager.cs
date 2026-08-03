@@ -84,8 +84,8 @@ public class AudioManager : MonoBehaviour
     {
         if (!Screen.fullScreen)
         {
-            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-            Screen.fullScreen = true;
+           // Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            //Screen.fullScreen = true;
         }
     }
 }

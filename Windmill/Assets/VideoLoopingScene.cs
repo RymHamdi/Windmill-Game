@@ -27,6 +27,16 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
     public string eventTriggerstart;
     public string eventTriggerEnd;
 
+    // Safety nets so one client's broken/slow video file can't freeze the whole room forever.
+    private const float VideoPrepareTimeoutSeconds = 12f;
+    // Small delay before we start trusting "playedVideo" properties, so a leftover "false" from
+    // the previous round can't be mistaken for an instant finish and skip the scene immediately.
+    private const float MinGraceBeforeCheckSeconds = 3f;
+    // Extra time allowed on top of videoTimeToSwitch1 (the expected video length) before we give
+    // up on a client that never reports back and force everyone else forward anyway.
+    public float maxOvertimeAfterVideoStart = 30f;
+    private float elapsedSinceVideoStart = 0f;
+
     // 🔹 NEW: Loaded from JSON
     private Dictionary<string, string> videoPathMap = new Dictionary<string, string>();
 
@@ -64,86 +74,78 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
         if (!PhotonLauncher.Instance.isServer)
             return;
 
-        if (video1Started)
+        if (!video1Started)
+            return;
+
+        elapsedSinceVideoStart += Time.deltaTime;
+        timerVideo1 += Time.deltaTime;
+
+        if (timerVideo1 >= 1f)
         {
-            timerVideo1 += Time.deltaTime;
+            videoTimeToSwitch1 -= 1;
+            timerVideo1 = 0f;
+        }
 
-            if (timerVideo1 >= 1f)
+        if (videoTimeToSwitch1 <= 0.04f)
+        {
+            videoTimeToSwitch1 -= Time.deltaTime;
+        }
+
+        infoText.text = videoTimeToSwitch1 > 0
+            ? $"Server: Playing Video 1 - switching Scene in {videoTimeToSwitch1} seconds"
+            : "Server: Waiting for all players to finish their video...";
+
+        if (elapsedSinceVideoStart < MinGraceBeforeCheckSeconds)
+            return;
+
+        bool allFinished = AllPlayersFinishedVideo();
+        // Once videoTimeToSwitch1 crosses zero it keeps counting down into negative numbers,
+        // so -videoTimeToSwitch1 is exactly how far past the expected video length we are.
+        bool overtime = videoTimeToSwitch1 <= 0 && (-videoTimeToSwitch1) >= maxOvertimeAfterVideoStart;
+
+        if (!allFinished && !overtime)
+        {
+            return;
+        }
+
+        if (!allFinished)
+        {
+            Debug.LogWarning($"[VideoLoopingScene] Forcing scene advance {maxOvertimeAfterVideoStart}s past the expected video length - at least one client never reported finishing its video.");
+        }
+
+        infoText.text = "";
+
+        if (ShowControlTrigger.Instance != null)
+        {
+            ShowControlTrigger.Instance.SendTrigger(eventTriggerEnd);
+        }
+
+        video1Started = false;
+        elapsedSinceVideoStart = 0f;
+
+        if (!string.IsNullOrEmpty(sceneName))
+        {
+            PhotonNetwork.LoadLevel(sceneName);
+        }
+        else if (PhotonLauncher.Instance != null && PhotonLauncher.Instance.isServer)
+        {
+            PhotonLauncher.Instance.EndGame();
+        }
+    }
+
+    private bool AllPlayersFinishedVideo()
+    {
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.TryGetValue("playedVideo", out object playedVideoObj)
+                && playedVideoObj is bool playedVideo
+                && playedVideo)
             {
-                videoTimeToSwitch1 -= 1;
-                timerVideo1 = 0f;
-            }
-
-            if (videoTimeToSwitch1 <= 0.04f)
-            {
-                videoTimeToSwitch1 -= Time.deltaTime;
-            }
-
-            infoText.text =
-                $"Server: Playing Video 1 - switching Scene in {videoTimeToSwitch1} seconds";
-
-            if (videoTimeToSwitch1 <= 0)
-            {
-
-                infoText.text = "";
-
-                if (ShowControlTrigger.Instance != null)
-                {
-                    ShowControlTrigger.Instance.SendTrigger(eventTriggerEnd);
-                }
-
-                if (!string.IsNullOrEmpty(sceneName))
-                {
-                    //PhotonNetwork.LoadLevel(sceneName);
-                    //Let's check if all player have finished the video before to change the scene
-                    bool allFinished = true;
-                    foreach (var player in PhotonNetwork.PlayerList)
-                    {
-                        object playedVideoObj;
-                        if (player.CustomProperties.TryGetValue("playedVideo", out playedVideoObj))
-                        {
-                            bool playedVideo = (bool)playedVideoObj;
-                            if (playedVideo)
-                            {
-                                allFinished = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (allFinished)
-                    {
-                        video1Started = false;
-                        PhotonNetwork.LoadLevel(sceneName);
-                    }
-                }
-                else
-                {
-                    if (PhotonLauncher.Instance != null && PhotonLauncher.Instance.isServer)
-                    {
-                        bool allFinished = true;
-                        foreach (var player in PhotonNetwork.PlayerList)
-                        {
-                            object playedVideoObj;
-                            if (player.CustomProperties.TryGetValue("playedVideo", out playedVideoObj))
-                            {
-                                bool playedVideo = (bool)playedVideoObj;
-                                if (playedVideo)
-                                {
-                                    allFinished = false;
-                                    break;
-                                }
-                            }
-                        }
-                        if (allFinished)
-                        {
-                            video1Started = false;
-                            PhotonLauncher.Instance.EndGame();
-                        }
-
-                    }
-                }
+                return false;
             }
         }
+
+        return true;
     }
 
     // ================= RPC =================
@@ -297,6 +299,7 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
         videoPlayer1.source = VideoSource.Url;
         videoPlayer1.url = fullPath;
+        videoPlayer1.errorReceived += OnVideoError;
         videoPlayer1.Prepare();
 
         // Subscribe to video end event
@@ -327,8 +330,20 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
 
     IEnumerator WaitForVideoEnd(VideoPlayer vp)
     {
-        // Wait until video is prepared (length available)
-        yield return new WaitUntil(() => vp.isPrepared);
+        // Wait until video is prepared (length available), but never longer than the timeout -
+        // a stuck/failed Prepare() (bad path, locked file, slow disk) must not freeze the whole room.
+        float prepareElapsed = 0f;
+        while (!vp.isPrepared)
+        {
+            prepareElapsed += Time.deltaTime;
+            if (prepareElapsed >= VideoPrepareTimeoutSeconds)
+            {
+                Debug.LogError($"❌ Video failed to prepare within {VideoPrepareTimeoutSeconds}s ({vp.url}). Skipping it.");
+                OnVideoEnd(vp);
+                yield break;
+            }
+            yield return null;
+        }
 
         double triggerTime = vp.length - 2.0; // 2 seconds before real end
 
@@ -341,12 +356,19 @@ public class VideoLoopingScene : MonoBehaviourPunCallbacks
         OnVideoEnd(vp);
     }
 
+    private void OnVideoError(VideoPlayer source, string message)
+    {
+        Debug.LogError($"❌ VideoPlayer error ({source.url}): {message}. Treating as finished.");
+        OnVideoEnd(source);
+    }
+
     void OnDisable()
     {
         // Unsubscribe from video end event
         if (videoPlayer1 != null)
         {
             videoPlayer1.loopPointReached -= OnVideoEnd;
+            videoPlayer1.errorReceived -= OnVideoError;
         }
     }
 }
