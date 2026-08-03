@@ -76,7 +76,7 @@ public class PhotonLauncher : MonoBehaviourPunCallbacks
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         PhotonNetwork.SendRate = 30;
         PhotonNetwork.SerializationRate = 15;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
 
 #if UNITY_STANDALONE
         SystemSleepBlocker.BlockSleep(true);

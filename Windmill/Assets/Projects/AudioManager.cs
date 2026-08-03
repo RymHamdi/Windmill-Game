@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         InitializePool();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
     }
 
     private void InitializePool()

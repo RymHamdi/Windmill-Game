@@ -42,6 +42,10 @@ public class SecretLanguageManager : MonoBehaviour
     public Action<bool> OnClothChange;
 
     public FadeCanvas fadeCanvas;
+    private Coroutine syncedGameFlowCoroutine;
+    private const string Game3StartTimePropertyKey = "Game3StartTime";
+    private const float LeaderboardTransitionDuration = 1f;
+    private const float RoundCompletedBuffer = 1f;
 
 
     private void Awake()
@@ -60,21 +64,16 @@ public class SecretLanguageManager : MonoBehaviour
         }
     }
 
-    public void StartRound(int roundIndex)
+    public bool StartRound(int roundIndex)
     {
-        //currentBladeImage.enabled = false;
-        //ClothChild.gameObject.SetActive(false);
-        //ToggleBtn.gameObject.SetActive(false);
         currentRoundIndex = roundIndex;
         int totalModelsNeeded = 0;
         DisbaleAllBladesController();
-        //RectTransform rt = formUiParent.GetComponent<RectTransform>();
+        currentUsedRoundPropSyncs.Clear();
+        isroundCompleted = false;
+
         if (currentRoundIndex == 1)
         {
-            /*rt.anchorMin = new Vector2(0.5f, 0.5f);
-            rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.pivot = new Vector2(0.5f, 0.5f);*/
-
             totalModelsNeeded = 3;
             saveTime = 5;
             timeToResolve = 4;
@@ -83,9 +82,6 @@ public class SecretLanguageManager : MonoBehaviour
         }
         else if (currentRoundIndex == 2)
         {
-            /*rt.anchorMin = new Vector2(0f, 0.5f);
-            rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 4;
             saveTime = 8;
             timeToResolve = 4;
@@ -94,9 +90,6 @@ public class SecretLanguageManager : MonoBehaviour
         }
         else if (currentRoundIndex == 3)
         {
-            /*rt.anchorMin = new Vector2(0f, 0.5f);
-            rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot = new Vector2(0f, 0.5f);*/
             totalModelsNeeded = 5;
             saveTime = 13;
             timeToResolve = 4;
@@ -106,20 +99,15 @@ public class SecretLanguageManager : MonoBehaviour
         else
         {
             Debug.Log("All rounds completed!");
-            fadeCanvas.FadeIn();
-            StartCoroutine(ShowLeaderboardAfterDelay(1));
-            //ToDo Show Leaderboard
-            // Handle end of game logic here
-            return;
+            return false;
         }
         modelIndex = 0;
         for (int i = 0; i < totalModelsNeeded; i++)
         {
             StartCoroutine(PrepareFormModellUI(1, i));
         }
-        //scrollRect.horizontalNormalizedPosition = 0;
         currentRoundPropSync = null;
-        StartCoroutine(StartPlayinngRoundAfterDelay(saveTime));
+        return true;
     }
 
     public void OnClickOnClothChange()
@@ -202,14 +190,17 @@ public class SecretLanguageManager : MonoBehaviour
 
     public void StartPlayerRound(bool needToclear)
     {
+        SetupPlayerRound(needToclear);
+        StartCoroutine(RunCrono());
+    }
+
+    private void SetupPlayerRound(bool needToclear)
+    {
         if (needToclear)
         {
             ClearFormModellUI();
         }
-        StartCoroutine(RunCrono());
-        //scrollRect.horizontal = false;
         currentRoundPropSync = currentUsedRoundPropSyncs[modelIndex];
-        //currentBladeImage.sprite = currentRoundPropSync.bigIconSprite;
         bladeMouseRotator.EnableRotation();
         bladeMouseRotator.ResetRotation();
     }
@@ -370,6 +361,244 @@ public class SecretLanguageManager : MonoBehaviour
             StartPlayerRound(false);
         }
 
+    }
+
+    private IEnumerator RunSyncedMemorizePhase(double endTime)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("G3_MEMORIZE");
+        }
+
+        while (PhotonNetwork.Time < endTime)
+        {
+            int remainingSeconds = Mathf.Max(1, Mathf.CeilToInt((float)(endTime - PhotonNetwork.Time)));
+            UpdateMemorizeText(remainingSeconds);
+            yield return null;
+        }
+
+        infoText.text = "";
+        infoSecondsText.text = "";
+    }
+
+    private IEnumerator RunSyncedResolvePhase(double endTime)
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            ShowControlTrigger.Instance?.SendTrigger("G3_PLACE");
+        }
+
+        while (PhotonNetwork.Time < endTime)
+        {
+            int remainingSeconds = Mathf.Max(0, Mathf.CeilToInt((float)(endTime - PhotonNetwork.Time)));
+            UpdateResolveText(remainingSeconds);
+            yield return null;
+        }
+
+        ShowTimeIsOverText();
+        infoSecondsText.text = "";
+        bladeMouseRotator.DisableRotation();
+    }
+
+    private void UpdateMemorizeText(int seconds)
+    {
+        switch (Language.Instance.languageData.currentLangState)
+        {
+            case LangState.English:
+                infoText.text = "Memorize the secret message!";
+                break;
+            case LangState.Frensh:
+                infoText.text = "Mémorisez le message secret!";
+                break;
+            case LangState.Netherland:
+                infoText.text = "Onthoud het geheime bericht!";
+                break;
+            case LangState.Germand:
+                infoText.text = "Merken Sie sich die geheime Nachricht!";
+                break;
+            case LangState.Spanish:
+                infoText.text = "Memoriza el mensaje secreto!";
+                break;
+            case LangState.Chineese:
+                infoText.text = "记住秘密信息!";
+                break;
+            case LangState.Italian:
+                infoText.text = "Memorizza il messaggio segreto!";
+                break;
+            default:
+                infoText.text = "Memorize the secret message!";
+                break;
+        }
+
+        infoSecondsText.text = seconds.ToString();
+    }
+
+    private void UpdateResolveText(int seconds)
+    {
+        switch (Language.Instance.languageData.currentLangState)
+        {
+            case LangState.English:
+                infoText.text = "Place the blade in the right position";
+                break;
+            case LangState.Frensh:
+                infoText.text = "Placez la lame dans la bonne position";
+                break;
+            case LangState.Netherland:
+                infoText.text = "Plaats het blad in de juiste positie";
+                break;
+            case LangState.Germand:
+                infoText.text = "Bringen Sie die Klinge in die richtige Position";
+                break;
+            case LangState.Spanish:
+                infoText.text = "Coloca la hoja en la posición correcta";
+                break;
+            case LangState.Chineese:
+                infoText.text = "将刀片放在正确的位置";
+                break;
+            case LangState.Italian:
+                infoText.text = "Posiziona la lama nella posizione corretta";
+                break;
+            default:
+                infoText.text = "Place the blade in the right position";
+                break;
+        }
+
+        infoSecondsText.text = seconds.ToString();
+    }
+
+    private void ShowTimeIsOverText()
+    {
+        switch (Language.Instance.languageData.currentLangState)
+        {
+            case LangState.English:
+                infoText.text = "Time is over!";
+                break;
+            case LangState.Frensh:
+                infoText.text = "Le temps est écoulé !";
+                break;
+            case LangState.Netherland:
+                infoText.text = "De tijd is om!";
+                break;
+            case LangState.Germand:
+                infoText.text = "Die Zeit ist vorbei!";
+                break;
+            case LangState.Spanish:
+                infoText.text = "¡Se acabó el tiempo!";
+                break;
+            case LangState.Chineese:
+                infoText.text = "时间到了！";
+                break;
+            case LangState.Italian:
+                infoText.text = "Il tempo è scaduto!";
+                break;
+            default:
+                infoText.text = "Time is over!";
+                break;
+        }
+    }
+
+    private void ShowRoundCompletedText()
+    {
+        switch (Language.Instance.languageData.currentLangState)
+        {
+            case LangState.English:
+                infoText.text = "Round Completed!";
+                break;
+            case LangState.Frensh:
+                infoText.text = "Manche terminée !";
+                break;
+            case LangState.Netherland:
+                infoText.text = "Ronde voltooid!";
+                break;
+            case LangState.Germand:
+                infoText.text = "Runde abgeschlossen!";
+                break;
+            case LangState.Spanish:
+                infoText.text = "¡Ronda completada!";
+                break;
+            case LangState.Chineese:
+                infoText.text = "回合完成！";
+                break;
+            case LangState.Italian:
+                infoText.text = "Round completato!";
+                break;
+            default:
+                infoText.text = "Round Completed!";
+                break;
+        }
+
+        infoSecondsText.text = "";
+    }
+
+    private void FinalizeCurrentBlade()
+    {
+        if (modelIndex > currentBladesController.GetActivatedImageCount() && modelIndex <= currentUsedRoundPropSyncs.Count)
+        {
+            InstantiteModelUI(bladeMouseRotator.GetCurrentRotation());
+        }
+    }
+
+    private IEnumerator WaitUntilPhotonTime(double targetTime)
+    {
+        while (PhotonNetwork.Time < targetTime)
+        {
+            yield return null;
+        }
+    }
+
+    private IEnumerator RunSyncedGameFlow(double startTime)
+    {
+        yield return new WaitUntil(() => fullUsedRoundPropSyncs.Count >= 12);
+        yield return WaitUntilPhotonTime(startTime);
+
+        double cursor = startTime;
+
+        for (int round = 1; round <= 3; round++)
+        {
+            if (!StartRound(round))
+            {
+                yield break;
+            }
+
+            double memorizeEndTime = cursor + saveTime;
+            yield return RunSyncedMemorizePhase(memorizeEndTime);
+
+            float resolveDurationPerBlade = Mathf.FloorToInt(timeToResolve) + 1f;
+
+            for (int bladeIndex = 0; bladeIndex < currentUsedRoundPropSyncs.Count; bladeIndex++)
+            {
+                modelIndex = bladeIndex;
+                SetupPlayerRound(bladeIndex == 0);
+
+                double bladeEndTime = memorizeEndTime + ((bladeIndex + 1) * resolveDurationPerBlade);
+                yield return RunSyncedResolvePhase(bladeEndTime);
+
+                modelIndex = bladeIndex + 1;
+                FinalizeCurrentBlade();
+            }
+
+            isroundCompleted = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ShowControlTrigger.Instance?.SendTrigger("G3_ROUND_DONE");
+            }
+
+            ShowRoundCompletedText();
+
+            double roundCompleteTime = memorizeEndTime + (currentUsedRoundPropSyncs.Count * resolveDurationPerBlade) + RoundCompletedBuffer;
+            yield return WaitUntilPhotonTime(roundCompleteTime);
+
+            isroundCompleted = false;
+            currentRoundPropSync = null;
+            currentUsedRoundPropSyncs.Clear();
+            cursor = roundCompleteTime;
+        }
+
+        fadeCanvas.FadeIn();
+        yield return new WaitForSeconds(LeaderboardTransitionDuration * 0.5f);
+        yield return new WaitForSeconds(LeaderboardTransitionDuration * 0.5f);
+        fadeCanvas.FadeOut();
+        leaderboard.SetActive(true);
     }
 
     private void ClearFormModellUI()
@@ -543,6 +772,8 @@ public class SecretLanguageManager : MonoBehaviour
 
     public void SetupWithSyncedSequence(List<SyncedRoundProp> currentSequence)
     {
+        fullUsedRoundPropSyncs.Clear();
+
         foreach (var syncedProp in currentSequence)
         {
             var propSync = secretLanguageRoundPropSyncs.Find(p => p.itemId == syncedProp.itemId);
@@ -568,8 +799,33 @@ public class SecretLanguageManager : MonoBehaviour
 
     public IEnumerator RunAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        StartRound(1);
+        yield return new WaitUntil(() => PhotonNetwork.InRoom && SecretLanguageRoundSyncManager.Instance != null);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            double startTime = PhotonNetwork.Time + delay;
+            PhotonNetwork.CurrentRoom.SetCustomProperties(
+                new ExitGames.Client.Photon.Hashtable
+                {
+                    { Game3StartTimePropertyKey, startTime }
+                }
+            );
+        }
+
+        object startTimeObj = null;
+        while (!PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(Game3StartTimePropertyKey, out startTimeObj))
+        {
+            yield return null;
+        }
+
+        double syncedStartTime = Convert.ToDouble(startTimeObj);
+
+        if (syncedGameFlowCoroutine != null)
+        {
+            StopCoroutine(syncedGameFlowCoroutine);
+        }
+
+        syncedGameFlowCoroutine = StartCoroutine(RunSyncedGameFlow(syncedStartTime));
     }
 
     public List<float> newAngles = new List<float> { 0, 45, 90, 135 };
